@@ -1,6 +1,0 @@
-<dependency>
-  <groupId>com.twilio.sdk</groupId>
-  <artifactId>twilio</artifactId>
-  <version>10.6.5</version>
-  <scope>compile</scope>
-</dependency>
