@@ -8,9 +8,9 @@ from threading import Thread
 app = Flask(__name__)
 
 # Twilio credentials
-TWILIO_SID = "your_twilio_sid"
-TWILIO_AUTH_TOKEN = "your_twilio_auth_token"
-TWILIO_PHONE_NUMBER = "your_twilio_phone_number"
+TWILIO_SID = "ACd1fc272aaed14e7c30cec526df3fab44"
+TWILIO_AUTH_TOKEN = "11258e6372a073bbfb018de8d1737938"
+TWILIO_PHONE_NUMBER = "+18444406910"
 
 # OpenAI API key
 OPENAI_API_KEY = "your_openai_api_key"
