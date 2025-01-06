@@ -26,3 +26,6 @@ export default tseslint.config(
     },
   }
 );
+
+const API_BASE_URL = "https://textmarley.onrender.com"
+fetch('${API_BASE_URL}/api/endpoint').then(response => response.json()).then(data => console.console.log(data));
