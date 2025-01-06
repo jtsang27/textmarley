@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # Twilio credentials
 TWILIO_SID = "ACd1fc272aaed14e7c30cec526df3fab44"
-TWILIO_AUTH_TOKEN = "11258e6372a073bbfb018de8d1737938"
+TWILIO_AUTH_TOKEN = "40694f46107d8660aabdbf1ebf63d089"
 TWILIO_PHONE_NUMBER = "+18444406910"
 
 # OpenAI API key
@@ -30,9 +30,9 @@ def send_reminders():
             # Check if the time matches (you can improve this logic)
             if event["time"] == time.strftime("%H:%M"):
                 client.messages.create(
-                    body=event["message"],
+                    body= event["message"],
                     from_=TWILIO_PHONE_NUMBER,
-                    to=event["phone"]
+                    to= event["phone"]
                 )
         time.sleep(60)  # Check every minute
 
