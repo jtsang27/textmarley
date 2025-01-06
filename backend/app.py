@@ -10,10 +10,10 @@ app = Flask(__name__)
 # Twilio credentials
 TWILIO_SID = "ACd1fc272aaed14e7c30cec526df3fab44"
 TWILIO_AUTH_TOKEN = "11258e6372a073bbfb018de8d1737938"
-TWILIO_PHONE_NUMBER = "+16504452399"
+TWILIO_PHONE_NUMBER = "+18444406910"
 
 # OpenAI API key
-OPENAI_API_KEY = "your_openai_api_key"
+OPENAI_API_KEY = "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"
 
 # Initialize Twilio client
 client = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
