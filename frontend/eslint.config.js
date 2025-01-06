@@ -3,6 +3,7 @@ import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
+import { shouldUseFlatConfig } from 'eslint/use-at-your-own-risk';
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -26,6 +27,3 @@ export default tseslint.config(
     },
   }
 );
-
-const API_BASE_URL = "https://textmarley.onrender.com"
-fetch('${API_BASE_URL}/api/endpoint').then(response => response.json()).then(data => console.console.log(data));
