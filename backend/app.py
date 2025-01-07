@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from twilio.rest import Client
-import openai
+from openai import OpenAI
 import schedule
 import time
 from threading import Thread
@@ -13,10 +13,13 @@ TWILIO_AUTH_TOKEN = "40694f46107d8660aabdbf1ebf63d089"
 TWILIO_PHONE_NUMBER = "+18444406910"
 
 # OpenAI API key
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = "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"
 
 # Initialize Twilio client
-client = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
+Tclient = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
+
+# Initialize OpenAI client
+Oclient = OpenAI(api_key=OPENAI_API_KEY)
 
 # Database to store user schedules
 schedules = []
@@ -29,7 +32,7 @@ def send_reminders():
         for event in schedules:
             # Check if the time matches (you can improve this logic)
             if event["time"] == time.strftime("%H:%M"):
-                client.messages.create(
+                Tclient.messages.create(
                     body= event["message"],
                     from_=TWILIO_PHONE_NUMBER,
                     to= event["phone"]
@@ -43,13 +46,32 @@ def process_request():
     user_phone = data["phone"]
 
     # AI model to interpret message
-    openai.api_key = OPENAI_API_KEY
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=f"Parse this schedule request: '{user_message}'. Provide a structured JSON response with 'task', 'time', and 'date'.",
+    parsing_response = Oclient.chat.completions.create(
+        model="gpt-4o-mini",
+        messages= [
+            {
+                "role": "developer", 
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date'."
+                    }
+                ]
+            },
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": f"{user_message}"
+                    }
+                ]
+            }
+        ],
         max_tokens=100
     )
-    parsed_response = response.choices[0].text.strip()
+
+    parsed_response = parsing_response.choices[0].message.content
 
     try:
         parsed_data = eval(parsed_response)
