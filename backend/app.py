@@ -39,7 +39,7 @@ def send_reminders():
                 )
         time.sleep(60)  # Check every minute
 
-@app.route("/process", methods=["POST"])
+@app.route("/process", methods=["POST", "GET"])
 def process_request():
     data = request.json
     user_message = data["message"]
