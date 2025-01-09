@@ -9,10 +9,10 @@ TWILIO_SID = "ACd1fc272aaed14e7c30cec526df3fab44"
 TWILIO_AUTH_TOKEN = "40694f46107d8660aabdbf1ebf63d089"
 TWILIO_PHONE_NUMBER = "+18444406910"
 
-#OPENAI_API_KEY = "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"
+OPENAI_API_KEY = "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"
 
 Tclient = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
-#Oclient = OpenAI(api_key=OPENAI_API_KEY)
+Oclient = OpenAI(api_key=OPENAI_API_KEY)
 
 def send_message():
     Tclient.messages.create(
@@ -20,10 +20,10 @@ def send_message():
         from_=TWILIO_PHONE_NUMBER,
         to= "2063343224" 
     )
-send_message()
+#send_message()
 user_message = "Send me 2 reminders before my exam on Friday at 9 am."
 
-"""
+
 parsing_response = Oclient.chat.completions.create(
     model="gpt-4o-mini",
     messages= [
@@ -50,11 +50,10 @@ parsing_response = Oclient.chat.completions.create(
 )
 
 parsed_response = parsing_response.choices[0].message.content
-parsed_data = eval(parsed_response)
+parsed_data = eval(parsed_response) # readable by user 
 
 task = parsed_data["task"]
 date = parsed_data["date"]
 time_ = parsed_data["time"]
 
 print(task, date, time_)
-"""
