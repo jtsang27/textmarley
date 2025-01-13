@@ -1,0 +1,2503 @@
+@import url("https://fonts.googleapis.com/css2?family=Protest Riot:wght@400");
+@import url("https://api.fontshare.com/css?f[]=protest riot@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700");
+@import url("https://api.fontshare.com/css?f[]=poppins@400,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900");
+@import url("https://api.fontshare.com/css?f[]=inter@300,400,500,600,700,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hanalei Fill:wght@400");
+@import url("https://api.fontshare.com/css?f[]=hanalei fill@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gochi Hand:wght@400");
+@import url("https://api.fontshare.com/css?f[]=gochi hand@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lacquer:wght@400");
+@import url("https://api.fontshare.com/css?f[]=lacquer@400&display=swap");
+
+p,
+ol,
+ul {
+  margin: 0px;
+}
+
+button {
+  padding: 0px;
+}
+
+ol,
+ul {
+  padding-inline-start: 1.5em;
+}
+
+input {
+  background-image: none;
+  background-color: transparent;
+}
+
+.common-52,
+.mac-book-air-background,
+.mac-book-air-background-1,
+.mac-book-air-background-2,
+.mac-book-air-background-3 {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  z-index: 0;
+}
+
+.common-53,
+.mac-book-air-wrapper-2,
+.mac-book-air-wrapper-4 {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  z-index: 1;
+}
+
+.common-54,
+.mac-book-air-t-section,
+.mac-book-air-tt-bg-section-background-theading-4join-40000000highly-effective-individuals-families-and-teams-iv-6617i-7a-6ivy-league-logo-ivy-league-logos-removebg-preview {
+  position: absolute;
+  right: 0px;
+  left: 1px;
+}
+
+.common-55,
+.mac-book-air-t-line,
+.mac-book-air-tt-student-quote-tline,
+.mac-book-air-t-nav {
+  position: absolute;
+  right: 0px;
+  left: 0px;
+}
+
+.common-56,
+.mac-book-air-t-ai-features-description,
+.mac-book-air-tttt-student-testimonials-title-tcontainer {
+  position: absolute;
+  left: 0px;
+}
+
+.common-57,
+.mac-book-air-easily-manage-your-personal-tasks-family-projects-and-team-swork-all-in-one-place-trusted-by-40m-people,
+.mac-book-air-free-forever-no-credit-card {
+  position: absolute;
+  z-index: 0;
+}
+
+.common-58,
+.mac-book-air-section-1,
+.mac-book-air-t-section-tai-features-description,
+.mac-book-air-t-bg-blockquote-robert-green-project-manager-in-aconstruction-firm-5stars-svg-any-do-scustom-views-provide-me-with-critical-insights-into-project-performance-and-team-productivity-as-aproject-manager-ican-track-progress-across-multiple-construction-sites-managed-in-different-boards-and-by-different-people-and-make-data-driven-decisions,
+.mac-book-air-t-bg-blockquote-5stars-svg-natalie-perez-it-consultant-as-an-it-consultant-irely-on-multiple-tools-and-any-do-sintegrations-with-services-like-slack-zapier-and-gmail-have-been-invaluable-it-connects-all-my-platforms-making-it-easier-to-manage-client-projects-and-communication,
+.mac-book-air-t-bg-blockquote-jason-lee-marketing-agency-director-5stars-svg-the-automation-feature-has-streamlined-our-workflow-at-the-marketing-agency-routine-tasks-are-handled-automatically-freeing-up-our-time-to-focus-on-creative-work-and-client-interactions-not-having-to-worry-about-the-next-step-in-our-workflow-and-simply-have-it-auto-generated-and-assigned-is-just-what-we-needed {
+  position: relative;
+  z-index: 0;
+}
+
+.common-59,
+.mac-book-air-robert-green-project-manager-in-aconstruction-firm,
+.mac-book-air-natalie-perez-it-consultant,
+.mac-book-air-jason-lee-marketing-agency-director {
+  position: absolute;
+  z-index: 4;
+}
+
+.common-48,
+.mac-book-air-ta-simple-to-do-list-tto,
+.mac-book-air-to-2 {
+  letter-spacing: -2px;
+  line-height: 79px;
+}
+
+.common-49,
+.mac-book-air-heading-2daily-planner,
+.mac-book-air-heading-2schedule-and-assign-tasks,
+.mac-book-air-heading-2turbocharge-with-ai {
+  letter-spacing: 0em;
+  line-height: 31px;
+}
+
+.common-50,
+.mac-book-air-text-heading,
+.mac-book-air-text-heading-1,
+.mac-book-air-text-heading-2 {
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.common-51,
+.mac-book-air-t,
+.mac-book-air-t-1,
+.mac-book-air-t-2 {
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.common-47,
+.mac-book-air-t-bg-section-background-theading-4join-40000000highly-effective-individuals-families-and-teams-iv-6617i-7a-6ivy-league-logo-ivy-league-logos-removebg-preview,
+.mac-book-air-t-boston-university-emblem {
+  background-position: center;
+  background-size: cover;
+}
+
+.common-44,
+.mac-book-air-container,
+.mac-book-air-button,
+.mac-book-air-im-g_,
+.mac-book-air-im-g_1,
+.mac-book-air-im-g_2,
+.mac-book-air-button-2,
+.mac-book-air-button-4,
+.mac-book-air-pricing-card-1,
+.mac-book-air-button-8 {
+  border-style: solid;
+  border-color: black;
+}
+
+.common-45,
+.mac-book-air-input,
+.mac-book-air-input-1,
+.mac-book-air-pricing-card,
+.mac-book-air-pricing-card-2 {
+  border-style: solid;
+  border-color: gainsboro;
+}
+
+.common-46,
+.mac-book-air-screenshot-20250106at,
+.mac-book-air-screenshot-20250106at-1 {
+  border-style: solid;
+  border-color: dodgerblue;
+}
+
+.common-25,
+.mac-book-air-container,
+.mac-book-air-t-screenshot-20250112at-70012pm,
+.mac-book-air-section-4,
+.mac-book-air-t-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.common-26,
+.mac-book-air-t-pricing-title,
+.mac-book-air-t-to,
+.mac-book-air-tt-bg-blockquote-5stars-svg-natalie-perez-it-consultant-as-an-it-consultant-irely-on-multiple-tools-and-any-do-sintegrations-with-services-like-slack-zapier-and-gmail-have-been-invaluable-it-connects-all-my-platforms-making-it-easier-to-manage-client-projects-and-communication {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.common-27,
+.mac-book-air-t-input-button,
+.mac-book-air-t-schedule-learning-description-section,
+.mac-book-air-ttt-founder-name-3timg_95791tline-3ttttfounder-name-2timg_42431tline-7tfounder-name-1img_95941tline,
+.mac-book-air-tt-svg-tiphone-tsvg-tipad-tsvg-tmac-ttsvg-tapple-watch,
+.mac-book-air-t-input-button-1,
+.mac-book-air-t-founder-quote-3tfounder-quote-2founder-quote {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.common-28,
+.mac-book-air-t-bg-section-background-theading-4join-40000000highly-effective-individuals-families-and-teams-iv-6617i-7a-6ivy-league-logo-ivy-league-logos-removebg-preview,
+.mac-book-air-t-task-creation-description,
+.mac-book-air-t-line-1,
+.mac-book-air-t-line-2,
+.mac-book-air-t-line-3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.common-29,
+.mac-book-air-t-founders-section-title,
+.mac-book-air-t-get-started-it-sfree {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.common-30,
+.mac-book-air-ta-simple-to-do-list-tto,
+.mac-book-air-section-1,
+.mac-book-air-section-2,
+.mac-book-air-tttt-founder-name-3timg_95791tline-3ttttfounder-name-2timg_42431tline-7tfounder-name-1img_95941tline,
+.mac-book-air-tttt-founder-name-2timg_42431tline,
+.mac-book-air-t-founder-name-1img_95941tline,
+.mac-book-air-tttt-student-testimonials-title-tcontainer,
+.mac-book-air-ttt-student-testimonials-title-tcontainer,
+.mac-book-air-t-container,
+.mac-book-air-t-bg-blockquote-5stars-svg-natalie-perez-it-consultant-as-an-it-consultant-irely-on-multiple-tools-and-any-do-sintegrations-with-services-like-slack-zapier-and-gmail-have-been-invaluable-it-connects-all-my-platforms-making-it-easier-to-manage-client-projects-and-communication,
+.mac-book-air-t-svg-tiphone,
+.mac-book-air-t-svg-tipad,
+.mac-book-air-t-svg-tmac,
+.mac-book-air-t-svg-tapple-watch,
+.mac-book-air-tt-input-button-1,
+.mac-book-air-t-marley_image-removebg-preview,
+.mac-book-air-tt-founder-quote-3tfounder-quote-2founder-quote,
+.mac-book-air-t-card-grid-pricing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.common-31,
+.mac-book-air-ttt-schedule-learning-description-section-tsection-ttask-creation-description-tsection-tai-features-description,
+.mac-book-air-tt-founder-name-3timg_95791tline,
+.mac-book-air-ttt-founder-name-2timg_42431tline,
+.mac-book-air-t-bg-blockquote-robert-green-project-manager-in-aconstruction-firm-5stars-svg-any-do-scustom-views-provide-me-with-critical-insights-into-project-performance-and-team-productivity-as-aproject-manager-ican-track-progress-across-multiple-construction-sites-managed-in-different-boards-and-by-different-people-and-make-data-driven-decisions,
+.mac-book-air-t-bg-blockquote-jason-lee-marketing-agency-director-5stars-svg-the-automation-feature-has-streamlined-our-workflow-at-the-marketing-agency-routine-tasks-are-handled-automatically-freeing-up-our-time-to-focus-on-creative-work-and-client-interactions-not-having-to-worry-about-the-next-step-in-our-workflow-and-simply-have-it-auto-generated-and-assigned-is-just-what-we-needed {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.common-32,
+.mac-book-air-ttta-simple-to-do-list-tto,
+.mac-book-air-ttt-input-button,
+.mac-book-air-t-t50mo-1,
+.mac-book-air-tt-list-item-1,
+.mac-book-air-t-button-1,
+.mac-book-air-t-button-2 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.common-33,
+.mac-book-air-to-1,
+.mac-book-air-easily-manage-your-personal-tasks-family-projects-and-team-swork-all-in-one-place-trusted-by-40m-people,
+.mac-book-air-t-heading-4join-40000000highly-effective-individuals-families-and-teams,
+.mac-book-air-tt-schedule-learning-description-section,
+.mac-book-air-t-heading-2daily-planner,
+.mac-book-air-t-section-ttask-creation-description,
+.mac-book-air-t-set-clear-responsibilities-and-deadlines-to-your-loved-ones,
+.mac-book-air-t-save-precious-time-and-effort-with-your-all-new-ai-assistant,
+.mac-book-air-tt-founder-name,
+.mac-book-air-student-quote,
+.mac-book-air-t-line-5,
+.mac-book-air-tt-student-testimonials-title,
+.mac-book-air-t-blockquote,
+.mac-book-air-organize-anything-with-anyone-anywhere,
+.mac-book-air-heading-3available-on,
+.mac-book-air-tt-list-item,
+.mac-book-air-tt-list-item-2,
+.mac-book-air-tt-list-item-3,
+.mac-book-air-button-6,
+.mac-book-air-tt-list-item-4,
+.mac-book-air-tt-list-item-5,
+.mac-book-air-tt-list-item-6 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.common-34,
+.mac-book-air-t,
+.mac-book-air-t-1,
+.mac-book-air-t-2 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.common-35,
+.mac-book-air-t-screenshot-20250106at-1242261screenshot-20250106at,
+.mac-book-air-tt-pricing-card-tpricing-card-tpricing-card {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.common-36,
+.mac-book-air-button,
+.mac-book-air-button-2,
+.mac-book-air-pricing-card,
+.mac-book-air-pricing-card-1,
+.mac-book-air-pricing-card-2 {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.common-37,
+.mac-book-air-t-section,
+.mac-book-air-tt-bg-section-background-theading-4join-40000000highly-effective-individuals-families-and-teams-iv-6617i-7a-6ivy-league-logo-ivy-league-logos-removebg-preview,
+.mac-book-air-tt-student-quote-tline,
+.mac-book-air-t-student-quote-tline {
+  display: flex;
+  flex-direction: column;
+}
+
+.common-38,
+.mac-book-air-tt-input-button,
+.mac-book-air-t-section-tai-features-description {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.common-39,
+.mac-book-air-wrapper,
+.mac-book-air-wrapper-2,
+.mac-book-air-wrapper-4 {
+  display: flex;
+  align-items: flex-start;
+}
+
+.common-40,
+.mac-book-air-wrapper-1,
+.mac-book-air-tta-simple-to-do-list-tto,
+.mac-book-air-schedule-learning-description,
+.mac-book-air-t-img_,
+.mac-book-air-t-founder-name,
+.mac-book-air-t-img_1,
+.mac-book-air-t-student-testimonials-title,
+.mac-book-air-student-testimonials-title,
+.mac-book-air-container-1,
+.mac-book-air-any-do-scustom-views-provide-me-with-critical-insights-into-project-performance-and-team-productivity-as-aproject-manager-ican-track-progress-across-multiple-construction-sites-managed-in-different-boards-and-by-different-people-and-make-data-driven-decisions,
+.mac-book-air-robert-green-project-manager-in-aconstruction-firm,
+.mac-book-air-wrapper-3,
+.mac-book-air-as-an-it-consultant-irely-on-multiple-tools-and-any-do-sintegrations-with-services-like-slack-zapier-and-gmail-have-been-invaluable-it-connects-all-my-platforms-making-it-easier-to-manage-client-projects-and-communication,
+.mac-book-air-the-automation-feature-has-streamlined-our-workflow-at-the-marketing-agency-routine-tasks-are-handled-automatically-freeing-up-our-time-to-focus-on-creative-work-and-client-interactions-not-having-to-worry-about-the-next-step-in-our-workflow-and-simply-have-it-auto-generated-and-assigned-is-just-what-we-needed,
+.mac-book-air-wrapper-5,
+.mac-book-air-faq-title,
+.mac-book-air-founder-quote,
+.mac-book-air-founder-quote-1,
+.mac-book-air-founder-quote-2,
+.mac-book-air-list-item,
+.mac-book-air-t-list-item-1,
+.mac-book-air-list-item-1,
+.mac-book-air-list-item-2,
+.mac-book-air-t-list-item-2,
+.mac-book-air-list-item-3,
+.mac-book-air-t-list-item-3,
+.mac-book-air-list-item-4,
+.mac-book-air-t-list-item-4,
+.mac-book-air-list-item-6,
+.mac-book-air-t-list-item-5,
+.mac-book-air-list-item-7,
+.mac-book-air-list-item-9,
+.mac-book-air-t-list-item-7,
+.mac-book-air-list-item-10,
+.mac-book-air-t-list-item-8,
+.mac-book-air-list-item-11,
+.mac-book-air-t-list-item-9,
+.mac-book-air-list-item-12,
+.mac-book-air-t-list-item-10,
+.mac-book-air-list-item-13 {
+  display: flex;
+  align-items: center;
+}
+
+.common-41,
+.mac-book-air-section,
+.mac-book-air-section-3,
+.mac-book-air-card-grid-pricing,
+.mac-book-air-t-pricing-card,
+.mac-book-air-t-pricing-card-1,
+.mac-book-air-t-pricing-card-2 {
+  flex-direction: column;
+  align-items: center;
+}
+
+.common-42,
+.mac-book-air-free-forever-no-credit-card,
+.mac-book-air-tt-bg-blockquote-robert-green-project-manager-in-aconstruction-firm-5stars-svg-any-do-scustom-views-provide-me-with-critical-insights-into-project-performance-and-team-productivity-as-aproject-manager-ican-track-progress-across-multiple-construction-sites-managed-in-different-boards-and-by-different-people-and-make-data-driven-decisions-ttbg-blockquote-5stars-svg-natalie-perez-it-consultant-as-an-it-consultant-irely-on-multiple-tools-and-any-do-sintegrations-with-services-like-slack-zapier-and-gmail-have-been-invaluable-it-connects-all-my-platforms-making-it-easier-to-manage-client-projects-and-communication-tbg-blockquote-jason-lee-marketing-agency-director-5stars-svg-the-automation-feature-has-streamlined-our-workflow-at-the-marketing-agency-routine-tasks-are-handled-automatically-freeing-up-our-time-to-focus-on-creative-work-and-client-interactions-not-having-to-worry-about-the-next-step-in-our-workflow-and-simply-have-it-auto-generated-and-assigned-is-just-what-we-needed-tblockquote,
+.mac-book-air-button-4,
+.mac-book-air-button-8 {
+  justify-content: center;
+  align-items: center;
+}
+
+.common-43,
+.mac-book-air-t-t50mo,
+.mac-book-air-t-t50mo-2 {
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.common-17,
+.mac-book-air-set-clear-responsibilities-and-deadlines-to-your-loved-ones,
+.mac-book-air-save-precious-time-and-effort-with-your-all-new-ai-assistant {
+  color: darkgray;
+  font-size: 17px;
+  text-align: center;
+}
+
+.common-18,
+.mac-book-air-ta-simple-to-do-list-tto,
+.mac-book-air-to-2 {
+  font-size: 72px;
+  font-family: Poppins, ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+}
+
+.common-19,
+.mac-book-air-text-heading,
+.mac-book-air-text-heading-1,
+.mac-book-air-text-heading-2 {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.common-20,
+.mac-book-air-button-1,
+.mac-book-air-button-3,
+.mac-book-air-button-5,
+.mac-book-air-button-9 {
+  color: whitesmoke;
+  text-align: center;
+}
+
+.common-21,
+.mac-book-air-heading-2daily-planner,
+.mac-book-air-heading-2schedule-and-assign-tasks,
+.mac-book-air-heading-2turbocharge-with-ai {
+  font-size: 28px;
+  font-family: Poppins, ui-sans-serif, system-ui, sans-serif;
+}
+
+.common-22,
+.mac-book-air-para-1,
+.mac-book-air-para-6,
+.mac-book-air-para-11 {
+  font-size: 50px;
+  font-weight: 900;
+}
+
+.common-23,
+.mac-book-air-heading-4join-40000000highly-effective-individuals-families-and-teams,
+.mac-book-air-section-1,
+.mac-book-air-section-2,
+.mac-book-air-section-3,
+.mac-book-air-pricing-title {
+  font-weight: 700;
+  text-align: center;
+}
+
+.common-24,
+.mac-book-air-founders-section-title,
+.mac-book-air-get-started-it-sfree {
+  font-weight: 900;
+  text-align: center;
+}
+
+.common-1,
+.mac-book-air-mac-book-air,
+.mac-book-air-pricing-card-2 {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.common-2,
+.mac-book-air-section,
+.mac-book-air-pricing-card-1 {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.common-3,
+.mac-book-air-pricing-card,
+.mac-book-air-wrapper-6,
+.mac-book-air-wrapper-7 {
+  display: flex;
+  width: 321px;
+  height: 395px;
+}
+
+.common-4,
+.mac-book-air-input,
+.mac-book-air-input-1 {
+  display: flex;
+  width: 250px;
+  background-color: white;
+}
+
+.common-5,
+.mac-book-air-bg-blockquote,
+.mac-book-air-bg-blockquote-1,
+.mac-book-air-bg-blockquote-2,
+.mac-book-air-blockquote {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.common-6,
+.mac-book-air-list-item-5,
+.mac-book-air-list-item-8,
+.mac-book-air-t-list-item-6 {
+  display: flex;
+  width: 321px;
+}
+
+.common-7,
+.mac-book-air-task-creation-description,
+.mac-book-air-ai-features-description {
+  display: flex;
+  height: 221px;
+}
+
+.common-8,
+.mac-book-air-natalie-perez-it-consultant,
+.mac-book-air-jason-lee-marketing-agency-director {
+  display: flex;
+  height: 33px;
+}
+
+.common-9,
+.mac-book-air-t-pricing-card,
+.mac-book-air-t-pricing-card-1,
+.mac-book-air-t-pricing-card-2 {
+  display: flex;
+  height: 296px;
+}
+
+.common-10,
+.mac-book-air-www-any-do-1920w-light,
+.mac-book-air-card-grid-pricing {
+  display: flex;
+  background-color: white;
+}
+
+.common-11,
+.mac-book-air-button,
+.mac-book-air-section-3,
+.mac-book-air-button-2,
+.mac-book-air-button-4,
+.mac-book-air-button-8 {
+  display: flex;
+  background-color: black;
+}
+
+.common-12,
+.mac-book-air-free-forever-no-credit-card,
+.mac-book-air-tt-bg-blockquote-robert-green-project-manager-in-aconstruction-firm-5stars-svg-any-do-scustom-views-provide-me-with-critical-insights-into-project-performance-and-team-productivity-as-aproject-manager-ican-track-progress-across-multiple-construction-sites-managed-in-different-boards-and-by-different-people-and-make-data-driven-decisions-ttbg-blockquote-5stars-svg-natalie-perez-it-consultant-as-an-it-consultant-irely-on-multiple-tools-and-any-do-sintegrations-with-services-like-slack-zapier-and-gmail-have-been-invaluable-it-connects-all-my-platforms-making-it-easier-to-manage-client-projects-and-communication-tbg-blockquote-jason-lee-marketing-agency-director-5stars-svg-the-automation-feature-has-streamlined-our-workflow-at-the-marketing-agency-routine-tasks-are-handled-automatically-freeing-up-our-time-to-focus-on-creative-work-and-client-interactions-not-having-to-worry-about-the-next-step-in-our-workflow-and-simply-have-it-auto-generated-and-assigned-is-just-what-we-needed-tblockquote {
+  display: flex;
+  color: dimgray;
+}
+
+.common-13,
+.mac-book-air-t-t50mo,
+.mac-book-air-t-t50mo-2 {
+  display: flex;
+  color: black;
+}
+
+.common-14,
+.mac-book-air-stars-svg,
+.mac-book-air-stars-svg-1,
+.mac-book-air-stars-svg-2 {
+  width: 161px;
+  height: 27px;
+}
+
+.common-15,
+.mac-book-air-svg,
+.mac-book-air-sv-g1,
+.mac-book-air-sv-g2,
+.mac-book-air-sv-g3 {
+  width: 87px;
+  height: 66px;
+}
+
+.common-16,
+.mac-book-air-text-heading,
+.mac-book-air-text-heading-2 {
+  width: 149px;
+  color: black;
+}
+
+.mac-book-air-wrapper {
+  width: 100%;
+}
+
+.mac-book-air-mac-book-air {
+  overflow: clip;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.mac-book-air-www-any-do-1920w-light {
+  border-bottom-left-radius: 42px;
+  border-bottom-right-radius: 42px;
+  flex-direction: column;
+  flex-grow: 1;
+  border-top-left-radius: 42px;
+  border-top-right-radius: 42px;
+  z-index: 0;
+}
+
+.mac-book-air-t-rectangle {
+  width: 1280px;
+  z-index: 2;
+}
+
+.mac-book-air-to {
+  font-size: 70px;
+  font-family: "Protest Riot", ui-sans-serif, system-ui, sans-serif;
+  line-height: 79px;
+  letter-spacing: 3px;
+  background-image: linear-gradient(
+    90deg,
+    rgba(0, 129, 251, 1),
+    rgba(67, 100, 247, 1) 50%,
+    rgba(111, 177, 252, 1)
+  );
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 51px;
+  padding-bottom: 50px;
+  width: 1920px;
+}
+
+.mac-book-air-container {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  padding-bottom: 381px;
+  padding-top: 6557px;
+  z-index: 1;
+  position: relative;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0em;
+}
+
+.mac-book-air-t-section {
+  height: 1130px;
+  top: 109px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-wrapper-1 {
+  z-index: 0;
+}
+
+.mac-book-air-section {
+  overflow: clip;
+  padding-bottom: 120px;
+  padding-left: 129px;
+  padding-right: 91px;
+  position: relative;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.mac-book-air-ttta-simple-to-do-list-tto {
+  align-self: stretch;
+  height: 147px;
+  padding-left: 41px;
+  padding-right: 41px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-tta-simple-to-do-list-tto {
+  flex-grow: 1;
+  height: 161px;
+  padding-right: 30px;
+  text-align: center;
+}
+
+.mac-book-air-ta-simple-to-do-list-tto {
+  flex-grow: 1;
+}
+
+.mac-book-air-a-simple-to-do-list {
+  width: 765px;
+  text-align: center;
+}
+
+.mac-book-air-to-1 {
+  text-align: center;
+  padding-bottom: -26px;
+  align-self: stretch;
+  height: 58px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-easily-manage-your-personal-tasks-family-projects-and-team-swork-all-in-one-place-trusted-by-40m-people {
+  height: 69px;
+  left: 327px;
+  right: 323px;
+  top: 206px;
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 300;
+  flex-shrink: 0;
+}
+
+.mac-book-air-para {
+  text-align: center;
+}
+
+.mac-book-air-text {
+  font-weight: 900;
+}
+
+.mac-book-air-free-forever-no-credit-card {
+  width: 344px;
+  height: 18px;
+  left: calc(50% + -9px + -142.5px);
+  top: calc(50% + -9px + -205.95px);
+  font-size: 14px;
+  line-height: 19px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-rectangle {
+  align-self: stretch;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-ttt-input-button {
+  align-self: stretch;
+  padding-top: 125px;
+  z-index: 5;
+}
+
+.mac-book-air-tt-input-button {
+  align-items: center;
+  padding-left: 41px;
+  text-align: center;
+}
+
+.mac-book-air-t-input-button {
+  row-gap: 12px;
+  column-gap: 12px;
+  line-height: 1;
+}
+
+.mac-book-air-input {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  align-items: center;
+  padding-bottom: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 12px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.mac-book-air-value {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.mac-book-air-button {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding-bottom: 11px;
+  padding-left: 11px;
+  padding-right: 11px;
+  padding-top: 11px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.mac-book-air-t-screenshot-20250106at-1242261screenshot-20250106at {
+  row-gap: 169px;
+  column-gap: 169px;
+  align-self: stretch;
+  padding-top: 86px;
+  z-index: 6;
+}
+
+.mac-book-air-screenshot-20250106at {
+  border-top-width: 3px;
+  border-bottom-width: 3px;
+  border-left-width: 3px;
+  border-right-width: 3px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  background-image: url(/assets/screenshot-20250106at.jpeg);
+  background-size: 100% 160%;
+  background-position: -0.21px 0px;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  max-height: 100%;
+  width: 434px;
+  height: 590px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.mac-book-air-screenshot-20250106at-1 {
+  border-top-width: 3px;
+  border-bottom-width: 3px;
+  border-left-width: 3px;
+  border-right-width: 3px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  background-image: url(/assets/screenshot-20250106at-1.jpeg);
+  background-size: 100% 201%;
+  background-position: 0px -0.44px;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  max-height: 100%;
+  width: 434px;
+  height: 469px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.mac-book-air-tt-bg-section-background-theading-4join-40000000highly-effective-individuals-families-and-teams-iv-6617i-7a-6ivy-league-logo-ivy-league-logos-removebg-preview {
+  height: 215px;
+  top: 1239px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-bg-section-background-theading-4join-40000000highly-effective-individuals-families-and-teams-iv-6617i-7a-6ivy-league-logo-ivy-league-logos-removebg-preview {
+  padding-left: 112px;
+  padding-right: 58px;
+  padding-top: 23px;
+  z-index: 0;
+  background-image: url(/assets/SectionBackground.svg);
+}
+
+.mac-book-air-t-heading-4join-40000000highly-effective-individuals-families-and-teams {
+  padding-right: 79px;
+  z-index: 2;
+}
+
+.mac-book-air-heading-4join-40000000highly-effective-individuals-families-and-teams {
+  flex-grow: 1;
+  font-size: 32px;
+  line-height: 45px;
+}
+
+.mac-book-air-iv-6617i-7a-6ivy-league-logo-ivy-league-logos-removebg-preview {
+  background-image: url(/assets/iv-6617i-7a-6ivy-league-logo-ivy-league-logos-removebg-preview.png);
+  background-size: 106% 272%;
+  background-position: 0px -138.94px;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  max-height: 100%;
+  width: 1109px;
+  height: 153px;
+  z-index: 3;
+  flex-shrink: 0;
+}
+
+.mac-book-air-ttt-schedule-learning-description-section-tsection-ttask-creation-description-tsection-tai-features-description {
+  height: 1548px;
+  left: 58px;
+  right: 57px;
+  top: calc(50% + -774px + -1668px);
+  position: absolute;
+  letter-spacing: -0.06px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-tt-schedule-learning-description-section {
+  padding-left: 9px;
+}
+
+.mac-book-air-t-schedule-learning-description-section {
+  row-gap: 4px;
+  column-gap: 4px;
+  flex-grow: 1;
+  max-width: 1100px;
+}
+
+.mac-book-air-schedule-learning-description {
+  width: 668px;
+  height: 594px;
+  filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.25));
+  font-size: 20px;
+  line-height: 18px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-para-1 {
+  line-height: 21px;
+}
+
+.mac-book-air-spacer {
+  height: 30px;
+}
+
+.mac-book-air-spacer-1 {
+  height: 30px;
+}
+
+.mac-book-air-spacer-2 {
+  height: 18px;
+}
+
+.mac-book-air-section-1 {
+  border-bottom-left-radius: 52px;
+  border-bottom-right-radius: 52px;
+  row-gap: 8px;
+  padding-bottom: 286px;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 36px;
+  border-top-left-radius: 52px;
+  border-top-right-radius: 52px;
+  filter: drop-shadow(0px 3px 36px rgba(0, 0, 0, 0.1));
+}
+
+.mac-book-air-background {
+  background-image: rgba(255, 255, 255, 1);
+  border-top-left-radius: 52px;
+  border-bottom-left-radius: 52px;
+  border-top-right-radius: 52px;
+  border-bottom-right-radius: 52px;
+}
+
+.mac-book-air-background-1 {
+  background-image: url(/assets/background-1.png);
+  background-size: 80% 66%;
+  background-position: 43px 131px;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  max-height: 100%;
+  border-top-left-radius: 52px;
+  border-bottom-left-radius: 52px;
+  border-top-right-radius: 52px;
+  border-bottom-right-radius: 52px;
+}
+
+.mac-book-air-t-heading-2daily-planner {
+  padding-right: 0.02px;
+  z-index: 1;
+}
+
+.mac-book-air-heading-2daily-planner {
+  text-align: center;
+}
+
+.mac-book-air-what-syour-plan-for-today {
+  z-index: 2;
+  font-size: 17px;
+  color: darkgray;
+  line-height: 21px;
+}
+
+.mac-book-air-t-section-ttask-creation-description {
+  z-index: 0;
+}
+
+.mac-book-air-section-2 {
+  border-bottom-left-radius: 52px;
+  border-bottom-right-radius: 52px;
+  row-gap: 8px;
+  padding-bottom: 311px;
+  padding-left: 26px;
+  padding-right: 25px;
+  padding-top: 36px;
+  border-top-left-radius: 52px;
+  border-top-right-radius: 52px;
+  z-index: 2;
+  filter: drop-shadow(0px 3px 36px rgba(0, 0, 0, 0.1));
+  position: relative;
+}
+
+.mac-book-air-background-2 {
+  background-image: rgba(255, 255, 255, 1);
+  border-top-left-radius: 52px;
+  border-bottom-left-radius: 52px;
+  border-top-right-radius: 52px;
+  border-bottom-right-radius: 52px;
+}
+
+.mac-book-air-background-3 {
+  background-image: url(/assets/background-3.png);
+  background-size: 80% 60%;
+  background-position: 44px 173px;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  max-height: 100%;
+  border-top-left-radius: 52px;
+  border-bottom-left-radius: 52px;
+  border-top-right-radius: 52px;
+  border-bottom-right-radius: 52px;
+}
+
+.mac-book-air-heading-2schedule-and-assign-tasks {
+  z-index: 1;
+}
+
+.mac-book-air-t-set-clear-responsibilities-and-deadlines-to-your-loved-ones {
+  align-self: stretch;
+  max-width: 391px;
+  padding-left: 76px;
+  padding-right: 75px;
+  z-index: 2;
+}
+
+.mac-book-air-set-clear-responsibilities-and-deadlines-to-your-loved-ones {
+  flex-grow: 1;
+  line-height: 21px;
+}
+
+.mac-book-air-para-4 {
+  text-align: center;
+}
+
+.mac-book-air-para-5 {
+  text-align: center;
+}
+
+.mac-book-air-t-task-creation-description {
+  width: 722px;
+  max-width: 722px;
+  padding-bottom: 1px;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.mac-book-air-task-creation-description {
+  text-align: right;
+  justify-content: flex-end;
+  align-items: center;
+  filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.25));
+  font-size: 20px;
+  line-height: 18px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-para-6 {
+  line-height: 21px;
+  text-align: right;
+}
+
+.mac-book-air-spacer-3 {
+  height: 21px;
+  text-align: right;
+}
+
+.mac-book-air-spacer-4 {
+  height: 21px;
+  text-align: right;
+}
+
+.mac-book-air-spacer-5 {
+  height: 21px;
+  text-align: right;
+}
+
+.mac-book-air-para-7 {
+  text-align: right;
+}
+
+.mac-book-air-spacer-6 {
+  height: 18px;
+  text-align: right;
+}
+
+.mac-book-air-para-8 {
+  text-align: right;
+}
+
+.mac-book-air-t-section-tai-features-description {
+  align-items: flex-end;
+  align-self: stretch;
+  padding-top: 17px;
+  line-height: 21px;
+}
+
+.mac-book-air-section-3 {
+  border-bottom-left-radius: 52px;
+  border-bottom-right-radius: 52px;
+  row-gap: 8px;
+  padding-bottom: 86px;
+  padding-left: 53px;
+  padding-right: 52px;
+  padding-top: 36px;
+  border-top-left-radius: 52px;
+  border-top-right-radius: 52px;
+  z-index: 1;
+  filter: drop-shadow(0px 3px 36px rgba(0, 0, 0, 0.1));
+}
+
+.mac-book-air-heading-2turbocharge-with-ai {
+  color: gainsboro;
+}
+
+.mac-book-air-t-save-precious-time-and-effort-with-your-all-new-ai-assistant {
+  align-self: stretch;
+  max-width: 440px;
+  padding-left: 97px;
+  padding-right: 97px;
+}
+
+.mac-book-air-save-precious-time-and-effort-with-your-all-new-ai-assistant {
+  flex-grow: 1;
+}
+
+.mac-book-air-para-9 {
+  text-align: center;
+}
+
+.mac-book-air-para-10 {
+  text-align: center;
+}
+
+.mac-book-air-t-screenshot-20250112at-70012pm {
+  padding-right: 1.3px;
+  padding-top: 25px;
+}
+
+.mac-book-air-screenshot-20250112at-70012pm {
+  object-fit: cover;
+  object-position: center;
+  width: 439px;
+  height: 273px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-ai-features-description {
+  width: 1055px;
+  height: 221px;
+  max-width: 1055px;
+  z-index: 2;
+  top: calc(50% + -110.5px + -24.5px);
+  flex-shrink: 0;
+}
+
+.mac-book-air-ai-features-description {
+  align-items: center;
+  filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.25));
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-spacer-7 {
+  height: 21px;
+}
+
+.mac-book-air-spacer-8 {
+  height: 21px;
+}
+
+.mac-book-air-spacer-9 {
+  height: 21px;
+}
+
+.mac-book-air-spacer-10 {
+  height: 21px;
+}
+
+.mac-book-air-t-pricing-title {
+  width: 252px;
+  height: 80px;
+  left: calc(50% + -40px + -76px);
+  top: calc(50% + -40px + -760px);
+  position: absolute;
+  flex-shrink: 0;
+}
+
+.mac-book-air-pricing-title {
+  font-family: Poppins, ui-sans-serif, system-ui, sans-serif;
+  font-size: 70px;
+  line-height: 79px;
+}
+
+.mac-book-air-t-to {
+  height: 111px;
+  left: 167px;
+  right: 166px;
+  top: 1565px;
+  position: absolute;
+  flex-shrink: 0;
+}
+
+.mac-book-air-to-2 {
+  text-align: center;
+  filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.25));
+}
+
+.mac-book-air-text-2 {
+  text-decoration: underline;
+  text-align: center;
+}
+
+.mac-book-air-t-founders-section-title {
+  height: 22px;
+  max-width: 1247px;
+  left: 16px;
+  right: 17px;
+  top: calc(50% + -11px + 169px);
+  position: absolute;
+  flex-shrink: 0;
+}
+
+.mac-book-air-founders-section-title {
+  font-size: 55px;
+  line-height: 27px;
+}
+
+.mac-book-air-t-line {
+  height: 3px;
+  bottom: 326px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-line {
+  height: 3px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-tttt-founder-name-3timg_95791tline-3ttttfounder-name-2timg_42431tline-7tfounder-name-1img_95941tline {
+  height: 416px;
+  left: 41px;
+  right: 43px;
+  top: calc(50% + -207.86px + 498px);
+  position: absolute;
+  flex-shrink: 0;
+}
+
+.mac-book-air-ttt-founder-name-3timg_95791tline-3ttttfounder-name-2timg_42431tline-7tfounder-name-1img_95941tline {
+  row-gap: 20px;
+  column-gap: 20px;
+  font-size: 45px;
+  line-height: normal;
+}
+
+.mac-book-air-tt-founder-name-3timg_95791tline {
+  row-gap: 6px;
+}
+
+.mac-book-air-founder-name {
+  font-family: "Hanalei Fill", ui-sans-serif, system-ui, sans-serif;
+  padding-left: 38px;
+  align-self: stretch;
+}
+
+.mac-book-air-t-img_ {
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
+.mac-book-air-im-g_ {
+  border-top-width: 2px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+  border-right-width: 2px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  background-image: url(/assets/im-g_.jpeg);
+  background-size: 186% 449%;
+  background-position: -139.57px -376.95px;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  max-height: 100%;
+  width: 356px;
+  height: 319px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-line-1 {
+  align-self: stretch;
+  max-width: 412px;
+  padding-right: 25px;
+  padding-top: 29px;
+}
+
+.mac-book-air-line-1 {
+  height: 2.6px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-tttt-founder-name-2timg_42431tline {
+  padding-top: 1px;
+}
+
+.mac-book-air-ttt-founder-name-2timg_42431tline {
+  row-gap: 6px;
+}
+
+.mac-book-air-tt-founder-name {
+  align-self: stretch;
+}
+
+.mac-book-air-t-founder-name {
+  flex-grow: 1;
+  max-width: 353px;
+}
+
+.mac-book-air-founder-name-1 {
+  flex-grow: 1;
+  font-family: "Gochi Hand", ui-sans-serif, system-ui, sans-serif;
+}
+
+.mac-book-air-t-img_1 {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.mac-book-air-im-g_1 {
+  border-top-width: 2px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+  border-right-width: 2px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  background-image: url(/assets/im-g_1.png);
+  background-size: 706% 359%;
+  background-position: -960.55px -241.38px;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  max-height: 100%;
+  width: 354px;
+  height: 320px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.25));
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-line-2 {
+  align-self: stretch;
+  max-width: 387px;
+  padding-top: 28px;
+}
+
+.mac-book-air-line-2 {
+  height: 2.6px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-founder-name-1img_95941tline {
+  row-gap: 11px;
+  align-self: stretch;
+  padding-left: 4.8px;
+}
+
+.mac-book-air-founder-name-2 {
+  width: 214px;
+  font-family: Lacquer, ui-sans-serif, system-ui, sans-serif;
+}
+
+.mac-book-air-im-g_2 {
+  border-top-width: 2px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+  border-right-width: 2px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  object-fit: cover;
+  object-position: center;
+  width: 352px;
+  height: 325px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.25));
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-line-3 {
+  align-self: stretch;
+  max-width: 352px;
+  padding-left: 1px;
+  padding-top: 16px;
+}
+
+.mac-book-air-line-3 {
+  height: 2.5px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-line-4 {
+  height: 2.1px;
+  left: 4px;
+  right: 5px;
+  top: calc(50% + -1.04px + -872.96px);
+  position: absolute;
+  flex-shrink: 0;
+}
+
+.mac-book-air-line-4 {
+  height: 2.1px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-tt-student-quote-tline {
+  height: 203px;
+  top: calc(50% + -101.54px + -93.46px);
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-student-quote-tline {
+  padding-bottom: 1.1px;
+  z-index: 0;
+}
+
+.mac-book-air-student-quote {
+  height: 202px;
+  text-align: center;
+  z-index: 2;
+  font-size: 20px;
+  line-height: 21px;
+  letter-spacing: -0.06px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-line-5 {
+  height: 1px;
+  padding-left: 10px;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.mac-book-air-line-5 {
+  margin-top: 0.04px;
+  flex-grow: 1;
+  height: 2.1px;
+}
+
+.mac-book-air-tttt-student-testimonials-title-tcontainer {
+  height: 698px;
+  right: 11px;
+  top: calc(50% + -349px + 1733px);
+  flex-shrink: 0;
+}
+
+.mac-book-air-ttt-student-testimonials-title-tcontainer {
+  z-index: 0;
+}
+
+.mac-book-air-tt-student-testimonials-title {
+  z-index: 2;
+}
+
+.mac-book-air-t-student-testimonials-title {
+  flex-grow: 1;
+  max-width: 1159px;
+  padding-left: 37px;
+}
+
+.mac-book-air-student-testimonials-title {
+  flex-grow: 1;
+  font-size: 86px;
+  line-height: normal;
+  font-weight: 900;
+}
+
+.mac-book-air-t-container {
+  height: 528px;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.mac-book-air-container-1 {
+  overflow: clip;
+  padding-left: 104px;
+  padding-top: 42px;
+  padding-bottom: 42px;
+  margin-top: -56px;
+  width: 1269px;
+  height: 584px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-tt-bg-blockquote-robert-green-project-manager-in-aconstruction-firm-5stars-svg-any-do-scustom-views-provide-me-with-critical-insights-into-project-performance-and-team-productivity-as-aproject-manager-ican-track-progress-across-multiple-construction-sites-managed-in-different-boards-and-by-different-people-and-make-data-driven-decisions-ttbg-blockquote-5stars-svg-natalie-perez-it-consultant-as-an-it-consultant-irely-on-multiple-tools-and-any-do-sintegrations-with-services-like-slack-zapier-and-gmail-have-been-invaluable-it-connects-all-my-platforms-making-it-easier-to-manage-client-projects-and-communication-tbg-blockquote-jason-lee-marketing-agency-director-5stars-svg-the-automation-feature-has-streamlined-our-workflow-at-the-marketing-agency-routine-tasks-are-handled-automatically-freeing-up-our-time-to-focus-on-creative-work-and-client-interactions-not-having-to-worry-about-the-next-step-in-our-workflow-and-simply-have-it-auto-generated-and-assigned-is-just-what-we-needed-tblockquote {
+  row-gap: 36px;
+  margin-right: -280px;
+  column-gap: 36px;
+  width: 1445px;
+  flex-wrap: wrap;
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-bg-blockquote-robert-green-project-manager-in-aconstruction-firm-5stars-svg-any-do-scustom-views-provide-me-with-critical-insights-into-project-performance-and-team-productivity-as-aproject-manager-ican-track-progress-across-multiple-construction-sites-managed-in-different-boards-and-by-different-people-and-make-data-driven-decisions {
+  row-gap: 21px;
+  width: 327px;
+  padding-bottom: 121px;
+  padding-left: 40px;
+  padding-right: 31px;
+  padding-top: 40px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-wrapper-2 {
+  border-bottom-left-radius: 26px;
+  border-bottom-right-radius: 26px;
+  border-top-left-radius: 26px;
+  border-top-right-radius: 26px;
+  filter: drop-shadow(0px 1.4px 18px rgba(0, 0, 0, 0.1));
+}
+
+.mac-book-air-bg-blockquote {
+  border-bottom-left-radius: 26px;
+  border-bottom-right-radius: 26px;
+  border-top-left-radius: 26px;
+  border-top-right-radius: 26px;
+  transform: scaleX(-1);
+  flex-shrink: 0;
+}
+
+.mac-book-air-stars-svg {
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.mac-book-air-any-do-scustom-views-provide-me-with-critical-insights-into-project-performance-and-team-productivity-as-aproject-manager-ican-track-progress-across-multiple-construction-sites-managed-in-different-boards-and-by-different-people-and-make-data-driven-decisions {
+  align-self: stretch;
+  height: 291px;
+  z-index: 3;
+  flex-shrink: 0;
+}
+
+.mac-book-air-robert-green-project-manager-in-aconstruction-firm {
+  width: 226px;
+  height: 49px;
+  bottom: 27px;
+  left: 12px;
+  font-size: 14px;
+  line-height: 16px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-tt-bg-blockquote-5stars-svg-natalie-perez-it-consultant-as-an-it-consultant-irely-on-multiple-tools-and-any-do-sintegrations-with-services-like-slack-zapier-and-gmail-have-been-invaluable-it-connects-all-my-platforms-making-it-easier-to-manage-client-projects-and-communication {
+  padding-bottom: 55px;
+  padding-left: 58px;
+  padding-right: 55px;
+  padding-top: 55px;
+}
+
+.mac-book-air-t-bg-blockquote-5stars-svg-natalie-perez-it-consultant-as-an-it-consultant-irely-on-multiple-tools-and-any-do-sintegrations-with-services-like-slack-zapier-and-gmail-have-been-invaluable-it-connects-all-my-platforms-making-it-easier-to-manage-client-projects-and-communication {
+  width: 256px;
+  padding-bottom: 14px;
+}
+
+.mac-book-air-wrapper-3 {
+  border-bottom-left-radius: 26px;
+  border-bottom-right-radius: 26px;
+  width: 348px;
+  border-top-left-radius: 26px;
+  border-top-right-radius: 26px;
+  z-index: 1;
+  bottom: -138px;
+  filter: drop-shadow(0px 1.4px 18px rgba(0, 0, 0, 0.1));
+  right: -54.82px;
+  top: -138px;
+  position: absolute;
+}
+
+.mac-book-air-bg-blockquote-1 {
+  border-bottom-left-radius: 26px;
+  border-bottom-right-radius: 26px;
+  border-top-left-radius: 26px;
+  border-top-right-radius: 26px;
+  transform: scaleX(-1);
+  flex-shrink: 0;
+}
+
+.mac-book-air-stars-svg-1 {
+  z-index: 2;
+  left: 3px;
+  top: -98px;
+  position: absolute;
+  flex-shrink: 0;
+}
+
+.mac-book-air-as-an-it-consultant-irely-on-multiple-tools-and-any-do-sintegrations-with-services-like-slack-zapier-and-gmail-have-been-invaluable-it-connects-all-my-platforms-making-it-easier-to-manage-client-projects-and-communication {
+  align-self: stretch;
+  z-index: 3;
+}
+
+.mac-book-air-natalie-perez-it-consultant {
+  width: 139px;
+  align-items: center;
+  bottom: -98px;
+  left: -19px;
+  font-size: 14px;
+  line-height: 16px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-bg-blockquote-jason-lee-marketing-agency-director-5stars-svg-the-automation-feature-has-streamlined-our-workflow-at-the-marketing-agency-routine-tasks-are-handled-automatically-freeing-up-our-time-to-focus-on-creative-work-and-client-interactions-not-having-to-worry-about-the-next-step-in-our-workflow-and-simply-have-it-auto-generated-and-assigned-is-just-what-we-needed {
+  row-gap: 21px;
+  width: 340px;
+  padding-bottom: 94px;
+  padding-left: 40px;
+  padding-right: 50px;
+  padding-top: 40px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-wrapper-4 {
+  border-bottom-left-radius: 26px;
+  border-bottom-right-radius: 26px;
+  border-top-left-radius: 26px;
+  border-top-right-radius: 26px;
+  filter: drop-shadow(0px 1.4px 18px rgba(0, 0, 0, 0.1));
+}
+
+.mac-book-air-bg-blockquote-2 {
+  border-bottom-left-radius: 26px;
+  border-bottom-right-radius: 26px;
+  border-top-left-radius: 26px;
+  border-top-right-radius: 26px;
+  transform: scaleX(-1);
+  flex-shrink: 0;
+}
+
+.mac-book-air-stars-svg-2 {
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.mac-book-air-the-automation-feature-has-streamlined-our-workflow-at-the-marketing-agency-routine-tasks-are-handled-automatically-freeing-up-our-time-to-focus-on-creative-work-and-client-interactions-not-having-to-worry-about-the-next-step-in-our-workflow-and-simply-have-it-auto-generated-and-assigned-is-just-what-we-needed {
+  align-self: stretch;
+  height: 318px;
+  z-index: 3;
+  flex-shrink: 0;
+}
+
+.mac-book-air-jason-lee-marketing-agency-director {
+  width: 178px;
+  align-items: center;
+  bottom: 41px;
+  left: 17px;
+  font-size: 14px;
+  line-height: 16px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-blockquote {
+  padding-left: 8px;
+}
+
+.mac-book-air-wrapper-5 {
+  border-bottom-left-radius: 26px;
+  border-bottom-right-radius: 26px;
+  width: 293px;
+  height: 500px;
+  border-top-left-radius: 26px;
+  border-top-right-radius: 26px;
+  filter: drop-shadow(0px 1.4px 18px rgba(0, 0, 0, 0.1));
+  flex-shrink: 0;
+}
+
+.mac-book-air-blockquote {
+  border-bottom-left-radius: 26px;
+  border-bottom-right-radius: 26px;
+  border-top-left-radius: 26px;
+  border-top-right-radius: 26px;
+  transform: scaleX(-1);
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-line-6section {
+  align-self: stretch;
+}
+
+.mac-book-air-line-6 {
+  height: 2.6px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-section-4 {
+  background-image: url(/assets/section-4.png);
+  background-size: 125% 100%;
+  background-position: -192.5px 0px;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  max-height: 100%;
+  padding-bottom: 557px;
+  padding-left: 468px;
+  padding-right: 464px;
+  padding-top: 943px;
+  position: relative;
+  color: white;
+  text-align: center;
+}
+
+.mac-book-air-organize-anything-with-anyone-anywhere {
+  width: 906px;
+  height: 338px;
+  left: calc(50% + -169px + -301px);
+  top: calc(50% + -169px + -221px);
+  position: absolute;
+  font-size: 96px;
+  line-height: 106px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-para-26 {
+  text-align: center;
+}
+
+.mac-book-air-text-3 {
+  font-weight: 500;
+}
+
+.mac-book-air-text-4 {
+  font-weight: 900;
+}
+
+.mac-book-air-text-5 {
+  font-weight: 500;
+}
+
+.mac-book-air-text-6 {
+  font-weight: 900;
+}
+
+.mac-book-air-heading-3available-on {
+  width: 151px;
+  height: 36px;
+  left: calc(50% + -18px + -51.31px);
+  top: calc(50% + -18px + 29px);
+  position: absolute;
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.mac-book-air-tt-svg-tiphone-tsvg-tipad-tsvg-tmac-ttsvg-tapple-watch {
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.mac-book-air-t-svg-tiphone {
+  row-gap: 12px;
+  align-self: stretch;
+  text-align: center;
+}
+
+.mac-book-air-svg {
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-svg-tipad {
+  row-gap: 12px;
+  align-self: stretch;
+  text-align: center;
+}
+
+.mac-book-air-sv-g1 {
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-svg-tmac {
+  row-gap: 12px;
+  align-self: stretch;
+  text-align: center;
+}
+
+.mac-book-air-sv-g2 {
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-svg-tapple-watch {
+  text-align: center;
+  row-gap: 12px;
+  padding-top: 2.4px;
+}
+
+.mac-book-air-sv-g3 {
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-boston-university-emblem {
+  width: 756px;
+  height: 251px;
+  padding-left: 756px;
+  padding-top: 251px;
+  z-index: 13;
+  left: calc(50% + -125.5px + -273.5px);
+  top: calc(50% + -125.5px + 1185px);
+  position: absolute;
+  background-image: url(/assets/boston-university-emblem.png);
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-get-started-it-sfree {
+  height: 37px;
+  max-width: 532px;
+  bottom: 2107px;
+  left: 374px;
+  right: 374px;
+  position: absolute;
+  flex-shrink: 0;
+}
+
+.mac-book-air-get-started-it-sfree {
+  font-size: 60px;
+  color: dodgerblue;
+  line-height: 60px;
+}
+
+.mac-book-air-tt-input-button-1 {
+  height: 41px;
+  bottom: 2021px;
+  left: 471px;
+  right: 471px;
+  position: absolute;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-input-button-1 {
+  row-gap: 12px;
+  column-gap: 12px;
+  line-height: 1;
+}
+
+.mac-book-air-input-1 {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  align-items: center;
+  padding-bottom: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 12px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-value-1 {
+  flex-grow: 1;
+}
+
+.mac-book-air-button-2 {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding-bottom: 11px;
+  padding-left: 11px;
+  padding-right: 11px;
+  padding-top: 11px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  text-align: left;
+}
+
+.mac-book-air-t-faq-title {
+  height: 154px;
+  max-width: 222px;
+  bottom: 84px;
+  left: 530px;
+  right: 528px;
+  position: absolute;
+  flex-shrink: 0;
+}
+
+.mac-book-air-faq-title {
+  height: 154px;
+  font-size: 30px;
+  line-height: 32px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.mac-book-air-para-27 {
+  font-size: 100px;
+}
+
+.mac-book-air-spacer-11 {
+  height: 32px;
+}
+
+.mac-book-air-t-line-6 {
+  height: 2.1px;
+  max-width: 1271px;
+  left: 9px;
+  right: 0px;
+  top: calc(50% + -1.04px + 1338px);
+  position: absolute;
+  flex-shrink: 0;
+}
+
+.mac-book-air-line-7 {
+  height: 2.1px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-nav {
+  height: 94px;
+  top: 1454px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-nav {
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0)
+  );
+  height: 94px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-marley_image-removebg-preview {
+  height: 20px;
+  left: 532px;
+  right: 526px;
+  top: 0px;
+  position: absolute;
+  flex-shrink: 0;
+}
+
+.mac-book-air-marley_image-removebg-preview {
+  margin-top: -181px;
+  object-fit: cover;
+  object-position: center;
+  width: 222px;
+  height: 201px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-tt-founder-quote-3tfounder-quote-2founder-quote {
+  height: 371px;
+  z-index: 20;
+  left: 48px;
+  right: 45px;
+  top: calc(50% + -185.5px + 898px);
+  position: absolute;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-founder-quote-3tfounder-quote-2founder-quote {
+  row-gap: 49px;
+  column-gap: 49px;
+  width: 1187px;
+  font-size: 29px;
+  line-height: normal;
+}
+
+.mac-book-air-founder-quote {
+  width: 358px;
+  height: 361px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-founder-quote-1 {
+  padding-left: 20px;
+  width: 384px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-founder-quote-2 {
+  width: 347px;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-card-grid-pricing {
+  height: 440px;
+  left: 31px;
+  right: 31px;
+  top: calc(50% + -220px + -500px);
+  position: absolute;
+  flex-shrink: 0;
+}
+
+.mac-book-air-card-grid-pricing {
+  row-gap: 48px;
+  padding-left: 64px;
+  padding-right: 64px;
+  padding-top: 64px;
+  justify-content: flex-end;
+}
+
+.mac-book-air-title {
+  line-height: 1;
+  text-align: center;
+  background-color: whitesmoke;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.mac-book-air-tt-pricing-card-tpricing-card-tpricing-card {
+  row-gap: 64px;
+  column-gap: 64px;
+  line-height: 1.4;
+}
+
+.mac-book-air-pricing-card {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  margin-bottom: -99px;
+  background-color: white;
+  row-gap: 12px;
+  padding-bottom: 31px;
+  padding-left: 11px;
+  padding-right: 11px;
+  padding-top: 31px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: gray;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-t50mo {
+  padding-top: 4px;
+}
+
+.mac-book-air-t {
+  font-weight: 700;
+}
+
+.mac-book-air-component {
+  font-size: 24px;
+}
+
+.mac-book-air-component-1 {
+  font-size: 48px;
+}
+
+.mac-book-air-mo {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.mac-book-air-t-list-item {
+  align-items: flex-end;
+  align-self: stretch;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 4px;
+  display: flex;
+}
+
+.mac-book-air-list-item {
+  flex-grow: 1;
+}
+
+.mac-book-air-list {
+  list-style-type: disc;
+}
+
+.mac-book-air-t-list-item-1 {
+  align-self: stretch;
+  max-width: 297px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.mac-book-air-list-item-1 {
+  flex-grow: 1;
+}
+
+.mac-book-air-list-1 {
+  list-style-type: disc;
+}
+
+.mac-book-air-list-item-2 {
+  padding-left: 20px;
+  align-self: stretch;
+}
+
+.mac-book-air-list-2 {
+  list-style-type: disc;
+}
+
+.mac-book-air-t-list-item-2 {
+  flex-grow: 1;
+  max-width: 257px;
+  padding-right: 52px;
+}
+
+.mac-book-air-list-item-3 {
+  flex-grow: 1;
+}
+
+.mac-book-air-list-3 {
+  list-style-type: disc;
+}
+
+.mac-book-air-t-button {
+  padding-top: 46px;
+}
+
+.mac-book-air-button-4 {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding-bottom: 11px;
+  padding-left: 90px;
+  padding-right: 90px;
+  padding-top: 11px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.mac-book-air-button-5 {
+  line-height: 1;
+}
+
+.mac-book-air-wrapper-6 {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  margin-bottom: -99px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.mac-book-air-pricing-card-1 {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  overflow: clip;
+  background-color: black;
+  row-gap: 12px;
+  padding-bottom: 31px;
+  padding-top: 31px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: whitesmoke;
+  flex-shrink: 0;
+}
+
+.mac-book-air-text-heading-1 {
+  width: 149px;
+}
+
+.mac-book-air-t-t50mo-1 {
+  padding-top: 4px;
+  flex-wrap: wrap;
+}
+
+.mac-book-air-t-1 {
+  font-weight: 700;
+}
+
+.mac-book-air-component-2 {
+  font-size: 24px;
+}
+
+.mac-book-air-component-3 {
+  font-size: 48px;
+}
+
+.mac-book-air-mo-1 {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.mac-book-air-tt-list-item-1 {
+  padding-top: 4px;
+}
+
+.mac-book-air-t-list-item-3 {
+  flex-grow: 1;
+  max-width: 257px;
+  padding-right: 18px;
+}
+
+.mac-book-air-list-item-4 {
+  flex-grow: 1;
+}
+
+.mac-book-air-list-4 {
+  list-style-type: disc;
+}
+
+.mac-book-air-list-item-5 {
+  align-items: center;
+  padding-left: 32px;
+  padding-right: -23.33px;
+}
+
+.mac-book-air-list-5 {
+  list-style-type: disc;
+}
+
+.mac-book-air-t-list-item-4 {
+  flex-grow: 1;
+  max-width: 301px;
+  padding-left: 22px;
+}
+
+.mac-book-air-list-item-6 {
+  flex-grow: 1;
+}
+
+.mac-book-air-list-6 {
+  list-style-type: disc;
+}
+
+.mac-book-air-t-list-item-5 {
+  flex-grow: 1;
+  max-width: 257px;
+  padding-right: 49px;
+}
+
+.mac-book-air-list-item-7 {
+  flex-grow: 1;
+}
+
+.mac-book-air-list-7 {
+  list-style-type: disc;
+}
+
+.mac-book-air-list-item-8 {
+  align-items: center;
+  padding-left: 32px;
+  padding-right: -17.33px;
+}
+
+.mac-book-air-list-8 {
+  list-style-type: disc;
+}
+
+.mac-book-air-t-button-1 {
+  padding-top: 12px;
+}
+
+.mac-book-air-button-6 {
+  border-style: solid;
+  border-color: gray;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-color: gainsboro;
+  padding-bottom: 11px;
+  padding-left: 90px;
+  padding-right: 90px;
+  padding-top: 11px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.mac-book-air-button-7 {
+  text-align: center;
+  line-height: 1;
+}
+
+.mac-book-air-wrapper-7 {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  margin-bottom: -99px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.mac-book-air-pricing-card-2 {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  overflow: clip;
+  row-gap: 12px;
+  padding-bottom: 31px;
+  padding-top: 31px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: gray;
+  flex-shrink: 0;
+}
+
+.mac-book-air-t-t50mo-2 {
+  padding-top: 4px;
+  flex-wrap: wrap;
+}
+
+.mac-book-air-t-2 {
+  font-weight: 700;
+}
+
+.mac-book-air-component-4 {
+  font-size: 24px;
+}
+
+.mac-book-air-component-5 {
+  font-size: 48px;
+}
+
+.mac-book-air-mo-2 {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.mac-book-air-t-list-item-6 {
+  align-items: flex-end;
+  padding-left: 32px;
+  padding-top: 4px;
+}
+
+.mac-book-air-list-item-9 {
+  margin-right: -34.33px;
+  flex-grow: 1;
+}
+
+.mac-book-air-list-9 {
+  list-style-type: disc;
+}
+
+.mac-book-air-t-list-item-7 {
+  flex-grow: 1;
+  max-width: 299px;
+  padding-left: 21px;
+}
+
+.mac-book-air-list-item-10 {
+  flex-grow: 1;
+}
+
+.mac-book-air-list-10 {
+  list-style-type: disc;
+}
+
+.mac-book-air-t-list-item-8 {
+  align-self: stretch;
+  max-width: 321px;
+  padding-left: 32px;
+  padding-right: 30px;
+}
+
+.mac-book-air-list-item-11 {
+  flex-grow: 1;
+}
+
+.mac-book-air-list-11 {
+  list-style-type: disc;
+}
+
+.mac-book-air-t-list-item-9 {
+  flex-grow: 1;
+  max-width: 257px;
+  padding-right: 39px;
+}
+
+.mac-book-air-list-item-12 {
+  flex-grow: 1;
+}
+
+.mac-book-air-list-12 {
+  list-style-type: disc;
+}
+
+.mac-book-air-t-list-item-10 {
+  flex-grow: 1;
+  max-width: 271px;
+  padding-left: 7.3px;
+}
+
+.mac-book-air-list-item-13 {
+  flex-grow: 1;
+}
+
+.mac-book-air-list-13 {
+  list-style-type: disc;
+}
+
+.mac-book-air-t-button-2 {
+  padding-top: 12px;
+}
+
+.mac-book-air-button-8 {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding-bottom: 11px;
+  padding-left: 90px;
+  padding-right: 90px;
+  padding-top: 11px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.mac-book-air-button-9 {
+  line-height: 1;
+}
+@media (min-width: 1270px) {
+  .mac-book-air-t-input-button {
+    flex-wrap: nowrap;
+  }
+  .mac-book-air-t-screenshot-20250106at-1242261screenshot-20250106at {
+    flex-wrap: nowrap;
+  }
+  .mac-book-air-t-schedule-learning-description-section {
+    flex-wrap: nowrap;
+  }
+  .mac-book-air-ttt-founder-name-3timg_95791tline-3ttttfounder-name-2timg_42431tline-7tfounder-name-1img_95941tline {
+    flex-wrap: nowrap;
+  }
+  .mac-book-air-tt-bg-blockquote-robert-green-project-manager-in-aconstruction-firm-5stars-svg-any-do-scustom-views-provide-me-with-critical-insights-into-project-performance-and-team-productivity-as-aproject-manager-ican-track-progress-across-multiple-construction-sites-managed-in-different-boards-and-by-different-people-and-make-data-driven-decisions-ttbg-blockquote-5stars-svg-natalie-perez-it-consultant-as-an-it-consultant-irely-on-multiple-tools-and-any-do-sintegrations-with-services-like-slack-zapier-and-gmail-have-been-invaluable-it-connects-all-my-platforms-making-it-easier-to-manage-client-projects-and-communication-tbg-blockquote-jason-lee-marketing-agency-director-5stars-svg-the-automation-feature-has-streamlined-our-workflow-at-the-marketing-agency-routine-tasks-are-handled-automatically-freeing-up-our-time-to-focus-on-creative-work-and-client-interactions-not-having-to-worry-about-the-next-step-in-our-workflow-and-simply-have-it-auto-generated-and-assigned-is-just-what-we-needed-tblockquote {
+    flex-wrap: nowrap;
+  }
+  .mac-book-air-tt-svg-tiphone-tsvg-tipad-tsvg-tmac-ttsvg-tapple-watch {
+    flex-wrap: nowrap;
+  }
+  .mac-book-air-t-input-button-1 {
+    flex-wrap: nowrap;
+  }
+  .mac-book-air-t-founder-quote-3tfounder-quote-2founder-quote {
+    flex-wrap: nowrap;
+  }
+  .mac-book-air-tt-pricing-card-tpricing-card-tpricing-card {
+    flex-wrap: nowrap;
+  }
+  .mac-book-air-t-t50mo-1 {
+    flex-wrap: nowrap;
+  }
+  .mac-book-air-t-t50mo-2 {
+    flex-wrap: nowrap;
+  }
+}
