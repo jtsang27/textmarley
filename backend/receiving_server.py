@@ -43,7 +43,7 @@ def parse_reminder(user_message, user_number):
                 "content": [
                     {
                         "type": "text",
-                        "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided."
+                        "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided. Ensure time is in 24 hour."
                     }
                 ]
             },
@@ -79,15 +79,35 @@ def send_reminders():
                 # Create message through OpenAI api
                 task = event["task"]
                 number = event["phone"]
-                """
-                Tclient.messages.create(
-                    body= event["message"],
-                    from_=TWILIO_PHONE_NUMBER,
-                    to= event["phone"]
-                )
-                """
                 send_message(task, number)
+            print(event['phone'])
+            print(event['task'])
+            print(event['time'])
+            print(event['date'])
         time.sleep(60)  # Check every minute
+
+# Endpoint for creating conversation once phone number is received
+conversations = {}
+@app.route("/create_conversation", methods=["POST"])
+def create_conversation():
+    user_phone = request.json["phone_number"]
+    conversation = Tclient.conversations.v1.conversations.create(
+        friendly_name="New conversation"
+    )
+    conversations[conversation.sid] = conversation
+    participant = Tclient.conversations.v1.conversations(
+        conversation.sid
+    ).participants.create(
+        messaging_binding_address="",
+        messaging_binding_proxy_address=TWILIO_PHONE_NUMBER
+    )
+
+    # Send initial message
+    message = Tclient.conversations.v1.conversations(
+        conversation.sid
+    ).messages.create(
+        body=""
+    )
 
 @app.route("/sms", methods=["POST", "GET"])
 def sms_reply():
