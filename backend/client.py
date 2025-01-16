@@ -5,6 +5,7 @@ import schedule
 import time
 from threading import Thread
 import json
+import os
 
 TWILIO_SID = "ACd1fc272aaed14e7c30cec526df3fab44"
 TWILIO_AUTH_TOKEN = "40694f46107d8660aabdbf1ebf63d089"
@@ -22,8 +23,14 @@ def send_message():
         to= "2063343224" 
     )
 #send_message()
-user_message = "Set me a reminder for my math homework at 4:20 pm today"
+user_message = "Set me a reminder for my math homework at 5 45 today"
 
+message = Tclient.conversations.v1.conversations(
+    "CH5bde8f09d4184ebbb81f27e4aba438bb"
+).messages.create(
+    author="smee",
+    body="Testing"
+)
 
 parsing_response = Oclient.chat.completions.create(
     model="gpt-4o-mini",
@@ -33,7 +40,7 @@ parsing_response = Oclient.chat.completions.create(
             "content": [
                 {
                     "type": "text",
-                    "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided."
+                    "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided. Ensure time is in 24 hour."
                 }
             ]
         },
@@ -77,18 +84,18 @@ for event in schedules:
     print(event['time'])
     print(event['date'])
 
+
+# Check if the time matches (you can improve this logic)
 for event in schedules:
-    # Check if the time matches (you can improve this logic)
-        if event["time"] == time.strftime("%H:%M"):
-            # Create message through OpenAI api
-            task = event["task"]
-            number = event["phone"]
-            """
-            Tclient.messages.create(
-                body= event["message"],
-                from_=TWILIO_PHONE_NUMBER,
-                to= event["phone"]
-            )
-            """
-            send_message()
+    if event['time'] == time.strftime("%H:%M"):
+        # Create message through OpenAI api
+        task = event["task"]
+        number = event["phone"]
+        """
+        Tclient.messages.create(
+        body= event["message"],
+        from_=TWILIO_PHONE_NUMBER,
+        to= event["phone"])
+        """
+        send_message()
 
