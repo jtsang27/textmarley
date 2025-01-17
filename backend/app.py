@@ -108,7 +108,7 @@ def create_conversation():
         body="Testing"
     )
 
-@app.route("/receive_message", methods=["POST", "GET"])
+@app.route("/receive_message", methods=["POST"])
 def sms_reply():
     """Respond to incoming SMS with a custom message."""
     # Get the message from the incoming request
@@ -150,7 +150,6 @@ def sms_reply():
         )
         message_final = message.choices[0].message.content
         response.message(message_final)
-
     return str(response)
 
 # Start reminder thread
