@@ -91,7 +91,7 @@ threads = []
 
 
 # Endpoint for creating conversation once phone number is received
-@app.route("/create_conversation", methods=["POST", "GET"])
+@app.route("/create_conversation", methods=["POST"])
 def create_conversation():
     user_phone = request.json["phone_number"]
     conversation = Tclient.conversations.v1.conversations.create(
@@ -117,7 +117,7 @@ def create_conversation():
         'phone_number': user_phone
     })
 
-@app.route("/receive_message", methods=["POST", "GET"])
+@app.route("/receive_message", methods=["POST"])
 def sms_reply():
     """Respond to incoming SMS with a custom message."""
     # Get the message from the incoming request

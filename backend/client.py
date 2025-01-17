@@ -5,7 +5,6 @@ import schedule
 import time
 from threading import Thread
 import json
-import os
 
 TWILIO_SID = "ACd1fc272aaed14e7c30cec526df3fab44"
 TWILIO_AUTH_TOKEN = "40694f46107d8660aabdbf1ebf63d089"
