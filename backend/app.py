@@ -20,9 +20,6 @@ OPENAI_API_KEY = "sk-proj-DDaEos6HKttYjwlfP3_D08bYeAqG_-S9FMuimXfN9eWyLKHrmgeeo4
 Tclient = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 Oclient = OpenAI(api_key=OPENAI_API_KEY)
 
-# Schedule for all reminders
-schedules = []
-
 def send_message(message, number):
     Tclient.messages.create(
         body= message, 
@@ -85,9 +82,16 @@ def send_reminders():
             print(event['date'])
         time.sleep(60)  # Check every minute
 
-# Endpoint for creating conversation once phone number is received
+# Schedule for all reminders
+schedules = []
+# Store twilio conversations
 conversations = {}
-@app.route("/create_conversation", methods=["POST"])
+# Store openai threads
+threads = []
+
+
+# Endpoint for creating conversation once phone number is received
+@app.route("/create_conversation", methods=["POST", "GET"])
 def create_conversation():
     user_phone = request.json["phone_number"]
     conversation = Tclient.conversations.v1.conversations.create(
@@ -113,7 +117,7 @@ def create_conversation():
         'phone_number': user_phone
     })
 
-@app.route("/receive_message", methods=["POST"])
+@app.route("/receive_message", methods=["POST", "GET"])
 def sms_reply():
     """Respond to incoming SMS with a custom message."""
     # Get the message from the incoming request

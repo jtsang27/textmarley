@@ -16,6 +16,39 @@ OPENAI_API_KEY = "sk-proj-DDaEos6HKttYjwlfP3_D08bYeAqG_-S9FMuimXfN9eWyLKHrmgeeo4
 Tclient = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 Oclient = OpenAI(api_key=OPENAI_API_KEY)
 
+# Create assistant 
+assistant = Oclient.beta.assistants.create(
+    name="Marley",
+    instructions="You are a friendly personal assistant.",
+    tools=[{"type": "code_interpreter"}],
+    model="gpt-4o",
+)
+
+# Create thread
+thread = Oclient.beta.threads.create()
+
+# Create and append message to thread
+message = Oclient.beta.threads.messages.create(
+    thread_id=thread.id,
+    role="user",
+    content="Set a reminder for my math homework tonight at 6 pm"
+)
+
+# Run agent on thread
+run = Oclient.beta.threads.runs.create_and_poll(
+    thread_id=thread.id,
+    assistant_id=assistant.id,
+)
+
+if run.status == 'completed': 
+    messages = Oclient.beta.threads.messages.list(
+    thread_id=thread.id, order="desc", limit=3
+    )
+    print(messages.data[0].content[0].text.value) # Get the latest message
+else:
+    print(run.status)
+
+"""
 def send_message():
     Tclient.messages.create(
         body= "hello jonathan", 
@@ -31,7 +64,9 @@ message = Tclient.conversations.v1.conversations(
     author="smee",
     body="Testing"
 )
+"""
 
+"""
 parsing_response = Oclient.chat.completions.create(
     model="gpt-4o-mini",
     messages= [
@@ -83,19 +118,4 @@ for event in schedules:
     print(event['task'])
     print(event['time'])
     print(event['date'])
-
-
-# Check if the time matches (you can improve this logic)
-for event in schedules:
-    if event['time'] == time.strftime("%H:%M"):
-        # Create message through OpenAI api
-        task = event["task"]
-        number = event["phone"]
-        """
-        Tclient.messages.create(
-        body= event["message"],
-        from_=TWILIO_PHONE_NUMBER,
-        to= event["phone"])
-        """
-        send_message()
-
+"""
