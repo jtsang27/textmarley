@@ -107,6 +107,11 @@ def create_conversation():
     ).messages.create(
         body="Testing"
     )
+    return jsonify({
+        'conversation_sid': conversation.sid,
+        'participant_sid': participant.sid,
+        'phone_number': user_phone
+    })
 
 @app.route("/receive_message", methods=["POST"])
 def sms_reply():
