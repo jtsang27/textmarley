@@ -87,25 +87,23 @@ schedules = []
 # Store twilio conversations
 conversations = {}
 # Store openai threads
-threads = []
+threads = {}
 
 
 # Endpoint for creating conversation once phone number is received
 @app.route("/create_conversation", methods=["POST"])
 def create_conversation():
     user_phone = request.form.get("phoneNumber")
-    conversation = Tclient.conversations.v1.conversations.create(
-        friendly_name="New conversation"
-    )
-
-    # Check if phone number valid
-    if user_phone:
-        print(user_phone)
-    else:
-        print(type(user_phone))
-        print(400)
-
-    conversations[conversation.sid] = conversation
+    
+    # Create new twilio conversation 
+    try:
+        conversation = Tclient.conversations.v1.conversations.create(
+            friendly_name=f"Conversation with {user_phone}"
+        )
+        conversations[conversation.sid] = conversation # Add conversation to dictionaries
+    except:
+        return jsonify({'Error': "Conversation not created"})
+    
     participant = Tclient.conversations.v1.conversations(
         conversation.sid
     ).participants.create(
@@ -129,6 +127,7 @@ def create_conversation():
         'participant_sid': participant.sid,
         'phone_number': user_phone
     })
+
 
 @app.route("/receive_message", methods=["POST"])
 def sms_reply():
