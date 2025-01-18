@@ -100,8 +100,9 @@ def create_conversation():
 
     # Check if phone number valid
     if user_phone:
-        print(200)
+        print(user_phone)
     else:
+        print(type(user_phone))
         print(400)
 
     conversations[conversation.sid] = conversation
@@ -118,6 +119,11 @@ def create_conversation():
     ).messages.create(
         body="Testing"
     )
+
+    Tclient.conversations.v1.conversations(
+        conversation.sid
+    ).delete()
+    
     return jsonify({
         'conversation_sid': conversation.sid,
         'participant_sid': participant.sid,
