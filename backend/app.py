@@ -91,7 +91,7 @@ threads = []
 
 
 # Endpoint for creating conversation once phone number is received
-@app.route("/create_conversation", methods=["POST", "GET"])
+@app.route("/create_conversation", methods=["POST"])
 def create_conversation():
     user_phone = request.form.get("phoneNumber")
     conversation = Tclient.conversations.v1.conversations.create(
