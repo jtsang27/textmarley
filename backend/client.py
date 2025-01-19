@@ -15,6 +15,11 @@ OPENAI_API_KEY = "sk-proj-DDaEos6HKttYjwlfP3_D08bYeAqG_-S9FMuimXfN9eWyLKHrmgeeo4
 Tclient = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 Oclient = OpenAI(api_key=OPENAI_API_KEY)
 
+Tclient.conversations.v1.conversations(
+    "CH79cf33aa952b405d8ec84a7d0676bb92"
+).delete()
+
+"""
 # Create assistant 
 Assistant = Oclient.beta.assistants.create(
     name="Marley", 
@@ -49,7 +54,6 @@ if run.status == 'completed':
 else:
     print(run.status)
 
-"""
 def send_message():
     Tclient.messages.create(
         body= "hello jonathan", 
@@ -65,9 +69,7 @@ message = Tclient.conversations.v1.conversations(
     author="smee",
     body="Testing"
 )
-"""
 
-"""
 parsing_response = Oclient.chat.completions.create(
     model="gpt-4o-mini",
     messages= [

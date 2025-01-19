@@ -39,7 +39,7 @@ def parse_reminder(user_message, user_number):
                 "content": [
                     {
                         "type": "text",
-                        "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided. Ensure time is in 24 hour."
+                        "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided. Translate time to 24 hour."
                     }
                 ]
             },
@@ -103,17 +103,18 @@ Assistant = Oclient.beta.assistants.create(
 @app.route("/create_conversation", methods=["POST"])
 def create_conversation():
     user_phone = request.form.get("phoneNumber")
+    # TODO: ensure phone numbers are all in same format
 
-    try:
+    
         # Create new twilio conversation
-        conversation = Tclient.conversations.v1.conversations.create(
+    conversation = Tclient.conversations.v1.conversations.create(
             friendly_name=f"Conversation with {user_phone}"
         )
-        conversations[conversation.sid] = conversation # Add conversation to dictionary
-        print(conversations)
+    conversations[user_phone] = conversation.sid # Add conversation to dictionary
+    print(conversations)
 
         # Add participant to new conversation
-        participant = Tclient.conversations.v1.conversations(
+    participant = Tclient.conversations.v1.conversations(
             conversation.sid
         ).participants.create(
             messaging_binding_address=user_phone,
@@ -121,39 +122,39 @@ def create_conversation():
         )
 
         # Create OpenAI thread
-        thread = Oclient.beta.threads.create()
-        threads[user_phone] = thread.id # Add thread to dictionary
+    thread = Oclient.beta.threads.create()
+    threads[user_phone] = thread.id # Add thread to dictionary
 
         # Add message to thread
-        message = Oclient.beta.threads.messages.create(
+    message = Oclient.beta.threads.messages.create(
             thread_id=threads[user_phone],
             role="user",
             content="Hello!"
         )
 
         # Run assistant on thread
-        run = Oclient.beta.threads.runs.create_and_poll(
+    run = Oclient.beta.threads.runs.create_and_poll(
             thread_id=threads[user_phone],
             assistant_id=Assistant.id,
         )
 
-        if run.status == 'completed': 
+    if run.status == 'completed': 
             messages = Oclient.beta.threads.messages.list(
                 thread_id=thread.id, order="desc", limit=3
             )
             send = messages.data[0].content[0].text.value # Get the latest message
-        else:
+    else:
             print(run.status)
 
         # Send initial message
-        message = Tclient.conversations.v1.conversations(
+    message = Tclient.conversations.v1.conversations(
             conversation.sid
         ).messages.create(
             body=send
         )
 
-    except:
-        return jsonify({'Error': "Conversation with this number already exists"})
+    #except:
+    #    return jsonify({'Error': "Conversation with this number already exists"})
 
     return jsonify({
         'conversation_sid': conversation.sid,
@@ -168,13 +169,19 @@ def sms_reply():
     from_number = request.form.get("From")  # Sender's phone number
     user_message = request.form.get("Body")        # Message body
     print(f"Received message from {from_number}: {user_message}")
+    print(threads)
+    # Add message to OpenAI threads
+    message = Oclient.beta.threads.messages.create(
+        thread_id=threads[from_number],
+        role="user",
+        content=user_message
+    )
 
     # Stores reminder information 
     i = parse_reminder(user_message, from_number)
-    response = MessagingResponse()
 
     if i == 0:
-        response.message("Please be more specific in you reminder request")
+        message_final = "Please be more specific in you reminder request"
     else: 
         print(f"Reminder stored: {schedules}")
         # Create a response message to send back to the user
@@ -202,8 +209,14 @@ def sms_reply():
             ]
         )
         message_final = message.choices[0].message.content
-        response.message(message_final)
-    return str(response)
+
+    # Send response back using twilio conversation
+    message = Tclient.conversations.v1.conversations(
+        conversations[from_number]
+    ).messages.create(
+        body=message_final
+    )
+    return jsonify({"Return message": message_final})
 
 # Start reminder thread
 reminder_thread = Thread(target=send_reminders, daemon=True)
