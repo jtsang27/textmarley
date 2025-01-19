@@ -16,11 +16,13 @@ Tclient = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 Oclient = OpenAI(api_key=OPENAI_API_KEY)
 
 # Create assistant 
-assistant = Oclient.beta.assistants.create(
-    name="Marley",
-    instructions="You are a friendly personal assistant.",
-    tools=[{"type": "code_interpreter"}],
-    model="gpt-4o",
+Assistant = Oclient.beta.assistants.create(
+    name="Marley", 
+    instructions="You are a friendly personal assistant that help set reminders and centralize deadlines lists.",
+    model="gpt-4o-mini", 
+    temperature=1.0,
+    top_p=1.0,
+    tools=[]
 )
 
 # Create thread
@@ -36,7 +38,7 @@ message = Oclient.beta.threads.messages.create(
 # Run agent on thread
 run = Oclient.beta.threads.runs.create_and_poll(
     thread_id=thread.id,
-    assistant_id=assistant.id,
+    assistant_id=Assistant.id,
 )
 
 if run.status == 'completed': 

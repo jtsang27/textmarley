@@ -89,39 +89,51 @@ conversations = {}
 # Store openai threads
 threads = {}
 
+# OpenAI assistant
+Assistant = Oclient.beta.assistants.create(
+    name="Marley", 
+    instructions="You are a friendly personal assistant that help set reminders and centralize to-do lists.",
+    model="gpt-4o-mini", 
+    temperature=1.0,
+    top_p=1.0,
+    tools=[]
+)
 
 # Endpoint for creating conversation once phone number is received
 @app.route("/create_conversation", methods=["POST"])
 def create_conversation():
     user_phone = request.form.get("phoneNumber")
-    
-    # Create new twilio conversation 
+     
     try:
+        # Create new twilio conversation
         conversation = Tclient.conversations.v1.conversations.create(
             friendly_name=f"Conversation with {user_phone}"
         )
-        conversations[conversation.sid] = conversation # Add conversation to dictionaries
+        conversations[conversation.sid] = conversation # Add conversation to dictionary
+        print(conversations)
+
+        # Add participant to new conversation
+        participant = Tclient.conversations.v1.conversations(
+            conversation.sid
+        ).participants.create(
+            messaging_binding_address=user_phone,
+            messaging_binding_proxy_address=TWILIO_PHONE_NUMBER
+        )
+
+        # Create OpenAI thread
+        thread = Oclient.beta.threads.create()
+        threads[thread.id] = thread # Add thread to dictionary
+
+        # Send initial message
+        message = Tclient.conversations.v1.conversations(
+            conversation.sid
+        ).messages.create(
+            body="Testing"
+        )
+
     except:
-        return jsonify({'Error': "Conversation not created"})
-    
-    participant = Tclient.conversations.v1.conversations(
-        conversation.sid
-    ).participants.create(
-        messaging_binding_address=user_phone,
-        messaging_binding_proxy_address=TWILIO_PHONE_NUMBER
-    )
+        return jsonify({'Error': "Conversation with this number already exists"})
 
-    # Send initial message
-    message = Tclient.conversations.v1.conversations(
-        conversation.sid
-    ).messages.create(
-        body="Testing"
-    )
-
-    Tclient.conversations.v1.conversations(
-        conversation.sid
-    ).delete()
-    
     return jsonify({
         'conversation_sid': conversation.sid,
         'participant_sid': participant.sid,
