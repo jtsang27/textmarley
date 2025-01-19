@@ -103,7 +103,7 @@ Assistant = Oclient.beta.assistants.create(
 @app.route("/create_conversation", methods=["POST"])
 def create_conversation():
     user_phone = request.form.get("phoneNumber")
-     
+
     try:
         # Create new twilio conversation
         conversation = Tclient.conversations.v1.conversations.create(
@@ -122,13 +122,34 @@ def create_conversation():
 
         # Create OpenAI thread
         thread = Oclient.beta.threads.create()
-        threads[thread.id] = thread # Add thread to dictionary
+        threads[user_phone] = thread.id # Add thread to dictionary
+
+        # Add message to thread
+        message = Oclient.beta.threads.messages.create(
+            thread_id=threads[user_phone],
+            role="user",
+            content="Hello!"
+        )
+
+        # Run assistant on thread
+        run = Oclient.beta.threads.runs.create_and_poll(
+            thread_id=threads[user_phone],
+            assistant_id=Assistant.id,
+        )
+
+        if run.status == 'completed': 
+            messages = Oclient.beta.threads.messages.list(
+                thread_id=thread.id, order="desc", limit=3
+            )
+            send = messages.data[0].content[0].text.value # Get the latest message
+        else:
+            print(run.status)
 
         # Send initial message
         message = Tclient.conversations.v1.conversations(
             conversation.sid
         ).messages.create(
-            body="Testing"
+            body=send
         )
 
     except:
@@ -139,7 +160,6 @@ def create_conversation():
         'participant_sid': participant.sid,
         'phone_number': user_phone
     })
-
 
 @app.route("/receive_message", methods=["POST"])
 def sms_reply():
