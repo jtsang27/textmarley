@@ -21,17 +21,43 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 Tclient = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 Oclient = OpenAI(api_key=OPENAI_API_KEY)
 
-def send_message(message, number):
-    Tclient.messages.create(
-        body= message, 
-        from_=TWILIO_PHONE_NUMBER,
-        to= f"{number}" 
+def intent(user_message, user_number):
+    parsing_response = Oclient.chat.completions.create(
+        model="gpt-4o-mini",
+        messages= [
+            {
+                "role": "developer", 
+                "content": [
+                    {
+                        "type": "text",
+                        "text": """You are a helpful assistant. A user sends you a message and you need to determine the following:
+                                    1. If the message asks to set a reminder, extract the task, time, and date.
+                                    2. If the message asks to delete a reminder, extract the task to be deleted.
+                                    3. If the message asks to edit a reminder, extract the task to be updated and the new task/time/date.
+                                    4. If the message asks to list current reminders, determine if there is a time frame (e.g., "today", "this week").
+
+                                    Parse task, time, and date into separate structured JSON response. Translate time to 24 hour.
+                                """
+                    }
+                ]
+            },
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": f"{user_message}"
+                    }
+                ]
+            }
+        ],
+        max_tokens=100
     )
 
 def add_schedule(phone_number, task, time_str, date_str):
     schedules.append({"phone": phone_number, "task": task, "time": time_str, "date": date_str})
 
-def parse_reminder(user_message, user_number):
+def parse_reminder(user_number, user_message):
     parsing_response = Oclient.chat.completions.create(
         model="gpt-4o-mini",
         messages= [
@@ -63,6 +89,7 @@ def parse_reminder(user_message, user_number):
     date = parsed_data["date"]
     time = parsed_data["time"]
 
+    # TODO: return whether task, date, time is missing
     if (task == None) | (date == None) | (time == None):
         return 0
     else:
@@ -76,7 +103,7 @@ def send_reminders():
                 # Create message through OpenAI api
                 task = event["task"]
                 number = event["phone"]
-                send_message(task, number)
+                #send_message(task, number)
             print(event['phone'])
             print(event['task'])
             print(event['time'])
@@ -86,9 +113,9 @@ def send_reminders():
 # Schedule for all reminders
 schedules = []
 # Store twilio conversations
-conversations = {}
+conversations = {} # conversations[phone_number] = conversation.sid
 # Store openai threads
-threads = {}
+threads = {} # threads[phone_number] = thread.id
 
 # OpenAI assistant
 Assistant = Oclient.beta.assistants.create(
@@ -106,7 +133,7 @@ def create_conversation():
     user_phone = request.form.get("phoneNumber")
     # TODO: ensure phone numbers are all in same format
 
-    
+
         # Create new twilio conversation
     conversation = Tclient.conversations.v1.conversations.create(
             friendly_name=f"Conversation with {user_phone}"
@@ -165,12 +192,11 @@ def create_conversation():
 
 @app.route("/receive_message", methods=["POST"])
 def sms_reply():
-    """Respond to incoming SMS with a custom message."""
     # Get the message from the incoming request
     from_number = request.form.get("From")  # Sender's phone number
     user_message = request.form.get("Body")        # Message body
     print(f"Received message from {from_number}: {user_message}")
-    print(threads)
+
     # Add message to OpenAI threads
     message = Oclient.beta.threads.messages.create(
         thread_id=threads[from_number],

@@ -16,7 +16,6 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 Tclient = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 Oclient = OpenAI(api_key=OPENAI_API_KEY)
 
-
 """
 # Create assistant 
 Assistant = Oclient.beta.assistants.create(
