@@ -25,6 +25,14 @@ input {
   background-color: transparent;
 }
 
+.landing-subtext {
+  text-align: center;
+  font-size: 1.2rem; /* Adjust the size as needed */
+  color: #555; /* Set the text color */
+  margin-top: 10px; /* Adjust spacing */
+  font-family: 'Inter', sans-serif; /* Ensure consistent font */
+}
+
 .common-50,
 .landing-span,
 .landing-start-your-business-with-fast-online-company-incorporation-plus-abank-account-and-registered-address-from-day-one,
@@ -440,6 +448,11 @@ input {
   text-align: center;
 }
 
+.landing-expert-assist {
+  font-size: 85px;
+  text-align: flex;
+}
+
 .common-17,
 .landing-for-founders-ready-to-ditch-the-books-and-do-business,
 .landing-from-founding-to-filing-and-beyond-we-re-with-you {
@@ -475,7 +488,7 @@ input {
 .landing-wrapper-1,
 .landing-tt-section-tgroup-section {
   display: flex;
-  width: 1914px;
+  width: 2000px;
 }
 
 .common-4,
@@ -617,25 +630,25 @@ input {
 .landing-group-main {
   height: 9144px;
   padding-bottom: 2787px;
-  padding-right: 13px;
+  padding-right: 0px;
   bottom: -2787px;
-  left: 19px;
+  left: 0px;
   right: -32px;
   position: absolute;
   flex-shrink: 0;
 }
 
 .landing-tt-section-tgroup-section {
-  height: 1954px;
+  height: 2000px;
   flex-shrink: 0;
 }
 
 .landing-t-section-tgroup-section {
-  margin-right: 13px;
+  margin-right: 0px;
   margin-top: -324px;
-  width: 1939px;
+  width: 2000px;
   height: 2278px;
-  padding-left: 6px;
+  padding-left: 0px;
   z-index: 0;
   letter-spacing: 0em;
   flex-shrink: 0;
@@ -651,7 +664,7 @@ input {
 }
 
 .landing-group {
-  row-gap: 32px;
+  row-gap: 0px;
   padding-bottom: 750px;
   padding-left: 106px;
   padding-right: 54px;
@@ -703,17 +716,17 @@ input {
 }
 
 .landing-t-incorporation {
-  width: 812px;
-  max-width: 812px;
+  width: 1000px;
+  max-width: 1000px;
   z-index: 3;
-  left: calc(50% + -50px + -266px);
+  left: calc(10%);
   flex-shrink: 0;
 }
 
 .landing-incorporation {
   margin-bottom: -14px;
-  font-size: 83px;
-  letter-spacing: -1.76px;
+  font-size: 85px;
+  letter-spacing: px;
   text-align: center;
 }
 
@@ -723,7 +736,17 @@ input {
   max-width: 823px;
   left: calc(50% + -57px + -381px);
   top: -92px;
-  flex-shrink: 0;
+  flex-shrink: 100;
+}
+
+.landing-z-expert-accounting {
+  width: 1010px;
+  height: 112px;
+  top: 157px;
+  left: 109px;
+  gap: 0px;
+  opacity: 0px;
+  
 }
 
 .landing-expert-accounting {
@@ -737,9 +760,11 @@ input {
 }
 
 .landing-purely-on-text-message-animation {
-  margin-top: 1px;
+  margin-top: -20px;
+  font-size: 85px;
+
   background-color: transparent;
-  width: 904px;
+  width: 1000px;
   height: 114px;
   text-align: center;
   flex-shrink: 0;
