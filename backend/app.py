@@ -30,7 +30,7 @@ def intent(user_message, user_number):
                 "content": [
                     {
                         "type": "text",
-                        "text": """You parse user messages into the following actions:
+                        "text": """You parse user messages into the following actionster:
                                     1. If the message asks to set a reminder, extract the task, time, and date.
                                     2. If the message asks to delete a reminder, extract the task to be deleted.
                                     3. If the message asks to edit a reminder, extract the task to be updated and the new task/time/date.
