@@ -21,7 +21,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 Tclient = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 Oclient = OpenAI(api_key=OPENAI_API_KEY)
 
-def intent(user_message, user_number):
+def intent(user_message):
     parsing_response = Oclient.chat.completions.create(
         model="gpt-4o-mini",
         messages= [
@@ -30,13 +30,14 @@ def intent(user_message, user_number):
                 "content": [
                     {
                         "type": "text",
-                        "text": """You parse user messages into the following actions:
-                                    1. If the message asks to set a reminder, extract the task, time, and date.
-                                    2. If the message asks to delete a reminder, extract the task to be deleted.
-                                    3. If the message asks to edit a reminder, extract the task to be updated and the new task/time/date.
-                                    4. If the message asks to list current reminders, determine if there is a time frame (e.g., "today", "this week").
+                        "text": """You categorize user intent into the following actions:
+                                    0. Message asks to set a reminder
+                                    1. Message asks to delete a reminder
+                                    2. Message asks to edit a reminder
+                                    3. Message asks to list current reminders
+                                    4. Other
 
-                                    Parse task, time, and date into separate structured JSON response. Translate time to 24 hour.
+                                    Return number associated with action
                                 """
                     }
                 ]
@@ -53,6 +54,9 @@ def intent(user_message, user_number):
         ],
         max_tokens=100
     )
+    parsed_response = parsing_response.choices[0].message.content
+
+    return parsed_response
 
 def add_schedule(phone_number, task, time_str, date_str):
     schedules.append({"phone": phone_number, "task": task, "time": time_str, "date": date_str})
@@ -94,7 +98,7 @@ def parse_reminder(user_number, user_message):
         return 0
     else:
         add_schedule(user_number, f"{task}", f"{time}", f"{date}")
-    
+
 def send_reminders():
     while True:
         for event in schedules:
@@ -194,7 +198,7 @@ def create_conversation():
 def sms_reply():
     # Get the message from the incoming request
     from_number = request.form.get("From")  # Sender's phone number
-    user_message = request.form.get("Body")        # Message body
+    user_message = request.form.get("Body")  # Message body
     print(f"Received message from {from_number}: {user_message}")
 
     # Add message to OpenAI threads
@@ -205,10 +209,13 @@ def sms_reply():
     )
 
     # Determine intent
+    i = intent(user_message)
 
-    # Stores reminder information 
+    # TODO: parse information based on intent
+    p = parse_array[i](user_message)
+
+
     i = parse_reminder(user_message, from_number)
-
     if i == 0:
         message_final = "Please be more specific in you reminder request"
     else: 
@@ -239,7 +246,7 @@ def sms_reply():
         )
         message_final = message.choices[0].message.content
 
-    
+    # TODO: run assistant on message thread
 
     # Send response back using twilio conversation
     message = Tclient.conversations.v1.conversations(

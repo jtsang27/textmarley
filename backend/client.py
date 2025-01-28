@@ -25,13 +25,14 @@ def intent(user_message):
                 "content": [
                     {
                         "type": "text",
-                        "text": """You parse user messages into the following actions:
-                                    1. If the message asks to set a reminder, extract the task, time, and date.
-                                    2. If the message asks to delete a reminder, extract the task to be deleted.
-                                    3. If the message asks to edit a reminder, extract the task to be updated and the new task/time/date.
-                                    4. If the message asks to list current reminders, determine if there is a time frame (e.g., "today", "this week").
+                        "text": """You categorize user intent into the following actions:
+                                    0. Message asks to set a reminder
+                                    1. Message asks to delete a reminder
+                                    2. Message asks to edit a reminder
+                                    3. Message asks to list current reminders
+                                    4. Other
 
-                                    Parse task, time, and date into separate structured JSON response. Translate time to 24 hour.
+                                    Return number associated with action
                                 """
                     }
                 ]
@@ -52,7 +53,123 @@ def intent(user_message):
 
     return parsed_response
 
+def parse_set(user_message):
+    parsing_response = Oclient.chat.completions.create(
+        model="gpt-4o-mini",
+        messages= [
+            {
+                "role": "developer", 
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided. Translate time to 24 hour."
+                    }
+                ]
+            },
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": f"{user_message}"
+                    }
+                ]
+            }
+        ],
+        max_tokens=100
+    )
+    parsed_response = parsing_response.choices[0].message.content
 
-message = "Delete my reminder at 8 pm"
+    return parsed_response
+
+def parse_delete(user_message):
+    parsing_response = Oclient.chat.completions.create(
+        model="gpt-4o-mini",
+        messages= [
+            {
+                "role": "developer", 
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided. Translate time to 24 hour."
+                    }
+                ]
+            },
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": f"{user_message}"
+                    }
+                ]
+            }
+        ],
+        max_tokens=100
+    )
+    parsed_response = parsing_response.choices[0].message.content
+
+    return parsed_response
+
+def parse_edit(user_message):
+    parsing_response = Oclient.chat.completions.create(
+        model="gpt-4o-mini",
+        messages= [
+            {
+                "role": "developer", 
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided. Translate time to 24 hour."
+                    }
+                ]
+            },
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": f"{user_message}"
+                    }
+                ]
+            }
+        ],
+        max_tokens=100
+    )
+    parsed_response = parsing_response.choices[0].message.content
+
+    return parsed_response
+
+def parse_list(user_message):
+    parsing_response = Oclient.chat.completions.create(
+        model="gpt-4o-mini",
+        messages= [
+            {
+                "role": "developer", 
+                "content": [
+                    {
+                        "type": "text",
+                        "text": """You parse user messages into separate structured JSON response with 'time frame' and 'date', if provided. 
+                                    If not provided, assume 'date' is today and 'time frame' is null"""
+                    }
+                ]
+            },
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": f"{user_message}"
+                    }
+                ]
+            }
+        ],
+        max_tokens=100
+    )
+    parsed_response = parsing_response.choices[0].message.content
+
+    return parsed_response
+
+message = "remind me to take notes for my meeting at 9am"
 
 print(intent(message))
