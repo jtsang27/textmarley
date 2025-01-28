@@ -170,6 +170,11 @@ def parse_list(user_message):
 
     return parsed_response
 
-message = "remind me to take notes for my meeting at 9am"
+parse_array = [parse_set, parse_delete, parse_edit, parse_list]
 
-print(intent(message))
+message = "remind me to do math hw tomorrow 9 am"
+i = int(intent(message))
+print(i)
+
+p = parse_array[i](message)
+print(p)
