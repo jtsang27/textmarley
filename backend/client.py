@@ -120,7 +120,7 @@ def parse_edit(user_message):
                 "content": [
                     {
                         "type": "text",
-                        "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided. Translate time to 24 hour."
+                        "text": "You parse user messages into separate structured JSON response with 'original task', 'new time', and 'new date', if provided. Translate time to 24 hour."
                     }
                 ]
             },
@@ -172,7 +172,7 @@ def parse_list(user_message):
 
 parse_array = [parse_set, parse_delete, parse_edit, parse_list]
 
-message = "remind me to do math hw tomorrow 9 am"
+message = "change my math hw reminder from 9 to 8 pm"
 i = int(intent(message))
 print(i)
 
