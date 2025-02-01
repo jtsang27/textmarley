@@ -5,7 +5,15 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "rewrites": [ {
+    "source": "**",
+    "run": {
+      "serviceId": "textmarley",  
+      "region": "us-central1",    
+      "pinTag": true              
+    }
+  } ]
   },
   "emulators": {
     "hosting": {
