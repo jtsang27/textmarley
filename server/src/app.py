@@ -64,44 +64,6 @@ def add_schedule(phone_number, task, time_str, date_str):
 def delete_schedule(phone_number, task): # TODO: search through schedules for reminder to be deleted
     None 
 
-def parse_reminder(user_number, user_message):
-    parsing_response = Oclient.chat.completions.create(
-        model="gpt-4o-mini",
-        messages= [
-            {
-                "role": "developer", 
-                "content": [
-                    {
-                        "type": "text",
-                        "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided. Translate time to 24 hour."
-                    }
-                ]
-            },
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "text",
-                        "text": f"{user_message}"
-                    }
-                ]
-            }
-        ],
-        max_tokens=100
-    )
-    parsed_response = parsing_response.choices[0].message.content
-
-    parsed_data = json.loads(parsed_response)
-    task = parsed_data["task"]
-    date = parsed_data["date"]
-    time = parsed_data["time"]
-
-    # TODO: return whether task, date, time is missing
-    if (task == None) | (date == None) | (time == None):
-        return 0
-    else:
-        add_schedule(user_number, f"{task}", f"{time}", f"{date}")
-
 def parse_set(user_number, user_message):
     parsing_response = Oclient.chat.completions.create(
         model="gpt-4o-mini",
@@ -404,7 +366,7 @@ def sms_reply():
 
     # TODO: generate response ???
 
-    # TODO: run assistant on message thread
+    # Run assistant on message thread
     run = Oclient.beta.threads.runs.create_and_poll(
         thread_id=threads[from_number],
         assistant_id=Assistant.id
@@ -431,4 +393,4 @@ reminder_thread = Thread(target=send_reminders, daemon=True)
 reminder_thread.start()
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
