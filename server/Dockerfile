@@ -11,8 +11,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the source code into the container
 COPY src/ .  
 
+EXPOSE 8080
 # Set environment variables
-ENV PORT=8080
 
 # Start the Gunicorn server
 CMD ["gunicorn", "--bind", ":8080", "--workers", "1", "--threads", "8", "app:app"]
