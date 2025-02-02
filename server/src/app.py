@@ -393,4 +393,4 @@ reminder_thread = Thread(target=send_reminders, daemon=True)
 reminder_thread.start()
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=int(os.getenv('PORT')))
+    app.run(debug=True)
