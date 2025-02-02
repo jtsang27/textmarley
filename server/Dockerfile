@@ -15,4 +15,4 @@ COPY src/ .
 EXPOSE 8080
 
 # Start the Gunicorn server
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "10", "--threads", "8", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "10", "--threads", "8", "src.app:app"]
