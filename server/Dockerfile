@@ -1,11 +1,18 @@
+# Use an official Python runtime
 FROM python:3.11.5
 
-RUN pip freeze > requirements.txt
-RUN pip install -r requirements.txt
-
-COPY src/ app/
+# Set the working directory inside the container
 WORKDIR /app
 
+# Copy and install dependencies (Make sure you have a valid requirements.txt)
+COPY requirements.txt .  
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the source code into the container
+COPY src/ .  
+
+# Set environment variables
 ENV PORT=8080
 
-CMD exec gunicorn --bind :${PORT} --workers 1 --threads 8 app:app
+# Start the Gunicorn server
+CMD ["gunicorn", "--bind", ":8080", "--workers", "1", "--threads", "8", "app:app"]
