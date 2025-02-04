@@ -15,7 +15,6 @@ body {
 
 li{
   list-style:none;
-
 }
 
 a {
@@ -34,9 +33,10 @@ head{
 
 /*Header*/
 header {
-  background-color: #000;
+  background-color: #000000d3;
   position: relative;
   padding: 0 2rem;
+  z-index: 1000; /* Ensure the header is on top */
 }
 
 .navbar {
@@ -99,19 +99,18 @@ header {
   border-radius: 10px;
   overflow: hidden;
   transition: height .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1001; /* Ensure the dropdown is on top of everything */
 }
 
 .dropdown_menu.open{
   height: 240px;
 }
 
-
 .dropdown_menu li{
   padding: .7rem;
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 .dropdown_menu .action_btn {
@@ -121,7 +120,7 @@ header {
 }
 
 /* RESPONSIVE DESIGN */
-@media(max-width: 992px){
+@media(max-width: 900px){
   .navbar .links,
   .navbar .action_btn {
     display: none;
@@ -149,70 +148,104 @@ header {
   width: 90%;
   color: black;
   position: absolute;
-  top: 20%;
+  top: 12rem;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
 }
 
 
-.text-box h1 {
-  font-size: 62px;
-  z-index: -1;
-}
-.pog{
-  position: absolute;
-  left: 50%;
-  top: 20%;
+.logo-image {
+  width: 50px; 
+  height: auto;
+  margin-bottom: 1rem;
+  display: block;
+  margin-left: 0px;
 }
 
-@media(max-width: 992px){
+
+.text-box .content {
+  display: flex; /* Enables flexbox for layout */
+  align-items: center; /* Vertically aligns items */
+  justify-content: center; /* Centers the entire content block */
+  gap: 1rem; /* Adds space between the images and text */
+}
+
+.logo-image {
+  width: 125px; /* Adjust the size of the logo */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.text-box .text h1 {
+  margin: 0; /* Remove default margins for cleaner layout */
+  text-align: center;
+  font-size: 62px;
+  width: 100%; 
+  min-width: 700px;
+}
+
+@media(max-width: 900px){
   .text-box {
     position: relative; /* Ensure the position can be adjusted */
     top: 9%; 
   }
 
-  .text-box h1 {
+  .text-box .text h1 {
     font-size: 36px;
     line-height: 35px;
+    min-width: 425px;
   }
-  .phone-input-container {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-0%, -0%);
-
+  .logo-image {
+    width: 75px; /* Adjust the size of the logo */
+    height: auto; /* Maintain aspect ratio */
   }
+  .text-box .content {
+    gap: 0rem; /* Adds space between the images and text */
+  }
+  
 }
-
-/*Phone number enter*/
 .phone-input-container {
-  position: absolute;
+  position: relative;
   transform: translate(-50%, -50%);
-  top: 45%;
+  top: 19rem; /* Default top value for desktop */
   left: 50%;
-  background-color: #fff;
   padding: 1rem;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: auto; /* Adjust width dynamically */
-  height: fit-content; /* Automatically adjusts height */
+  width: 300px;
+  height: fit-content;
 }
+
 
 
 .phone-input-container label {
   font-size: 1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: -1px;
   color: #333;
 }
 
 .phone-input-container input {
   width: 100%;
-  padding: 0.8rem;
-  font-size: 1rem;
+  padding: .5rem;
+  font-size: .8rem;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-bottom: 1rem;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+.phone-input-container .input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Space between input and button */
+}
+
+.phone-input-container .input-group input {
+  flex: 1; /* Make the input take up the remaining space */
+  width: auto; /* Reset any specific width for better responsiveness */
+}
+
+.phone-input-container .input-group button {
+  flex-shrink: 0; /* Prevent the button from shrinking */
 }
 
 .phone-input-container input:focus {
@@ -223,20 +256,37 @@ header {
 
 .submit-btn {
   background-color: #669BFE;
-  color: #fff;
+  color: #FFF;
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
   font-weight: bold;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .submit-btn:hover {
-  background-color: #233e68;
+  background-color: #9ab8e7;
 }
 
 .submit-btn:active {
   transform: scale(0.98);
+}
+
+@media(max-width: 900px) {
+  .phone-input-container {
+    position: absolute;
+    margin-top: 2rem;
+    top: 12.5rem; /* Adjusted top for better mobile placement */
+    width: 300px; /* Ensure usability on mobile */
+    max-width: 400px;
+  }
+  .submit-btn {
+    padding: 0.5rem 1.0rem;
+    font-size: .9rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 }
