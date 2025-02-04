@@ -14,7 +14,7 @@
   <body>
     <header>
       <div class = "navbar">
-        <div class="logo"><a href = "#"> TextMarley</a></div>
+        <div class="logo"><a href = ""> TextMarley</a></div>
         <ul class = "links">
           <li><a href = "hero">Home</a></li>
           <li><a href = "pricing">Pricing</a></li>
@@ -55,23 +55,34 @@
   </body>
   <head>
     <div class="text-box">
-      <h1>your most proactive</h1> 
-      <h1>personal assistant</h1> 
-      <h1>purely on text message</h1> 
+      <div class="content">
+        <img src="assets/logo.png" alt="Logo" class="logo-image" />
+        <div class="text">
+          <h1>your most proactive</h1> 
+          <h1>personal assistant</h1> 
+          <h1>purely on text message</h1> 
+        </div>
+        <img src="assets/logo.png" alt="Logo" class="logo-image-flip" />
+      </div>
+    </div>
+    
+    <div class="phone-input-container">
+      <form id="phoneForm" action="https://thoroughly-social-mollusk.ngrok-free.app/create_conversation" method="POST">
+          <div class="input-group">
+              <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="7073456789"
+                  pattern="\d{10}"
+                  autofocus
+                  required
+                  title="Enter your phone number without any spaces"
+              />
+              <button type="submit" class="submit-btn">Submit</button>
+          </div>
+          <label for="phone">No additional sign up, No credit card.</label>
+      </form>
     </div>
   </head>
-  <div class="phone-input-container">
-      <form id="phoneForm" action="https://textmarley-21309214523.us-central1.run.app/create_conversation" method="POST">
-        <label for="phone">No additional sign up, No credit card, No BS.</label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          placeholder="+17073456789"
-          pattern="\+1\d{10}"
-          required
-        />
-        <button type="submit" class="submit-btn">Submit</button>      </form>
-  </div>
-  
 </html>
