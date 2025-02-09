@@ -9,7 +9,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the source code into the container
-COPY src/ .  
+COPY . .  
 
 # Set environment variables
 EXPOSE 8080
