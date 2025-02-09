@@ -1,15 +1,15 @@
 # Use an official Python runtime
-FROM python:3.11.5
+FROM python:3.11
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /
 
 # Copy and install dependencies (Make sure you have a valid requirements.txt)
 COPY requirements.txt .  
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the source code into the container
-COPY src/ .  
+COPY server/src/ .
 
 # Set environment variables
 EXPOSE 8080
