@@ -69,3 +69,6 @@ node_modules/
 .dataconnect
 
 .DS_Store
+
+# virtual environment not needed for Google Cloud Run
+venv/
