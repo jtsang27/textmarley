@@ -5,6 +5,8 @@ from openai import OpenAI
 import json
 import time
 from threading import Thread
+import firebase_admin
+from firebase_admin import firestore
 import os
 
 app = Flask(__name__)
@@ -20,6 +22,17 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 # Clients
 Tclient = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 Oclient = OpenAI(api_key=OPENAI_API_KEY)
+
+# Schedule for all reminders
+schedules = []
+# Store twilio conversations
+conversations = {} # conversations[phone_number] = conversation.sid
+# Store openai threads
+threads = {} # threads[phone_number] = thread.id
+
+# Initialize firestore
+app = firebase_admin.initialize_app()
+db = firestore.client()
 
 def intent(user_message):
     parsing_response = Oclient.chat.completions.create(
@@ -219,7 +232,6 @@ def parse_list(user_number, user_message):
 
 parse_array = [parse_set, parse_delete, parse_edit, parse_list]
 
-
 def send_reminders():
     while True:
         for event in schedules:
@@ -234,13 +246,6 @@ def send_reminders():
             print(event['time'])
             print(event['date'])
         time.sleep(60)  # Check every minute
-
-# Schedule for all reminders
-schedules = []
-# Store twilio conversations
-conversations = {} # conversations[phone_number] = conversation.sid
-# Store openai threads
-threads = {} # threads[phone_number] = thread.id
 
 # OpenAI assistant
 Assistant = Oclient.beta.assistants.create(
@@ -395,6 +400,22 @@ def testing():
         from_=TWILIO_PHONE_NUMBER,
         to="+12063343224"
     )
+
+    doc_ref = db.collection("Testing").document("eliu")
+    doc_ref.set({"first": "Evan", "last": "Liu", "number": "+12063343224", "Message": "This is the ship that made the Kessel Run in fourteen parsecs?"})
+
+    doc_ref = db.collection("Testing").document("jtsang")
+    doc_ref.set({"first": "Jonathan", "middle": "CoolBeans", "last": "Tsang", "number": "+16504452399"})
+
+    doc_ref = db.collection("Testing").document("jfarber")
+    doc_ref.set({"first": "Jonny", "last": "Farber", "number": "+18478266465"})
+
+    users_ref = db.collection("Testing")
+    docs = users_ref.stream()
+
+    for doc in docs:
+        print(f"{doc.id} => {doc.to_dict()}")
+
     return "<p>This is the ship that made the Kessel Run in fourteen parsecs?</p>"
 
 # Start reminder thread
