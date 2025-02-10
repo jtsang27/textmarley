@@ -16,11 +16,7 @@
       <div class = "navbar">
         <div class="logo"><a href = ""> TextMarley</a></div>
         <ul class = "links">
-          <li><a href = "hero">Home</a></li>
-          <li><a href = "pricing">Pricing</a></li>
-          <li><a href = "faq">FAQ</a></li>
-          <li><a href = "aboutus">About Us</a></li>
-          <li><a href = "forbuisness">For Buisness</a></li>
+          <li><a href = "#">Home</a></li>
         </ul>
         <a href="#" class = "action_btn"></a>
         <div class = "toggle_btn">
@@ -29,15 +25,9 @@
       </div>
 
       <div class = "dropdown_menu">
-        <li><a href = "hero">Home</a></li>
-        <li><a href = "pricing">Pricing</a></li>
-        <li><a href = "faq">FAQ</a></li>
-        <li><a href = "aboutus">About Us</a></li>
-        <li><a href = "forbuisness">For Buisness</a></li>
+        <li><a href = "#">Home</a></li>
       </div>
     </header>
-    
-
     <script>
       const toggleBtn = document.querySelector('.toggle_btn')
       const toggleBtnIcon = document.querySelector('.toggle_btn i')
@@ -58,23 +48,23 @@
       <div class="content">
         <img src="assets/logo.png" alt="Logo" class="logo-image" />
         <div class="text">
-          <h1>your most proactive</h1> 
-          <h1>personal assistant</h1> 
-          <h1>purely on text message</h1> 
+          <h1>The Assistant</h1> 
+          <h1>Made to Prevent</h1> 
+          <h1>'Oops I Forgot!'</h1> 
         </div>
         <img src="assets/logo.png" alt="Logo" class="logo-image-flip" />
       </div>
     </div>
     
     <div class="phone-input-container">
-      <form id="phoneForm" action="https://thoroughly-social-mollusk.ngrok-free.app/create_conversation" method="POST">
+      <form id="phoneForm" action="https://textmarley-one-21309214523.us-central1.run.app/create_conversation" method="POST">
           <div class="input-group">
               <input
                   type="tel"
                   id="phone"
                   name="phone"
-                  placeholder="7073456789"
-                  pattern="\d{10}"
+                  placeholder="+17073456789"
+                  pattern="\+1\d{10}"
                   autofocus
                   required
                   title="Enter your phone number without any spaces"
@@ -84,5 +74,23 @@
           <label for="phone">No additional sign up, No credit card.</label>
       </form>
     </div>
-  </head>
+    <script>
+      document.getElementById('phoneForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+    
+        var formData = new FormData(this); // Collect the data from the form
+    
+        // Send the data to the webhook
+        fetch(this.action, {
+          method: 'POST',
+          body: formData
+        });
+    
+        // Redirect immediately to the thank you page
+        window.location.href = 'thank.html'; // Adjust 'thankyou.html' to your target redirection page
+      });
+    </script>
+  </head> 
+  <body1>
+  </body1>
 </html>
