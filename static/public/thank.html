@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@500"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>TextMarley</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class = "navbar">
+        <div class="logo"><a href = ""> TextMarley</a></div>
+        <ul class = "links">
+          <li><a href = "hero">Home</a></li>
+          <li><a href = "pricing">Pricing</a></li>
+          <li><a href = "faq">FAQ</a></li>
+          <li><a href = "aboutus">About Us</a></li>
+          <li><a href = "forbuisness">For Buisness</a></li>
+        </ul>
+        <a href="thank" class = "action_btn"></a>
+        <div class = "toggle_btn">
+          <i class="fa fa-bars"></i>
+        </div>
+      </div>
+
+      <div class = "dropdown_menu">
+        <li><a href = "hero">Home</a></li>
+        <li><a href = "pricing">Pricing</a></li>
+        <li><a href = "faq">FAQ</a></li>
+        <li><a href = "aboutus">About Us</a></li>
+        <li><a href = "forbuisness">For Buisness</a></li>
+      </div>
+    </header>
+    
+
+    <script>
+      const toggleBtn = document.querySelector('.toggle_btn')
+      const toggleBtnIcon = document.querySelector('.toggle_btn i')
+      const dropDownMenu = document.querySelector('.dropdown_menu')
+
+      toggleBtn.onclick = function () {
+        dropDownMenu.classList.toggle('open')
+        const isOpen = dropDownMenu.classList.contains('open')
+
+        toggleBtnIcon.classList = isOpen
+          ? 'fa fa-bars'
+          : 'fa fa-bars'
+      }
+    </script>
+  </body>
+  <head>
+    <div class="text-box">
+      <div class="content">
+        <img src="assets/logo.png" alt="Logo" class="logo-image" />
+        <div class="text">
+          <h1>Thanks For Signing Up!</h1> 
+        </div>
+        <img src="assets/logo.png" alt="Logo" class="logo-image-flip" />
+      </div>
+    </div>
+</html>
