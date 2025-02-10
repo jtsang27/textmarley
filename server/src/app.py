@@ -5,12 +5,10 @@ from openai import OpenAI
 import json
 import time
 from threading import Thread
-from dotenv import load_dotenv
 import os
 
 app = Flask(__name__)
 
-load_dotenv()
 # Twilio credentials
 TWILIO_SID = os.getenv("TWILIO_SID")
 TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
