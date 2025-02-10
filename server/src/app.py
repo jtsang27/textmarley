@@ -56,7 +56,7 @@ def intent(user_message):
     )
     parsed_response = parsing_response.choices[0].message.content
 
-    return parsed_response
+    return int(parsed_response)
 
 def add_schedule(phone_number, task, time_str, date_str):
     schedules.append({"phone": phone_number, "task": task, "time": time_str, "date": date_str})
