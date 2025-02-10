@@ -10,8 +10,10 @@ certifi
 charset-normalizer
 click
 distro
+firebase-admin
 Flask
 frozenlist
+google-cloud-firestore
 gunicorn
 h11
 httpcore
