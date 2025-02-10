@@ -31,7 +31,7 @@ conversations = {} # conversations[phone_number] = conversation.sid
 threads = {} # threads[phone_number] = thread.id
 
 # Initialize firestore
-app = firebase_admin.initialize_app()
+DB_app = firebase_admin.initialize_app()
 db = firestore.client()
 
 def intent(user_message):
