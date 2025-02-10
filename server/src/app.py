@@ -390,7 +390,12 @@ def sms_reply():
 
 @app.route("/testing", methods=["GET"])
 def testing():
-    return "<p>Hello, World!</p>"
+    message = Tclient.messages.create(
+        body="This is the ship that made the Kessel Run in fourteen parsecs?",
+        from_=TWILIO_PHONE_NUMBER,
+        to="+12063343224"
+    )
+    return "<p>This is the ship that made the Kessel Run in fourteen parsecs?</p>"
 
 # Start reminder thread
 reminder_thread = Thread(target=send_reminders, daemon=True)
