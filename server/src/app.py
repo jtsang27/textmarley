@@ -30,12 +30,6 @@ db = firestore.client()
 # Schedule for all reminders
 schedules = []
 
-# Store twilio conversations
-conversations = {} # conversations[phone_number] = conversation.sid
-
-# Store openai threads
-threads = {} # threads[phone_number] = thread.id
-
 def intent(user_message):
     parsing_response = Oclient.chat.completions.create(
         model="gpt-4o-mini",
@@ -271,9 +265,9 @@ def create_conversation():
             friendly_name=f"Conversation with {user_phone}"
         )
     # conversations[user_phone] = conversation.sid 
-        # Add conversation to firestore collegection where document name is phone number 
-    doc_ref = db.collection("Testing").document(f"{user_phone}")
-    doc_ref.set({"ID": f"{conversation.sid}"})
+        # Add conversation to firestore collection where document name is phone number 
+    convo_ref = db.collection("Conversations").document(f"{user_phone}")
+    convo_ref.set({"ID": f"{conversation.sid}"})
 
         # Add participant to new conversation
     participant = Tclient.conversations.v1.conversations(
@@ -285,18 +279,21 @@ def create_conversation():
 
         # Create OpenAI thread
     thread = Oclient.beta.threads.create()
-    threads[user_phone] = thread.id # Add thread to dictionary
+    # threads[user_phone] = thread.id # Add thread to dictionary
+        # Add thread id to firestore collection where document name is phone number
+    thread_ref = db.collection("Threads").document(f"{user_phone}")
+    thread_ref.set({"ID": f"{thread.id}"})
 
         # Add message to thread
     message = Oclient.beta.threads.messages.create(
-            thread_id=threads[user_phone],
+            thread_id=thread.id,
             role="user",
             content="Hello!"
         )
 
         # Run assistant on thread
     run = Oclient.beta.threads.runs.create_and_poll(
-            thread_id=threads[user_phone],
+            thread_id=thread.id,
             assistant_id=Assistant.id,
         )
 
@@ -331,9 +328,19 @@ def sms_reply():
     user_message = request.form.get("Body")  # Message body
     print(f"Received message from {from_number}: {user_message}")
 
+    # Get thread id
+    thread_ref = db.collection("Threads").document(f"{from_number}").get()
+    if thread_ref.exists:
+        Thread_id = thread_ref.to_dict()["ID"]
+    
+    # Get conversation sid
+    convo_ref = db.collection("Conversations").document(f"{from_number}").get()
+    if convo_ref.exists:
+        Convo_id = convo_ref.to_dict()["ID"]
+    
     # Add message to OpenAI threads
     message = Oclient.beta.threads.messages.create(
-        thread_id=threads[from_number],
+        thread_id=Thread_id,
         role="user",
         content=user_message
     )
@@ -377,12 +384,12 @@ def sms_reply():
 
     # Run assistant on message thread
     run = Oclient.beta.threads.runs.create_and_poll(
-        thread_id=threads[from_number],
+        thread_id=Thread_id,
         assistant_id=Assistant.id
     )
     if run.status == 'completed': 
         messages = Oclient.beta.threads.messages.list(
-            thread_id=threads[from_number], order="desc", limit=3
+            thread_id=Thread_id, order="desc", limit=3
         )
         message_final = messages.data[0].content[0].text.value # Get the latest message
     else:
@@ -390,7 +397,7 @@ def sms_reply():
 
     # Send response back using twilio conversation
     message = Tclient.conversations.v1.conversations(
-        conversations[from_number]
+        Convo_id
     ).messages.create(
         body=message_final
     )
