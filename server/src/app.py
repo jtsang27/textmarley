@@ -23,16 +23,18 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 Tclient = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 Oclient = OpenAI(api_key=OPENAI_API_KEY)
 
-# Schedule for all reminders
-schedules = []
-# Store twilio conversations
-conversations = {} # conversations[phone_number] = conversation.sid
-# Store openai threads
-threads = {} # threads[phone_number] = thread.id
-
 # Initialize firestore
 DB_app = firebase_admin.initialize_app()
 db = firestore.client()
+
+# Schedule for all reminders
+schedules = []
+
+# Store twilio conversations
+conversations = {} # conversations[phone_number] = conversation.sid
+
+# Store openai threads
+threads = {} # threads[phone_number] = thread.id
 
 def intent(user_message):
     parsing_response = Oclient.chat.completions.create(
@@ -261,15 +263,17 @@ Assistant = Oclient.beta.assistants.create(
 @app.route("/create_conversation", methods=["GET", "POST"])
 def create_conversation():
     user_phone = request.form.get("phone")
-    # TODO: ensure phone numbers are all in same format
+        # TODO: ensure phone numbers are all in same format
 
 
         # Create new twilio conversation
     conversation = Tclient.conversations.v1.conversations.create(
             friendly_name=f"Conversation with {user_phone}"
         )
-    conversations[user_phone] = conversation.sid # Add conversation to dictionary
-    print(conversations)
+    # conversations[user_phone] = conversation.sid 
+        # Add conversation to firestore collegection where document name is phone number 
+    doc_ref = db.collection("Testing").document(f"{user_phone}")
+    doc_ref.set({"ID": f"{conversation.sid}"})
 
         # Add participant to new conversation
     participant = Tclient.conversations.v1.conversations(
@@ -395,26 +399,27 @@ def sms_reply():
 
 @app.route("/testing", methods=["GET"])
 def testing():
-    message = Tclient.messages.create(
-        body="This is the ship that made the Kessel Run in fourteen parsecs?",
-        from_=TWILIO_PHONE_NUMBER,
-        to="+12063343224"
-    )
+    number = "+12063343224"
+    ID = "RANDOM010101ID"
 
-    doc_ref = db.collection("Testing").document("eliu")
-    doc_ref.set({"first": "Evan", "last": "Liu", "number": "+12063343224", "Message": "This is the ship that made the Kessel Run in fourteen parsecs?"})
+    doc_ref = db.collection("Testing").document(f"{number}")
+    doc_ref.set({"ID": f"{ID}", "Message": "This is the ship that made the Kessel Run in fourteen parsecs?"})
 
-    doc_ref = db.collection("Testing").document("jtsang")
-    doc_ref.set({"first": "Jonathan", "middle": "CoolBeans", "last": "Tsang", "number": "+16504452399"})
+    users_ref = db.collection("Testing").document(f"{number}")
+    doc = users_ref.get()
 
-    doc_ref = db.collection("Testing").document("jfarber")
-    doc_ref.set({"first": "Jonny", "last": "Farber", "number": "+18478266465"})
-
-    users_ref = db.collection("Testing")
-    docs = users_ref.stream()
-
-    for doc in docs:
-        print(f"{doc.id} => {doc.to_dict()}")
+    if doc.exists:
+        dicti = doc.to_dict()
+        m = dicti["Message"]
+        
+        message = Tclient.messages.create(
+            body=m,
+            from_=TWILIO_PHONE_NUMBER,
+            to=number
+        )
+    else:
+        print("No such document!")
+    
 
     return "<p>This is the ship that made the Kessel Run in fourteen parsecs?</p>"
 
