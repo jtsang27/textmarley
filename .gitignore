@@ -72,3 +72,9 @@ node_modules/
 
 # virtual environment not needed for Google Cloud Run
 venv/
+
+# Testing files
+client.py
+assistant.py
+initial.py
+receiving_server.py
