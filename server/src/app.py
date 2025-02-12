@@ -234,7 +234,7 @@ parse_array = [parse_set, parse_delete, parse_edit, parse_list]
 # OpenAI assistant
 Assistant = Oclient.beta.assistants.create(
     name="Marley", 
-    instructions="You are a friendly personal assistant that help set reminders and centralize to-do lists.",
+    instructions="You are a friendly personal assistant named Marley that help set reminders and centralize to-do lists. You are a texting assistant and able to set reminders.",
     model="gpt-4o-mini", 
     temperature=1.0,
     top_p=1.0,
@@ -410,10 +410,19 @@ def reminder_thread():
                         "content": [
                             {
                                 "type": "text",
-                                "text": f"You create reminders based off of the following information: {task}" 
+                                "text": "You create reminders based off of the specified user task" 
                             }
                         ]
                     },
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": f"{task}"
+                            }
+                        ]
+                    }
                 ]
             )
             message_final = message.choices[0].message.content
@@ -443,7 +452,6 @@ def reminder_thread():
 
             print(f"Task: {event['task']}, Phone: {event['phone']}, Time: {event['time']}, Date: {event['date']}")
     return jsonify({"Return message": message_final})
-
 
 @app.route("/testing", methods=["GET"])
 def testing():
