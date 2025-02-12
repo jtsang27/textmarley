@@ -30,6 +30,7 @@ db = firestore.client()
 # Schedule for all reminders
 schedules = []
 
+# Parse for user intent
 def intent(user_message):
     parsing_response = Oclient.chat.completions.create(
         model="gpt-4o-mini",
@@ -73,6 +74,7 @@ def add_schedule(phone_number, task, time_str, date_str):
 def delete_schedule(phone_number, task): # TODO: search through schedules for reminder to be deleted
     None 
 
+# Functions for parsing user message
 def parse_set(user_number, user_message):
     parsing_response = Oclient.chat.completions.create(
         model="gpt-4o-mini",
@@ -227,6 +229,7 @@ def parse_list(user_number, user_message):
     return None
 
 parse_array = [parse_set, parse_delete, parse_edit, parse_list]
+
 
 def send_reminders():
     while True:
@@ -405,6 +408,10 @@ def sms_reply():
     
     return jsonify({"Return message": message_final})
 
+@app.route("/reminder_thread", method=["POST"])
+def reminder_thread():
+    None
+
 @app.route("/testing", methods=["GET"])
 def testing():
     number = "+12063343224"
@@ -430,10 +437,6 @@ def testing():
     
 
     return "<p>This is the ship that made the Kessel Run in fourteen parsecs?</p>"
-
-# Start reminder thread
-reminder_thread = Thread(target=send_reminders, daemon=True)
-reminder_thread.start()
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
