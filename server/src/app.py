@@ -230,22 +230,7 @@ def parse_list(user_number, user_message):
 
 parse_array = [parse_set, parse_delete, parse_edit, parse_list]
 
-
-def send_reminders():
-    while True:
-        for event in schedules:
-            # Check if the time matches (you can improve this logic)
-            if event["time"] == time.strftime("%H:%M"):
-                # Create message through OpenAI api
-                task = event["task"]
-                number = event["phone"]
-                #send_message(task, number)
-            print(event['phone'])
-            print(event['task'])
-            print(event['time'])
-            print(event['date'])
-        time.sleep(60)  # Check every minute
-
+    
 # OpenAI assistant
 Assistant = Oclient.beta.assistants.create(
     name="Marley", 
@@ -408,9 +393,57 @@ def sms_reply():
     
     return jsonify({"Return message": message_final})
 
-@app.route("/reminder_thread", method=["POST"])
+@app.route("/reminder_thread", methods=["POST"])
 def reminder_thread():
-    None
+    for event in schedules:
+        # TODO: improve time logic
+        if event["time"] == time.strftime("%H:%M"):
+            task = event["task"]
+            number = event["phone"]
+            
+            # Create message through OpenAI api
+            message = Oclient.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[
+                    {
+                        "role": "developer", 
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": f"You create reminders based off of the following information: {task}" 
+                            }
+                        ]
+                    },
+                ]
+            )
+            message_final = message.choices[0].message.content
+
+            # Append to threads
+                # Get thread id
+            thread_ref = db.collection("Threads").document(f"{number}").get()
+            if thread_ref.exists:
+                Thread_id = thread_ref.to_dict()["ID"]
+                message = Oclient.beta.threads.messages.create(
+                    thread_id=Thread_id,
+                    role="Assistant",
+                    content=message_final
+                )
+
+
+            # Send through twilio conversation
+                 # Get conversation sid
+            convo_ref = db.collection("Conversations").document(f"{number}").get()
+            if convo_ref.exists:
+                Convo_id = convo_ref.to_dict()["ID"]
+                message = Tclient.conversations.v1.conversations(
+                    Convo_id
+                ).messages.create(
+                    body=message_final
+                )
+
+            print(f"Task: {event['task']}, Phone: {event['phone']}, Time: {event['time']}, Date: {event['date']}")
+    return jsonify({"Return message": message_final})
+
 
 @app.route("/testing", methods=["GET"])
 def testing():
