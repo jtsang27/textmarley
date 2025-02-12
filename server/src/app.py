@@ -348,37 +348,38 @@ def sms_reply():
     # Determine intent
     i = intent(user_message)
 
-    # parse information based on intent
-    p = parse_array[i](from_number, user_message)
-    if p == 0:
-        message_final = "Please be more specific in you reminder request"
-    else: 
-        print(f"Reminder stored: {schedules}")
-        # Create a response message to send back to the user
-        message = Oclient.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {
-                    "role": "developer", 
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": "You create automatic responses to confirm users' reminder requests"
-                        }
-                    ]
-                },
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": f"{user_message}"
-                        }
-                    ]
-                }
-            ]
-        )
-        message_final = message.choices[0].message.content
+    if i != 4:
+        # parse information based on intent
+        p = parse_array[i](from_number, user_message)
+        if p == 0:
+            message_final = "Please be more specific in you reminder request"
+        else: 
+            print(f"Reminder stored: {schedules}")
+            # Create a response message to send back to the user
+            message = Oclient.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[
+                    {
+                        "role": "developer", 
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "You create automatic responses to confirm users' reminder requests"
+                            }
+                        ]
+                    },
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": f"{user_message}"
+                            }
+                        ]
+                    }
+                ]
+            )
+            message_final = message.choices[0].message.content
 
     # TODO: generate response ???
 
