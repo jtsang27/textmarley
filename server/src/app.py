@@ -47,7 +47,7 @@ def intent(user_message):
                                     3. Message asks to list current reminders
                                     4. Other
 
-                                    Return number associated with action
+                                    Return only the number of the action
                                 """
                     }
                 ]
