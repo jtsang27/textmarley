@@ -84,7 +84,7 @@ def parse_set(user_number, user_message):
                 "content": [
                     {
                         "type": "text",
-                        "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided. Translate time to 24 hour."
+                        "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided. Assume date is today if not provided. Translate time to 24 hour."
                     }
                 ]
             },
@@ -123,7 +123,7 @@ def parse_delete(user_number, user_message):
                 "content": [
                     {
                         "type": "text",
-                        "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided. Translate time to 24 hour."
+                        "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided. Assume date is today if not provided. Translate time to 24 hour."
                     }
                 ]
             },
@@ -162,7 +162,7 @@ def parse_edit(user_number, user_message):
                 "content": [
                     {
                         "type": "text",
-                        "text": "You parse user messages into separate structured JSON response with 'original task', 'new time', and 'new date', if provided. Translate time to 24 hour."
+                        "text": "You parse user messages into separate structured JSON response with 'original task', 'new time', and 'new date', if provided. Assume date is today if not provided. Translate time to 24 hour."
                     }
                 ]
             },
