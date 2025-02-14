@@ -451,7 +451,7 @@ def reminder_thread():
                 )
 
             print(f"Task: {event['task']}, Phone: {event['phone']}, Time: {event['time']}, Date: {event['date']}")
-    return jsonify({"Return message": message_final})
+    return jsonify({"Return message": "Place holder return message"})
 
 @app.route("/testing", methods=["GET"])
 def testing():
