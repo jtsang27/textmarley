@@ -346,7 +346,6 @@ def sms_reply():
             message_final = "Please be more specific in you reminder request"
         else: 
             print(f"Reminder stored: {schedules}")
-            """
             # Create a response message to send back to the user
             message = Oclient.chat.completions.create(
                 model="gpt-4o-mini",
@@ -372,22 +371,26 @@ def sms_reply():
                 ]
             )
             message_final = message.choices[0].message.content
-            """
-
+            # Append to threads
+            message = Oclient.beta.threads.messages.create(
+                thread_id=Thread_id,
+                role="Assistant",
+                content=message_final
+            )
     # TODO: generate response ???
-
-    # Run assistant on message thread
-    run = Oclient.beta.threads.runs.create_and_poll(
-        thread_id=Thread_id,
-        assistant_id=Assistant.id
-    )
-    if run.status == 'completed': 
-        messages = Oclient.beta.threads.messages.list(
-            thread_id=Thread_id, order="desc", limit=3
-        )
-        message_final = messages.data[0].content[0].text.value # Get the latest message
     else:
-        print(run.status)
+        # Run assistant on message thread
+        run = Oclient.beta.threads.runs.create_and_poll(
+            thread_id=Thread_id,
+            assistant_id=Assistant.id
+        )
+        if run.status == 'completed': 
+            messages = Oclient.beta.threads.messages.list(
+                thread_id=Thread_id, order="desc", limit=3
+            )
+            message_final = messages.data[0].content[0].text.value # Get the latest message
+        else:
+            print(run.status)
 
     # Send response back using twilio conversation
     message = Tclient.conversations.v1.conversations(
@@ -395,7 +398,6 @@ def sms_reply():
     ).messages.create(
         body=message_final
     )
-    
     return jsonify({"Return message": message_final})
 
 @app.route("/reminder_thread", methods=["POST"])
