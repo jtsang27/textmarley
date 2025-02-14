@@ -31,6 +31,7 @@ pydantic
 pydantic_core
 PyJWT
 python-dotenv
+pytz
 requests
 schedule
 sniffio
