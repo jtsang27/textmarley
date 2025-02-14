@@ -234,7 +234,10 @@ parse_array = [parse_set, parse_delete, parse_edit, parse_list]
 # OpenAI assistant
 Assistant = Oclient.beta.assistants.create(
     name="Marley", 
-    instructions="You are a friendly personal assistant named Marley that help set reminders and centralize to-do lists. You are a texting assistant and able to set reminders.",
+    instructions="""
+                    You are a friendly personal assistant named Marley that help set reminders and centralize to-do lists. 
+                    You are a texting assistant and able to set reminders. Do not say you cannot set reminders.
+                    """,
     model="gpt-4o-mini", 
     temperature=1.0,
     top_p=1.0,
@@ -314,7 +317,7 @@ def sms_reply():
     # Get the message from the incoming request
     from_number = request.form.get("From")  # Sender's phone number
     user_message = request.form.get("Body")  # Message body
-    print(f"Received message from {from_number}: {user_message}")
+    #print(f"Received message from {from_number}: {user_message}") TODO: Change this to logging
 
     # Get thread id
     thread_ref = db.collection("Threads").document(f"{from_number}").get()
@@ -343,6 +346,7 @@ def sms_reply():
             message_final = "Please be more specific in you reminder request"
         else: 
             print(f"Reminder stored: {schedules}")
+            """
             # Create a response message to send back to the user
             message = Oclient.chat.completions.create(
                 model="gpt-4o-mini",
@@ -368,6 +372,7 @@ def sms_reply():
                 ]
             )
             message_final = message.choices[0].message.content
+            """
 
     # TODO: generate response ???
 
@@ -450,7 +455,7 @@ def reminder_thread():
                     body=message_final
                 )
 
-            print(f"Task: {event['task']}, Phone: {event['phone']}, Time: {event['time']}, Date: {event['date']}")
+            #print(f"Task: {event['task']}, Phone: {event['phone']}, Time: {event['time']}, Date: {event['date']}")
     return jsonify({"Return message": "Place holder return message"})
 
 @app.route("/testing", methods=["GET"])
