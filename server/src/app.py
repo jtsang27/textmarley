@@ -374,7 +374,7 @@ def sms_reply():
             # Append to threads
             message = Oclient.beta.threads.messages.create(
                 thread_id=Thread_id,
-                role="Assistant",
+                role="assistant",
                 content=message_final
             )
     # TODO: generate response ???
@@ -441,7 +441,7 @@ def reminder_thread():
                 Thread_id = thread_ref.to_dict()["ID"]
                 message = Oclient.beta.threads.messages.create(
                     thread_id=Thread_id,
-                    role="Assistant",
+                    role="assistant",
                     content=message_final
                 )
 
