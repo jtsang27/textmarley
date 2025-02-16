@@ -248,63 +248,66 @@ Assistant = Oclient.beta.assistants.create(
 @app.route("/create_conversation", methods=["GET", "POST"])
 def create_conversation():
     user_phone = request.form.get("phone")
-        # TODO: ensure phone numbers are all in same format
 
+    phone_ref = db.collection("Conversations").document(f"{user_phone}").get()
 
-        # Create new twilio conversation
-    conversation = Tclient.conversations.v1.conversations.create(
-            friendly_name=f"Conversation with {user_phone}"
-        )
-    # conversations[user_phone] = conversation.sid 
-        # Add conversation to firestore collection where document name is phone number 
-    convo_ref = db.collection("Conversations").document(f"{user_phone}")
-    convo_ref.set({"ID": f"{conversation.sid}"})
+    if phone_ref.exists:
+        #TODO: send a message to user
+        None
 
-        # Add participant to new conversation
-    participant = Tclient.conversations.v1.conversations(
-            conversation.sid
-        ).participants.create(
-            messaging_binding_address=user_phone,
-            messaging_binding_proxy_address=TWILIO_PHONE_NUMBER
-        )
-
-        # Create OpenAI thread
-    thread = Oclient.beta.threads.create()
-    # threads[user_phone] = thread.id # Add thread to dictionary
-        # Add thread id to firestore collection where document name is phone number
-    thread_ref = db.collection("Threads").document(f"{user_phone}")
-    thread_ref.set({"ID": f"{thread.id}"})
-
-        # Add message to thread
-    message = Oclient.beta.threads.messages.create(
-            thread_id=thread.id,
-            role="user",
-            content="Hello!"
-        )
-
-        # Run assistant on thread
-    run = Oclient.beta.threads.runs.create_and_poll(
-            thread_id=thread.id,
-            assistant_id=Assistant.id,
-        )
-
-    if run.status == 'completed': 
-            messages = Oclient.beta.threads.messages.list(
-                thread_id=thread.id, order="desc", limit=3
-            )
-            send = messages.data[0].content[0].text.value # Get the latest message
     else:
-            print(run.status)
 
-        # Send initial message
-    message = Tclient.conversations.v1.conversations(
-            conversation.sid
-        ).messages.create(
-            body=send
-        )
+            # Create new twilio conversation
+        conversation = Tclient.conversations.v1.conversations.create(
+                friendly_name=f"Conversation with {user_phone}"
+            )
+        # conversations[user_phone] = conversation.sid 
+            # Add conversation to firestore collection where document name is phone number 
+        convo_ref = db.collection("Conversations").document(f"{user_phone}")
+        convo_ref.set({"ID": f"{conversation.sid}"})
 
-    #except:
-    #    return jsonify({'Error': "Conversation with this number already exists"})
+            # Add participant to new conversation
+        participant = Tclient.conversations.v1.conversations(
+                conversation.sid
+            ).participants.create(
+                messaging_binding_address=user_phone,
+                messaging_binding_proxy_address=TWILIO_PHONE_NUMBER
+            )
+
+            # Create OpenAI thread
+        thread = Oclient.beta.threads.create()
+        # threads[user_phone] = thread.id # Add thread to dictionary
+            # Add thread id to firestore collection where document name is phone number
+        thread_ref = db.collection("Threads").document(f"{user_phone}")
+        thread_ref.set({"ID": f"{thread.id}"})
+
+            # Add message to thread
+        message = Oclient.beta.threads.messages.create(
+                thread_id=thread.id,
+                role="user",
+                content="Hello!"
+            )
+
+            # Run assistant on thread
+        run = Oclient.beta.threads.runs.create_and_poll(
+                thread_id=thread.id,
+                assistant_id=Assistant.id,
+            )
+
+        if run.status == 'completed': 
+                messages = Oclient.beta.threads.messages.list(
+                    thread_id=thread.id, order="desc", limit=3
+                )
+                send = messages.data[0].content[0].text.value # Get the latest message
+        else:
+                print(run.status)
+
+            # Send initial message
+        message = Tclient.conversations.v1.conversations(
+                conversation.sid
+            ).messages.create(
+                body=send
+            )
 
     return jsonify({
         'conversation_sid': conversation.sid,
