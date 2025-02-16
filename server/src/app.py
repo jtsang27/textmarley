@@ -254,6 +254,7 @@ def create_conversation():
     if phone_ref.exists:
         #TODO: send a message to user
         None
+        return jsonify({'This phone number already exists': f"{user_phone}"})
 
     else:
 
@@ -308,12 +309,11 @@ def create_conversation():
             ).messages.create(
                 body=send
             )
-
-    return jsonify({
-        'conversation_sid': conversation.sid,
-        'participant_sid': participant.sid,
-        'phone_number': user_phone
-    })
+        return jsonify({
+            'conversation_sid': conversation.sid,
+            'participant_sid': participant.sid,
+            'phone_number': user_phone
+        })
 
 @app.route("/receive_message", methods=["POST"])
 def sms_reply():
