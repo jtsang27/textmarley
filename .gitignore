@@ -78,3 +78,6 @@ client.py
 assistant.py
 initial.py
 receiving_server.py
+
+# pycache
+__pycache__
