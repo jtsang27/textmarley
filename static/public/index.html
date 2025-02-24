@@ -29,6 +29,7 @@
     <script src="js/plugins.js"></script>
     <script src="js/min/waypoints.min.js"></script>
     <script src="js/jquery.counterup.js"></script>
+
     <!--Marley I have a ...--->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -48,7 +49,9 @@
 
 
     <script src="js/main.js"></script>
+    <script src="js/signup.js"></script>
 
+    <!-- Script for submission button-->
 
   </head>
   <body>
@@ -79,6 +82,9 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav navbar-right">
                     <li><a href="index.html">Home</a></li>
+                    <li><a href="work.html">Pricing</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -97,17 +103,8 @@
               <h1 class="animated fadeInUp">The Assistant To Prevent  <br> 'Oops I Forgot!'</h1>
               <p class="animated fadeInUp">Schedule, manage, and create tasks, all through imessage</p>
               <div class="animated fadeInUp">
-                <form action="/signup" method="post" class="signup-form">
-                  <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  placeholder="+17073456789"
-                  pattern="\+1\d{10}"
-                  autofocus
-                  required
-                  title="Enter your phone number without any spaces"
-                  />
+                <form id="signupForm" class="signup-form">
+                  <input type="tel" id="phoneNumber" name="phone" placeholder="Enter your phone number" pattern="\d{10}" required>
                   <button type="submit">Sign Up</button>
                 </form>
               </div>
