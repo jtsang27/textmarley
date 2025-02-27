@@ -145,12 +145,8 @@ def parse_set(user_number, user_message): # TODO: add parsing for frequency
     recurring = parsed_data.get("recurring", False)
     frequency = parsed_data.get("frequency", None)
 
-    # TODO: return whether task, date, time is missing
-    if not task or not date or not time:
-        return 0
-    else:
-        add_reminder(user_number, task, date, time, recurring, frequency)
-        return 1
+    add_reminder(user_number, task, date, time, recurring, frequency)
+    return [task, time]
 
 def parse_delete(user_number, user_message):
     parsing_response = Oclient.chat.completions.create(
@@ -385,40 +381,39 @@ def receive_message():
     if i != 4:
         # parse information based on intent
         p = parse_array[i](from_number, user_message)
-        if p == 0:
-            message_final = "Please be more specific in you reminder request"
-        else: 
-            # Create a response message to send back to the user
-            message = Oclient.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[
-                    {
-                        "role": "developer", 
-                        "content": [
-                            {
-                                "type": "text",
-                                "text": "You create automatic responses to confirm users' reminder requests"
-                            }
-                        ]
-                    },
-                    {
-                        "role": "user",
-                        "content": [
-                            {
-                                "type": "text",
-                                "text": f"{user_message}"
-                            }
-                        ]
-                    }
-                ]
-            )
-            message_final = message.choices[0].message.content
-            # Append to threads
-            message = Oclient.beta.threads.messages.create(
-                thread_id=Thread_id,
-                role="assistant",
-                content=message_final
-            )
+         
+        # Create a response message to send back to the user
+        message = Oclient.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "developer", 
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": """You create automatic responses to confirm users' reminder requests, 
+                            or ask for more information depending on the provided missing variables."""
+                        }
+                    ]
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": f"{user_message}, {p}"
+                        }
+                    ]
+                }
+            ]
+        )
+        message_final = message.choices[0].message.content
+        # Append to threads
+        message = Oclient.beta.threads.messages.create(
+            thread_id=Thread_id,
+            role="assistant",
+            content=message_final
+        )
     # TODO: generate response ???
     else:
         # Run assistant on message thread
