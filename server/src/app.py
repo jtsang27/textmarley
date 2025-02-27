@@ -96,7 +96,7 @@ def delete_reminder(user_number, task, date, time):
     db.collection("Reminders").document(to_delete.id).delete()
 
 def delete_past_reminder(): # TODO
-    now = datetime.now(pytz.UTC).isoformat()
+    now = datetime.now(pytz.UTC).replace(second=0, microsecond=0).isoformat()
     reminders = db.collection("Reminders").where("time", "<", now).where("recurring", "==", False).stream()
 
     for r in reminders:
@@ -104,7 +104,7 @@ def delete_past_reminder(): # TODO
         print(f"Deleted expired reminder: {r.id}")
 
 def get_reminders(user_number):
-    now = datetime.now(pytz.UTC).isoformat()
+    now = datetime.now(pytz.UTC).replace(second=0, microsecond=0).isoformat()
     reminders = db.collection("Reminders").where("user_id", "==", user_number).where("time", ">=", now).where("status", "==", "Pending").order_by("time").stream()
 
     return [{r.id: r.to_dict()} for r in reminders]
@@ -435,13 +435,13 @@ def receive_message():
 
 @app.route("/reminder_thread", methods=["POST"])
 def reminder_thread():
-    now = datetime.now(pytz.UTC).isoformat()
+    now = datetime.now(pytz.UTC).replace(second=0, microsecond=0).isoformat()
     reminders = db.collection("Reminders").where("time", "==", now).stream()
     for event in reminders:
         # Convert to dictionary and get reminder task and user number
         event = event.to_dict()
-        task = event["task"]
-        number = event["user_number"]
+        task = event.get("task")
+        number = event.get("user_number")
 
         # Create message through OpenAI api
         message = Oclient.chat.completions.create(
@@ -469,8 +469,8 @@ def reminder_thread():
         )
         message_final = message.choices[0].message.content
 
-            # Append to threads
-                # Get thread id
+        # Append to threads
+            # Get thread id
         thread_ref = db.collection("Threads").document(f"{number}").get()
         if thread_ref.exists:
             Thread_id = thread_ref.to_dict()["ID"]
@@ -482,7 +482,7 @@ def reminder_thread():
 
 
         # Send through twilio conversation
-             # Get conversation sid
+            # Get conversation sid
         convo_ref = db.collection("Conversations").document(f"{number}").get()
         if convo_ref.exists:
             Convo_id = convo_ref.to_dict()["ID"]
