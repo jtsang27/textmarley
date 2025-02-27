@@ -133,14 +133,14 @@ def parse_set(user_number, user_message): # TODO: add parsing for recurring and 
     parsed_response = parsing_response.choices[0].message.content
 
     parsed_data = json.loads(parsed_response)
-    task = parsed_data["task"]
-    date = parsed_data["date"]
-    time = parsed_data["time"]
-    recurring = parsed_data["recurring"]
-    frequency = parsed_data["frequency"]
+    task = parsed_data.get("task")
+    date = parsed_data.get("date") # TODO: if no date entered, then this set as today
+    time = parsed_data.get("time")
+    recurring = parsed_data.get("recurring", False)
+    frequency = parsed_data.get("frequency", None)
 
     # TODO: return whether task, date, time is missing
-    if (task == None) | (date == None) | (time == None):
+    if not task or not date or not time:
         return 0
     else:
         add_reminder(user_number, task, time, recurring, frequency)
