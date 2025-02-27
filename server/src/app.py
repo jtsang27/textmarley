@@ -66,45 +66,51 @@ def intent(user_message):
 
     return int(parsed_response)
 
-def add_reminder(user_number, title, time, recurring=False, frequency=None):
+def standardize_time(date_str, time_str, user_timezone="US/Eastern"):
+    # Convert parsed strings to a datetime object
+    naive_dt = datetime.strptime(f"{date_str} {time_str}", "%Y-%m-%d %H:%M")
+
+    # Set the correct timezone
+    user_tz = pytz.timezone(user_timezone)
+    localized_dt = user_tz.localize(naive_dt)
+
+    # Convert to UTC
+    utc_dt = localized_dt.astimezone(pytz.utc)
+
+    return utc_dt  # Return datetime in UTC
+
+def add_reminder(user_number, task, date, time, recurring=False, frequency=None):
     reminder_ref = db.collection("Reminders").document()
     reminder_ref.set({
         "user_number": user_number,
-        "title": title,
-        "time": time, 
+        "task": task,
+        "time": standardize_time(date, time), 
         "recurring": recurring,
         "frequency": frequency,
         "status": "Pending"
     })
 
-def delete_reminder(user_number, title, time):
-    to_delete = db.collection("Reminders").where("user_number", "==", user_number).where("title", "==", title).where("time", "==", time)
+def delete_reminder(user_number, task, date, time):
+    time_ = standardize_time(date, time)
+    to_delete = db.collection("Reminders").where("user_number", "==", user_number).where("task", "==", task).where("time", "==", time_)
     db.collection("Reminders").document(to_delete.id).delete()
 
 def delete_past_reminder(): # TODO
     now = datetime.now(pytz.UTC).isoformat()
-    reminders = db.collection("Reminders") \
-        .where("time", "<", now) \
-        .where("recurring", "==", False) \
-        .stream()
+    reminders = db.collection("Reminders").where("time", "<", now).where("recurring", "==", False).stream()
 
     for r in reminders:
         db.collection("reminders").document(r.id).delete()
         print(f"Deleted expired reminder: {r.id}")
 
-def get_upcoming_reminders(user_number):
+def get_reminders(user_number):
     now = datetime.now(pytz.UTC).isoformat()
-    reminders = db.collection("Reminders") \
-        .where("user_id", "==", user_number) \
-        .where("time", ">=", now) \
-        .where("status", "==", "Pending") \
-        .order_by("time") \
-        .stream()
+    reminders = db.collection("Reminders").where("user_id", "==", user_number).where("time", ">=", now).where("status", "==", "Pending").order_by("time").stream()
 
     return [{r.id: r.to_dict()} for r in reminders]
 
 # Functions for parsing user message
-def parse_set(user_number, user_message): # TODO: add parsing for recurring and frequency
+def parse_set(user_number, user_message): # TODO: add parsing for frequency
     parsing_response = Oclient.chat.completions.create(
         model="gpt-4o-mini",
         messages= [
@@ -113,8 +119,8 @@ def parse_set(user_number, user_message): # TODO: add parsing for recurring and 
                 "content": [
                     {
                         "type": "text",
-                        "text": """You parse user messages into separate structured JSON response with 'task', 'time', 'date', 'recurring', and 'frequency' if provided. 
-                        Assume date is today if not provided. Translate time to 24 hour."""
+                        "text": """You parse user messages into separate structured JSON response with 'task', 'date', 'time', 'recurring', and 'frequency' if provided. 
+                        Time must be in 24-hour format (HH:MM) and date in YYYY-MM-DD. Assume today if no date is given."""
                     }
                 ]
             },
@@ -143,7 +149,7 @@ def parse_set(user_number, user_message): # TODO: add parsing for recurring and 
     if not task or not date or not time:
         return 0
     else:
-        add_reminder(user_number, task, time, recurring, frequency)
+        add_reminder(user_number, task, date, time, recurring, frequency)
         return 1
 
 def parse_delete(user_number, user_message):
@@ -155,7 +161,8 @@ def parse_delete(user_number, user_message):
                 "content": [
                     {
                         "type": "text",
-                        "text": "You parse user messages into separate structured JSON response with 'task', 'time', and 'date', if provided. Assume date is today if not provided. Translate time to 24 hour."
+                        "text": """You parse user messages into separate structured JSON response with 'task', 'date' and 'time', if provided. 
+                        Time must be in 24-hour format (HH:MM) and date in YYYY-MM-DD. Assume today if no date is given."""
                     }
                 ]
             },
@@ -182,7 +189,7 @@ def parse_delete(user_number, user_message):
     if (task == None):
         return 0
     else:
-        delete_reminder(user_number, task, time)
+        delete_reminder(user_number, task, date, time)
         return 1
 
 def parse_edit(user_number, user_message):
@@ -194,7 +201,8 @@ def parse_edit(user_number, user_message):
                 "content": [
                     {
                         "type": "text",
-                        "text": "You parse user messages into separate structured JSON response with 'original task', 'new time', and 'new date', if provided. Assume date is today if not provided. Translate time to 24 hour."
+                        "text": """You parse user messages into separate structured JSON response with 'original task', 'new date', and 'new time', if provided. 
+                        Time must be in 24-hour format (HH:MM) and date in YYYY-MM-DD. Assume today if no date is given."""
                     }
                 ]
             },
@@ -222,7 +230,7 @@ def parse_edit(user_number, user_message):
         return 0
     else:
         delete_reminder(user_number, task_original)
-        add_reminder(user_number, task_original, time_new)
+        add_reminder(user_number, task_original, date_new, time_new)
         return 1
 
 def parse_list(user_number, user_message):
@@ -348,7 +356,7 @@ def create_conversation():
         })
 
 @app.route("/receive_message", methods=["POST"])
-def sms_reply():
+def receive_message():
     # Get the message from the incoming request
     from_number = request.form.get("From")  # Sender's phone number
     user_message = request.form.get("Body")  # Message body
@@ -439,9 +447,9 @@ def reminder_thread():
     now = datetime.now(pytz.UTC).isoformat()
     reminders = db.collection("Reminders").where("time", "==", now).stream()
     for event in reminders:
-        # Convert to dictionary and get reminder title and user number
+        # Convert to dictionary and get reminder task and user number
         event = event.to_dict()
-        task = event["title"]
+        task = event["task"]
         number = event["user_number"]
 
 
