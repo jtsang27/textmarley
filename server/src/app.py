@@ -145,8 +145,9 @@ def parse_set(user_number, user_message): # TODO: add parsing for frequency
     recurring = parsed_data.get("recurring", False)
     frequency = parsed_data.get("frequency", None)
 
-    add_reminder(user_number, task, date, time, recurring, frequency)
-    return [task, time]
+    if task and time:
+        add_reminder(user_number, task, date, time, recurring, frequency)
+    return {"task": task, "time": time}
 
 def parse_delete(user_number, user_message):
     parsing_response = Oclient.chat.completions.create(
@@ -177,16 +178,14 @@ def parse_delete(user_number, user_message):
     parsed_response = parsing_response.choices[0].message.content
 
     parsed_data = json.loads(parsed_response)
-    task = parsed_data["task"]
-    date = parsed_data["date"]
-    time = parsed_data["time"]
+    task = parsed_data.get("task")
+    date = parsed_data.get("date") # TODO: if no date entered, then this set as today
+    time = parsed_data.get("time")
 
     # TODO: return whether task, date, time is missing
-    if (task == None):
-        return 0
-    else:
+    if task and time:
         delete_reminder(user_number, task, date, time)
-        return 1
+    return {"task": task, "time": time}
 
 def parse_edit(user_number, user_message):
     parsing_response = Oclient.chat.completions.create(
@@ -217,17 +216,14 @@ def parse_edit(user_number, user_message):
     parsed_response = parsing_response.choices[0].message.content
 
     parsed_data = json.loads(parsed_response)
-    task_original = parsed_data["original task"]
-    date_new = parsed_data["new date"]
-    time_new = parsed_data["new time"]
+    task_original = parsed_data.get("original task")
+    date_new = parsed_data.get("new date")
+    time_new = parsed_data.get("new time")
 
-    # TODO: return whether task, date, time is missing
-    if (task_original == None):
-        return 0
-    else:
+    if task_original and date_new and time_new:
         delete_reminder(user_number, task_original)
         add_reminder(user_number, task_original, date_new, time_new)
-        return 1
+    return {"Original task": task_original, "New Date": date_new, "New time": time_new}
 
 def parse_list(user_number, user_message):
     parsing_response = Oclient.chat.completions.create(
@@ -392,7 +388,7 @@ def receive_message():
                         {
                             "type": "text",
                             "text": """You create automatic responses to confirm users' reminder requests, 
-                            or ask for more information depending on the provided missing variables."""
+                            or ask for more information depending on the provided missing variables, if any."""
                         }
                     ]
                 },
@@ -446,7 +442,6 @@ def reminder_thread():
         event = event.to_dict()
         task = event["task"]
         number = event["user_number"]
-
 
         # Create message through OpenAI api
         message = Oclient.chat.completions.create(
