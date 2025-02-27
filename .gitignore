@@ -75,7 +75,7 @@ venv/
 
 # Testing files
 client.py
-assistant.py
+time_experiment.py
 initial.py
 receiving_server.py
 
