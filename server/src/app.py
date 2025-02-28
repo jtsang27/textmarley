@@ -123,7 +123,7 @@ def parse_set(user_number, user_message): # TODO: add parsing for frequency
                     {
                         "type": "text",
                         "text": f"""You parse user messages into separate structured JSON response with 'task', 'date', 'time', 'recurring', and 'frequency' if provided. 
-                        Time must be in 24-hour format (HH:MM) and date in YYYY-MM-DD. Today's date is {datetime.now(pytz.utc).strftime("%Y-%m-%d")}, if not provided by user or if user specifys today."""
+                        Time must be in 24-hour format (HH:MM) and date in YYYY-MM-DD. Today's date is {datetime.now(pytz.timezone("America/New_York")).strftime("%Y-%m-%d")}, if not provided by user or if user specifys today."""
                     }
                 ]
             },
