@@ -67,7 +67,7 @@ def intent(user_message):
     return int(parsed_response)
 
 def standardize_time(date_str, time_str, user_timezone="America/New_York"):
-    if not date_str:
+    if not date_str: # Check if date is provided, if now, assume today
         date_str = datetime.now(pytz.timezone(user_timezone)).strftime("%Y-%m-%d")
 
     # Convert parsed strings to a datetime object
@@ -122,8 +122,8 @@ def parse_set(user_number, user_message): # TODO: add parsing for frequency
                 "content": [
                     {
                         "type": "text",
-                        "text": """You parse user messages into separate structured JSON response with 'task', 'date', 'time', 'recurring', and 'frequency' if provided. 
-                        Time must be in 24-hour format (HH:MM) and date in YYYY-MM-DD."""
+                        "text": f"""You parse user messages into separate structured JSON response with 'task', 'date', 'time', 'recurring', and 'frequency' if provided. 
+                        Time must be in 24-hour format (HH:MM) and date in YYYY-MM-DD. Today's date is {datetime.now(pytz.timezone("America/New_York")).strftime("%Y-%m-%d")}"""
                     }
                 ]
             },
@@ -143,7 +143,7 @@ def parse_set(user_number, user_message): # TODO: add parsing for frequency
 
     parsed_data = json.loads(parsed_response)
     task = parsed_data.get("task")
-    date = parsed_data.get("date") # TODO: if no date entered, then this set as today
+    date = parsed_data.get("date") 
     time = parsed_data.get("time")
     recurring = parsed_data.get("recurring", False)
     frequency = parsed_data.get("frequency", None)
