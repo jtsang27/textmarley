@@ -68,7 +68,7 @@ def intent(user_message):
 
 def standardize_time(date_str, time_str, user_timezone="America/New_York"):
     if not date_str: # Check if date is provided, if now, assume today
-        date_str = datetime.now(pytz.timezone(user_timezone)).strftime("%Y-%m-%d")
+        date_str = datetime.now(pytz.utc).strftime("%Y-%m-%d")
 
     # Convert parsed strings to a datetime object
     naive_dt = datetime.strptime(f"{date_str} {time_str}", "%Y-%m-%d %H:%M")
@@ -123,7 +123,7 @@ def parse_set(user_number, user_message): # TODO: add parsing for frequency
                     {
                         "type": "text",
                         "text": f"""You parse user messages into separate structured JSON response with 'task', 'date', 'time', 'recurring', and 'frequency' if provided. 
-                        Time must be in 24-hour format (HH:MM) and date in YYYY-MM-DD. Today's date is {datetime.now(pytz.timezone("America/New_York")).strftime("%Y-%m-%d")}"""
+                        Time must be in 24-hour format (HH:MM) and date in YYYY-MM-DD. Today's date is {datetime.now(pytz.utc).strftime("%Y-%m-%d")}, if not provided by user or if user specifys today."""
                     }
                 ]
             },
@@ -457,7 +457,7 @@ def reminder_thread():
                     "content": [
                         {
                             "type": "text",
-                            "text": "You create friendly reminders for a college student based off of the task they enter." 
+                            "text": "You create friendly reminders for a college student based off of the task they enter. Keep it brief, preferably less than 30 words." 
                         }
                     ]
                 },
