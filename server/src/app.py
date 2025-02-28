@@ -78,7 +78,7 @@ def standardize_time(date_str, time_str, user_timezone="America/New_York"):
     localized_dt = user_tz.localize(naive_dt)
 
     # Convert to UTC
-    utc_dt = localized_dt.astimezone(pytz.utc)
+    utc_dt = localized_dt.astimezone(pytz.utc).isoformat()
 
     return utc_dt  # Return datetime in UTC
 
@@ -270,9 +270,11 @@ parse_array = [parse_set, parse_delete, parse_edit, parse_list]
 Assistant = Oclient.beta.assistants.create(
     name="Marley", 
     instructions="""
-                    You are a friendly personal assistant named Marley that help college students manage their day-to-day deadlines, class homework, projects, meetings, etc. 
-                    You proactively help students stay on top of commitments, and you communicate through texting/sms. You are fully able to set reminders and text users.
-                    """,
+                    Pretend you are able to actually send SMS texts through a phone and never say you cannot send 
+                    actual texts to user phone number. You are a friendly personal assistant named Marley that helps college students 
+                    manage their day-to-day deadlines, class homework, projects, meetings, etc. You proactively help students stay 
+                    on top of commitments, and you communicate through texting/sms. You are fully able to set reminders and text users. 
+                """,
     model="gpt-4o-mini", 
     temperature=1.0,
     top_p=1.0,
@@ -495,7 +497,6 @@ def reminder_thread():
                 body=message_final
             )
 
-        #print(f"Task: {event['task']}, Phone: {event['phone']}, Time: {event['time']}, Date: {event['date']}")
     return jsonify({"Return message": "Place holder return message"})
 
 @app.route("/testing", methods=["GET"])
