@@ -457,7 +457,7 @@ def reminder_thread():
                     "content": [
                         {
                             "type": "text",
-                            "text": "You create friendly reminders for a college student based off of the task they enter. Keep it brief, preferably less than 30 words." 
+                            "text": "You create friendly reminders for a college student based off of the task they enter. Keep it brief. Do not say tell the user to set a reminder. Simply, remind them." 
                         }
                     ]
                 },
