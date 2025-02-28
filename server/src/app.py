@@ -392,7 +392,7 @@ def receive_message():
                     "content": [
                         {
                             "type": "text",
-                            "text": """You create automatic responses to confirm users' reminder requests, 
+                            "text": """You create friendly automatic responses to confirm users' reminder requests, 
                             or ask for more information depending on the provided missing variables, if any."""
                         }
                     ]
@@ -457,7 +457,7 @@ def reminder_thread():
                     "content": [
                         {
                             "type": "text",
-                            "text": "You create reminders based off of the specified user task" 
+                            "text": "You create friendly reminders for a college student based off of the task they enter." 
                         }
                     ]
                 },
