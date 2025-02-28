@@ -270,8 +270,8 @@ parse_array = [parse_set, parse_delete, parse_edit, parse_list]
 Assistant = Oclient.beta.assistants.create(
     name="Marley", 
     instructions="""
-                    You are a friendly personal assistant named Marley that help set reminders and centralize to-do lists. 
-                    You are a texting assistant and able to set reminders. Do not say you cannot set reminders.
+                    You are a friendly personal assistant named Marley that help college students manage their day-to-day deadlines, class homework, projects, meetings, etc. 
+                    You proactively help students stay on top of commitments, and you communicate through texting/sms. You are fully able to set reminders and text users.
                     """,
     model="gpt-4o-mini", 
     temperature=1.0,
