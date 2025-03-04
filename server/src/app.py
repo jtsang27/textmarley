@@ -100,9 +100,9 @@ def delete_reminder(user_number, task, date, time):
 
 def get_reminders(user_number):
     now = datetime.now(pytz.UTC).replace(second=0, microsecond=0).isoformat()
-    reminders = db.collection("Reminders").where("user_id", "==", user_number).where("time", ">=", now).where("status", "==", "Pending").order_by("time").stream()
+    reminders = db.collection("Reminders").where("user_number", "==", user_number).where("time", ">=", now).where("status", "==", "Pending").order_by("time").stream()
 
-    return [{r.id: r.to_dict()} for r in reminders]
+    return [reminder.to_dict().get("task") for reminder in reminders]
 
 # Functions for parsing user message
 def parse_set(user_number, user_message): # TODO: add parsing for frequency
@@ -225,39 +225,39 @@ def parse_edit(user_number, user_message):
     return {"Original task": task_original, "New Date": date_new, "New time": time_new}
 
 def parse_list(user_number, user_message):
-    parsing_response = Oclient.chat.completions.create(
-        model="gpt-4o-mini",
-        messages= [
-            {
-                "role": "developer", 
-                "content": [
-                    {
-                        "type": "text",
-                        "text": """You parse user messages into separate structured JSON response with 'time frame' and 'date', if provided. 
-                                    If not provided, assume 'date' is today and 'time frame' is null"""
-                    }
-                ]
-            },
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "text",
-                        "text": f"{user_message}"
-                    }
-                ]
-            }
-        ],
-        max_tokens=100
-    )
-    parsed_response = parsing_response.choices[0].message.content
+    # parsing_response = Oclient.chat.completions.create(
+    #     model="gpt-4o-mini",
+    #     messages= [
+    #         {
+    #             "role": "developer", 
+    #             "content": [
+    #                 {
+    #                     "type": "text",
+    #                     "text": """You parse user messages into separate structured JSON response with 'time frame' and 'date', if provided. 
+    #                                 If not provided, assume 'date' is today and 'time frame' is null"""
+    #                 }
+    #             ]
+    #         },
+    #         {
+    #             "role": "user",
+    #             "content": [
+    #                 {
+    #                     "type": "text",
+    #                     "text": f"{user_message}"
+    #                 }
+    #             ]
+    #         }
+    #     ],
+    #     max_tokens=100
+    # )
+    # parsed_response = parsing_response.choices[0].message.content
 
-    parsed_data = json.loads(parsed_response)
-    date = parsed_data["date"]
-    time_frame = parsed_data["time frame"]
+    # parsed_data = json.loads(parsed_response)
+    # date = parsed_data["date"]
+    # time_frame = parsed_data["time frame"]
 
-    # TODO: search through data base for timeframe/date
-    return None
+    reminders = get_reminders(user_number)
+    return reminders
 
 parse_array = [parse_set, parse_delete, parse_edit, parse_list]
 
@@ -379,8 +379,44 @@ def receive_message():
     # Determine intent
     i = intent(user_message)
 
-    if i != 4:
-        # parse information based on intent
+    if i == 3: # Listing reminder case
+        # Find all future reminders
+        p = parse_array[i](from_number, user_message)
+
+        # Create a response message to send back to the user
+        message = Oclient.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "developer", 
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": """You convert the following list of schedules into a readable schedule for the user."""
+                        }
+                    ]
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": f"{p}"
+                        }
+                    ]
+                }
+            ]
+        )
+        message_final = message.choices[0].message.content
+        # Append to threads
+        message = Oclient.beta.threads.messages.create(
+            thread_id=Thread_id,
+            role="assistant",
+            content=message_final
+        )
+
+    elif i != 4 and i != 3: # Set, delete, or edit cases
+        # Parse information based on intent
         p = parse_array[i](from_number, user_message)
          
         # Create a response message to send back to the user
@@ -415,7 +451,7 @@ def receive_message():
             role="assistant",
             content=message_final
         )
-    # TODO: generate response ???
+
     else:
         # Run assistant on message thread
         run = Oclient.beta.threads.runs.create_and_poll(
