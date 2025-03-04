@@ -98,14 +98,6 @@ def delete_reminder(user_number, task, date, time):
     to_delete = db.collection("Reminders").where("user_number", "==", user_number).where("task", "==", task).where("time", "==", time_)
     db.collection("Reminders").document(to_delete.id).delete()
 
-def delete_past_reminder(): # TODO
-    now = datetime.now(pytz.UTC).replace(second=0, microsecond=0).isoformat()
-    reminders = db.collection("Reminders").where("time", "<", now).where("recurring", "==", False).stream()
-
-    for r in reminders:
-        db.collection("reminders").document(r.id).delete()
-        print(f"Deleted expired reminder: {r.id}")
-
 def get_reminders(user_number):
     now = datetime.now(pytz.UTC).replace(second=0, microsecond=0).isoformat()
     reminders = db.collection("Reminders").where("user_id", "==", user_number).where("time", ">=", now).where("status", "==", "Pending").order_by("time").stream()
@@ -506,6 +498,17 @@ def reminder_thread():
             )
 
     return jsonify({"Return message": "Place holder return message"})
+
+@app.route("/delete_expired_reminders", methods=["POST"])
+def delete_past_reminder(): 
+    """
+        Deletes past reminders that are over one day old. Only delete reminders that are not recurring
+    """
+    now = datetime.now(pytz.UTC).replace(hour=00, minute=00, second=0, microsecond=0).isoformat()
+    reminders = db.collection("Reminders").where("time", "<", now).where("recurring", "==", False).stream()
+
+    for reminder in reminders:
+        db.collection("reminders").document(reminder.id).delete()
 
 @app.route("/testing", methods=["GET"])
 def testing():
