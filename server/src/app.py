@@ -510,6 +510,8 @@ def delete_past_reminder():
     for reminder in reminders:
         db.collection("Reminders").document(reminder.id).delete()
 
+    return jsonify({"Message": "Past reminders deleted"})
+
 @app.route("/testing", methods=["GET"])
 def testing():
     number = "+12063343224"
