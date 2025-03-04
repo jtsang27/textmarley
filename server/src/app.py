@@ -102,7 +102,7 @@ def get_reminders(user_number):
     now = datetime.now(pytz.UTC).replace(second=0, microsecond=0).isoformat()
     reminders = db.collection("Reminders").where("user_number", "==", user_number).where("time", ">=", now).where("status", "==", "Pending").order_by("time").stream()
 
-    return [reminder.to_dict().get("task") for reminder in reminders]
+    return [(reminder.to_dict().get("task"),reminder.to_dict().get("time")) for reminder in reminders]
 
 # Functions for parsing user message
 def parse_set(user_number, user_message): # TODO: add parsing for frequency
@@ -381,7 +381,7 @@ def receive_message():
 
     if i == 3: # Listing reminder case
         # Find all future reminders
-        p = parse_array[i](from_number, user_message)
+        p = get_reminders(from_number)
 
         # Create a response message to send back to the user
         message = Oclient.chat.completions.create(
@@ -392,7 +392,7 @@ def receive_message():
                     "content": [
                         {
                             "type": "text",
-                            "text": """You convert the following list of schedules into a readable schedule for the user."""
+                            "text": """You convert the following list of schedules into a friendly schedule for the user."""
                         }
                     ]
                 },
@@ -405,7 +405,7 @@ def receive_message():
                         }
                     ]
                 }
-            ]
+            ], temperature=0.75
         )
         message_final = message.choices[0].message.content
         # Append to threads
