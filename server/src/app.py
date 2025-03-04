@@ -508,7 +508,7 @@ def delete_past_reminder():
     reminders = db.collection("Reminders").where("time", "<", now).where("recurring", "==", False).stream()
 
     for reminder in reminders:
-        db.collection("reminders").document(reminder.id).delete()
+        db.collection("Reminders").document(reminder.id).delete()
 
 @app.route("/testing", methods=["GET"])
 def testing():
