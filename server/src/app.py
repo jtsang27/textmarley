@@ -408,7 +408,8 @@ def receive_message():
                     "content": [
                         {
                             "type": "text",
-                            "text": """You convert the following list of schedules into a friendly schedule for the user."""
+                            "text": """You convert the following list of schedules into a friendly schedule for the user. 
+                                    Start your message with: "here's what's on your plate today!", and then list the schedule."""
                         }
                     ]
                 },
