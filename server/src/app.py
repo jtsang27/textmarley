@@ -39,10 +39,10 @@ def intent(user_message):
                     {
                         "type": "text",
                         "text": """You categorize user intent into the following actions:
-                                    0. Message asks to set a reminder
-                                    1. Message asks to delete a reminder
-                                    2. Message asks to edit a reminder
-                                    3. Message asks to list current reminders
+                                    0. Message asks to set a reminder. Look for "I need to...", "I have to...", "remind me to...", etc.
+                                    1. Message asks to delete a reminder. 
+                                    2. Message asks to edit a reminder. 
+                                    3. Message asks to list current reminders. Look for phrases like "what do i have/need to do", "what is on my plate", etc.
                                     4. Other
 
                                     Return only the number of the action
@@ -409,7 +409,7 @@ def receive_message():
                         {
                             "type": "text",
                             "text": """You convert the following list of schedules into a friendly schedule for the user. 
-                                    Start your message with: "here's what's on your plate today!", and then list the schedule."""
+                                    Start your message with: "here's what's on your plate!", and then list the schedule."""
                         }
                     ]
                 },
