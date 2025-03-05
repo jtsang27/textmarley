@@ -102,7 +102,23 @@ def get_reminders(user_number):
     now = datetime.now(pytz.UTC).replace(second=0, microsecond=0).isoformat()
     reminders = db.collection("Reminders").where("user_number", "==", user_number).where("time", ">=", now).where("status", "==", "Pending").order_by("time").stream()
 
-    return [(reminder.to_dict().get("task"),reminder.to_dict().get("time")) for reminder in reminders]
+    schedule = []
+    for reminder in reminders:
+        d = reminder.to_dict()
+        task = d.get("task")
+        time = d.get("time")
+
+        # Convert to datetime object
+        dt_obj = datetime.fromisoformat(time)
+        if dt_obj.tzinfo is None:
+            # Add timezone
+            dt_obj = dt_obj.replace(tzinfo=pytz.timezone('US/Eastern'))
+
+        # Convert to UTC
+        est_dt = dt_obj.astimezone(pytz.timezone('US/Eastern')).isoformat()
+
+        schedule.append((task, est_dt))
+    return schedule
 
 # Functions for parsing user message
 def parse_set(user_number, user_message): # TODO: add parsing for frequency
