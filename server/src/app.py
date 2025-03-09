@@ -339,7 +339,7 @@ def create_conversation():
         message = Oclient.beta.threads.messages.create(
                 thread_id=thread.id,
                 role="user",
-                content="Hello!"
+                content="Hello! Introduce yourself."
             )
 
             # Run assistant on thread
