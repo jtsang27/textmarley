@@ -157,6 +157,7 @@ def parse_set(user_number, user_message): # TODO: add parsing for frequency
                                 Today's date and time is {datetime.now(pytz.timezone("America/New_York")).strftime("%Y-%m-%d %H:%M")}, 
                                 if not provided by user or if user specifies today. If user asks for tomorrow or in the future, use this date to calculate.
                                 Convert phrases like 'in 5 minutes' or 'in an hour' into an absolute time based off today's time. 
+                                Set frequency to be either 'daily', weekly', or 'monthly'.
                                 """
                     }
                 ]
