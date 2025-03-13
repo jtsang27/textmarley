@@ -82,15 +82,16 @@ def standardize_time(date_str, time_str, user_timezone="America/New_York"):
 
     return utc_dt  # Return datetime in UTC
 
-def update_recurring(now):
+def update_recurring():
 
-    # Get all reminders that are recurring and 
-    reminders = db.collection("Reminders").where("recurring", "==", True).where("time", "<", now).stream()
+    # Get all reminders that are recurring and before now
+    reminder_ref = db.collection("Reminders").where("recurring", "==", True).where("time", "<", "now")
 
-    for event in reminders:
-        event = event.to_dict()
-        time = event.get("time")
-        frequency = event.get("frequency")
+    # Iterate through all reminders
+    for event in reminder_ref.stream():
+        event_dict = event.to_dict()
+        time = event_dict.get("time")
+        frequency = event_dict.get("frequency")
 
         if frequency == "daily":
             time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(days=1))
@@ -100,7 +101,7 @@ def update_recurring(now):
             time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=4))
 
         # Set new time
-        db.collection("Reminders").document(event.id).update({"time": time_new})
+        reminder_ref.document(event).update({"time": time_new})
 
 def add_reminder(user_number, task, date, time, recurring=False, frequency=None):
     reminder_ref = db.collection("Reminders").document()
@@ -576,7 +577,7 @@ def reminder_thread():
             )
 
     # Update recurring reminders
-    update_recurring(now)
+    update_recurring()
 
     return jsonify({"Return message": "Place holder return message"})
 
