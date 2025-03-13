@@ -3,7 +3,7 @@ from twilio.twiml.messaging_response import MessagingResponse
 from twilio.rest import Client
 from openai import OpenAI
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz
 from threading import Thread
 import firebase_admin
@@ -81,6 +81,26 @@ def standardize_time(date_str, time_str, user_timezone="America/New_York"):
     utc_dt = localized_dt.astimezone(pytz.utc).isoformat()
 
     return utc_dt  # Return datetime in UTC
+
+def update_recurring(now):
+
+    # Get all reminders that are recurring and 
+    reminders = db.collection("Reminders").where("recurring", "==", True).where("time", "<", now).stream()
+
+    for event in reminders:
+        event = event.to_dict()
+        time = event.get("time")
+        frequency = event.get("frequency")
+
+        if frequency == "daily":
+            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(days=1))
+        elif frequency == "weekly":
+            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=1))
+        elif frequency == "monthly":
+            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=4))
+
+        # Set new time
+        db.collection("Reminders").document(event.id).update({"time": time_new})
 
 def add_reminder(user_number, task, date, time, recurring=False, frequency=None):
     reminder_ref = db.collection("Reminders").document()
@@ -554,6 +574,9 @@ def reminder_thread():
             ).messages.create(
                 body=message_final
             )
+
+    # Update recurring reminders
+    update_recurring()
 
     return jsonify({"Return message": "Place holder return message"})
 
