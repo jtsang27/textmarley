@@ -101,7 +101,7 @@ def update_recurring():
             time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=4))
 
         # Set new time
-        reminder_ref.document(event).update({"time": time_new})
+        db.collection("Reminders").document(event).update({"time": time_new})
 
 def add_reminder(user_number, task, date, time, recurring=False, frequency=None):
     reminder_ref = db.collection("Reminders").document()
