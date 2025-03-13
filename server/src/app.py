@@ -576,7 +576,7 @@ def reminder_thread():
             )
 
     # Update recurring reminders
-    update_recurring()
+    update_recurring(now)
 
     return jsonify({"Return message": "Place holder return message"})
 
