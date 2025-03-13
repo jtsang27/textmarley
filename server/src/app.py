@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 import pytz
 #from threading import Thread
 import firebase_admin
-from firebase_admin import firestore
+from firebase_admin import firestore, credentials
 from google.cloud.firestore_v1.base_query import FieldFilter
 import os
 
@@ -26,7 +26,8 @@ Tclient = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 Oclient = OpenAI(api_key=OPENAI_API_KEY)
 
 # Initialize firestore
-DB_app = firebase_admin.initialize_app()
+cred = credentials.Certificate("projects/21309214523/secrets/firebase-admin-authentication")
+DB_app = firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # Parse for user intent
