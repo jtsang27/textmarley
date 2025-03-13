@@ -1,13 +1,14 @@
 from flask import Flask, request, jsonify
-from twilio.twiml.messaging_response import MessagingResponse
+#from twilio.twiml.messaging_response import MessagingResponse
 from twilio.rest import Client
 from openai import OpenAI
 import json
 from datetime import datetime, timedelta
 import pytz
-from threading import Thread
+#from threading import Thread
 import firebase_admin
 from firebase_admin import firestore
+from google.cloud.firestore_v1.base_query import FieldFilter
 import os
 
 app = Flask(__name__)
@@ -95,12 +96,12 @@ def add_reminder(user_number, task, date, time, recurring=False, frequency=None)
 
 def delete_reminder(user_number, task, date, time): # TODO: fix the id part of this
     time_ = standardize_time(date, time)
-    to_delete = db.collection("Reminders").where("user_number", "==", user_number).where("task", "==", task).where("time", "==", time_)
+    to_delete = db.collection("Reminders").where(filter=FieldFilter("user_number", "==", user_number)).where(filter=FieldFilter("task", "==", task)).where(filter=FieldFilter("time", "==", time_))
     db.collection("Reminders").document(to_delete.id).delete()
 
 def get_reminders(user_number):
     now = datetime.now(pytz.UTC).replace(second=0, microsecond=0).isoformat()
-    reminders = db.collection("Reminders").where("user_number", "==", user_number).where("time", ">=", now).where("status", "==", "Pending").order_by("time").stream()
+    reminders = db.collection("Reminders").where(filter=FieldFilter("user_number", "==", user_number)).where(filter=FieldFilter("time", ">=", now)).where(filter=FieldFilter("status", "==", "Pending")).order_by("time").stream()
 
     schedule = []
     for reminder in reminders:
@@ -123,7 +124,7 @@ def get_reminders(user_number):
 def update_recurring_reminders():
 
     # Get all reminders that are recurring and before now
-    reminders = db.collection("Reminders").where("recurring", "==", True).where("time", "<", "now").stream() # Returns a stream of documents
+    reminders = db.collection("Reminders").where(filter=FieldFilter("recurring", "==", True)).where(filter=FieldFilter("time", "<", "now")).stream() # Returns a stream of documents
 
     # Iterate through all reminders
     for event in reminders: # Reads document in document stream that match the query
@@ -143,7 +144,7 @@ def update_recurring_reminders():
             db.collection("Reminders").document(event.id).update({"time": time_new})
 
 # Functions for parsing user message
-def parse_set(user_number, user_message): # TODO: add parsing for frequency
+def parse_set(user_number, user_message): 
     parsing_response = Oclient.chat.completions.create(
         model="gpt-4o-mini",
         messages= [
@@ -517,7 +518,7 @@ def receive_message():
 @app.route("/reminder_thread", methods=["POST"])
 def reminder_thread():
     now = datetime.now(pytz.UTC).replace(second=0, microsecond=0).isoformat()
-    reminders = db.collection("Reminders").where("time", "==", now).stream()
+    reminders = db.collection("Reminders").where(filter=FieldFilter("time", "==", now)).stream()
     for event in reminders:
         # Convert to dictionary and get reminder task and user number
         event = event.to_dict()
@@ -589,7 +590,7 @@ def delete_past_reminder():
         Deletes past reminders that are over one day old. Only delete reminders that are not recurring
     """
     now = datetime.now(pytz.UTC).replace(hour=00, minute=00, second=0, microsecond=0).isoformat()
-    reminders = db.collection("Reminders").where("time", "<", now).where("recurring", "==", False).stream()
+    reminders = db.collection("Reminders").where(filter=FieldFilter("time", "<", now)).where(filter=FieldFilter("recurring", "==", False)).stream()
 
     for reminder in reminders:
         db.collection("Reminders").document(reminder.id).delete()
