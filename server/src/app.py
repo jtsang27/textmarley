@@ -82,27 +82,6 @@ def standardize_time(date_str, time_str, user_timezone="America/New_York"):
 
     return utc_dt  # Return datetime in UTC
 
-def update_recurring():
-
-    # Get all reminders that are recurring and before now
-    reminder_ref = db.collection("Reminders").where("recurring", "==", True).where("time", "<", "now")
-
-    # Iterate through all reminders
-    for event in reminder_ref.stream():
-        event_dict = event.to_dict()
-        time = event_dict.get("time")
-        frequency = event_dict.get("frequency")
-
-        if frequency == "daily":
-            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(days=1))
-        elif frequency == "weekly":
-            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=1))
-        elif frequency == "monthly":
-            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=4))
-
-        # Set new time
-        db.collection("Reminders").document(event).update({"time": time_new})
-
 def add_reminder(user_number, task, date, time, recurring=False, frequency=None):
     reminder_ref = db.collection("Reminders").document()
     reminder_ref.set({
@@ -114,7 +93,7 @@ def add_reminder(user_number, task, date, time, recurring=False, frequency=None)
         "status": "Pending"
     })
 
-def delete_reminder(user_number, task, date, time):
+def delete_reminder(user_number, task, date, time): # TODO: fix the id part of this
     time_ = standardize_time(date, time)
     to_delete = db.collection("Reminders").where("user_number", "==", user_number).where("task", "==", task).where("time", "==", time_)
     db.collection("Reminders").document(to_delete.id).delete()
@@ -140,6 +119,27 @@ def get_reminders(user_number):
 
         schedule.append((task, est_dt))
     return schedule
+
+def update_recurring_reminders():
+
+    # Get all reminders that are recurring and before now
+    reminders = db.collection("Reminders").where("recurring", "==", True).where("time", "<", "now").stream() # Returns a stream of documents
+
+    # Iterate through all reminders
+    for event in reminders: # Reads document in document stream that match the query
+        event_dict = event.to_dict()
+        time = event_dict.get("time")
+        frequency = event_dict.get("frequency")
+
+        if frequency == "daily":
+            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(days=1))
+        elif frequency == "weekly":
+            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=1))
+        elif frequency == "monthly":
+            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=4))
+
+        # Set new time
+        db.collection("Reminders").document(event.id).update({"time": time_new})
 
 # Functions for parsing user message
 def parse_set(user_number, user_message): # TODO: add parsing for frequency
@@ -577,7 +577,7 @@ def reminder_thread():
             )
 
     # Update recurring reminders
-    update_recurring()
+    update_recurring_reminders()
 
     return jsonify({"Return message": "Place holder return message"})
 
