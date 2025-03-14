@@ -132,17 +132,20 @@ def update_recurring_reminders():
         event_dict = event.to_dict()
         time = event_dict.get("time")
         frequency = event_dict.get("frequency")
+        time_unit = frequency.get("time_unit")
+        how_often = frequency.get("how_often")
 
-        if frequency == "daily":
+        if time_unit == 'hourly':
+            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(hours=1))
+        elif time_unit == "daily":
             time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(days=1))
-        elif frequency == "weekly":
+        elif time_unit == "weekly":
             time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=1))
-        elif frequency == "monthly":
+        elif time_unit == "monthly":
             time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=4))
 
-        if frequency == "daily" or frequency == "weekly" or frequency == "monthly":
-            # Set new time
-            db.collection("Reminders").document(event.id).update({"time": time_new})
+        # Set new time
+        db.collection("Reminders").document(event.id).update({"time": time_new})
 
 # Functions for parsing user message
 def parse_set(user_number, user_message): 
@@ -188,33 +191,54 @@ def parse_set(user_number, user_message):
     if frequency:
         frequency_response = Oclient.chat.completions.create(
             model="gpt-4o-mini",
-            messages= [
+            messages=[
                 {
-                    "role": "developer", 
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": """You parse for the user's frequency of their reminder. 
-                                    """
-                        }
-                    ]
+                    "role": "system",
+                    "content": "You parse user requests for frequency of reminders and return a structured response."
                 },
                 {
                     "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": f"{user_message}"
-                        }
-                    ]
+                    "content": user_message
                 }
             ],
-            max_tokens=100
+            functions=[
+                {
+                    "name": "parse_frequency",
+                    "description": "Determine the frequency of a user's reminder request.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "time_unit": {
+                                "type": "string",
+                                "description": "The unit of frequency, defining the time period for recurrence.",
+                                "enum": ["hourly", "daily", "weekly", "monthly"]
+                            },
+                            "how_often": {
+                                "oneOf": [
+                                    {
+                                        "type": "integer",
+                                        "description": "The number of time units between reminders (e.g., every X hours, days, weeks, or months)."
+                                    },
+                                    {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "description": "For 'weekly', an array representing days of the week (0 for Sunday, 6 for Saturday)."
+                                    }
+                                ]
+                            }
+                        },
+                        "required": ["time_unit", "how_often"]
+                    }
+                }
+            ],
+            function_call={"name": "parse_frequency"},
+            temperature=1
         )
-        parsed_response_2 = frequency_response.choices[0].message.content
+        parsed_response_2 = frequency_response.choices[0].message.function_call.arguments
 
-        parsed_data_2 = json.loads(parsed_response_2)
-        frequency = parsed_data_2.get("frequency")
+        frequency = json.loads(parsed_response_2)
 
     if task and time:
         add_reminder(user_number, task, date, time, recurring, frequency)
