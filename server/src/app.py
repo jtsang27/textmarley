@@ -91,7 +91,7 @@ def add_reminder(user_number, task, date, time, recurring=False, frequency=None)
         "task": task,
         "time": standardize_time(date, time), 
         "recurring": recurring,
-        "frequency": frequency,
+        "frequency": {frequency},
         "status": "Pending"
     })
 
@@ -132,9 +132,9 @@ def update_recurring_reminders():
         event_dict = event.to_dict()
         time = event_dict.get("time")
         frequency = event_dict.get("frequency")
-        frequency_dict = frequency.to_dict()
-        time_unit = frequency_dict.get("time_unit")
-        how_often = frequency_dict.get("how_often")
+        
+        time_unit = frequency.get("time_unit")
+        how_often = frequency.get("how_often")
 
         if time_unit == 'hourly':
             if how_often[0] == None:
