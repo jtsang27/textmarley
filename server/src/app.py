@@ -622,7 +622,7 @@ def testing():
     #     print("No such document!")
     
 
-    return "<p>This is the ship that made the Kessel Run in fourteen parsecs?</p>"
+    return f"<p>This is the ship that made the Kessel Run in fourteen parsecs?: {doc} </p>"
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
