@@ -26,8 +26,7 @@ Tclient = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 Oclient = OpenAI(api_key=OPENAI_API_KEY)
 
 # Initialize firestore
-FIREBASE_ADMIN_AUTH = os.getenv("FIREBASE_ADMIN_AUTH")
-cred = credentials.Certificate(FIREBASE_ADMIN_AUTH)
+cred = credentials.Certificate("/mnt/secrets4/firebase-admin-authentication.json")
 DB_app = firebase_admin.initialize_app(cred)
 db = firestore.client()
 
