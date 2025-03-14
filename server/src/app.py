@@ -123,9 +123,9 @@ def get_reminders(user_number):
     return schedule
 
 def update_recurring_reminders():
-
+    now = datetime.now(pytz.UTC).replace(second=0, microsecond=0).isoformat()
     # Get all reminders that are recurring and before now
-    reminders = db.collection("Reminders").where(filter=FieldFilter("recurring", "==", True)).where(filter=FieldFilter("time", "<", "now")).stream() # Returns a stream of documents
+    reminders = db.collection("Reminders").where(filter=FieldFilter("recurring", "==", True)).where(filter=FieldFilter("time", "<", now)).stream() # Returns a stream of documents
 
     # Iterate through all reminders
     for event in reminders: # Reads document in document stream that match the query
@@ -159,7 +159,7 @@ def parse_set(user_number, user_message):
                                 Today's date and time is {datetime.now(pytz.timezone("America/New_York")).strftime("%Y-%m-%d %H:%M")}, 
                                 if not provided by user or if user specifies today. If user asks for tomorrow or in the future, use this date to calculate.
                                 Convert phrases like 'in 5 minutes' or 'in an hour' into an absolute time based off today's time. 
-                                Set frequency to be either 'daily', weekly', or 'monthly'.
+                                Set recurring to be boolean true or false. 
                                 """
                     }
                 ]
@@ -184,6 +184,37 @@ def parse_set(user_number, user_message):
     time = parsed_data.get("time")
     recurring = parsed_data.get("recurring", False)
     frequency = parsed_data.get("frequency", None)
+
+    if frequency:
+        frequency_response = Oclient.chat.completions.create(
+            model="gpt-4o-mini",
+            messages= [
+                {
+                    "role": "developer", 
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": """You parse for the user's frequency of their reminder. 
+                                    """
+                        }
+                    ]
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": f"{user_message}"
+                        }
+                    ]
+                }
+            ],
+            max_tokens=100
+        )
+        parsed_response_2 = frequency_response.choices[0].message.content
+
+        parsed_data_2 = json.loads(parsed_response_2)
+        frequency = parsed_data_2.get("frequency")
 
     if task and time:
         add_reminder(user_number, task, date, time, recurring, frequency)
@@ -609,20 +640,15 @@ def testing():
     users_ref = db.collection("Testing").document("TESTING101")
     doc = users_ref.get()
 
-    # if doc.exists:
-    #     dicti = doc.to_dict()
-    #     m = dicti["Message"]
+    if doc.exists:
+        dicti = doc.to_dict()
+        m = dicti["Message"]
         
-    #     message = Tclient.messages.create(
-    #         body=m,
-    #         from_=TWILIO_PHONE_NUMBER,
-    #         to=number
-    #     )
-    # else:
-    #     print("No such document!")
+    else:
+        m = "No such document!"
     
 
-    return f"<p>This is the ship that made the Kessel Run in fourteen parsecs?: {doc} </p>"
+    return f"<p>This is the ship that made the Kessel Run in fourteen parsecs?: {m} </p>"
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
