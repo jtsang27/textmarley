@@ -91,7 +91,7 @@ def add_reminder(user_number, task, date, time, recurring=False, frequency=None)
         "task": task,
         "time": standardize_time(date, time), 
         "recurring": recurring,
-        "frequency": {frequency},
+        "frequency": frequency,
         "status": "Pending"
     })
 
