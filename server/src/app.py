@@ -132,17 +132,25 @@ def update_recurring_reminders():
         event_dict = event.to_dict()
         time = event_dict.get("time")
         frequency = event_dict.get("frequency")
-        time_unit = frequency.get("time_unit")
-        how_often = frequency.get("how_often")
+        frequency_dict = frequency.to_dict()
+        time_unit = frequency_dict.get("time_unit")
+        how_often = frequency_dict.get("how_often")
 
         if time_unit == 'hourly':
-            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(hours=1))
+            if how_often[0] == None:
+                how_often[0] = 1
+            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(hours=how_often[0]))
         elif time_unit == "daily":
-            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(days=1))
+            if how_often[0] == None:
+                how_often[0] = 1
+            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(days=how_often[0]))
         elif time_unit == "weekly":
+
             time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=1))
         elif time_unit == "monthly":
-            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=4))
+            if how_often[0] == None:
+                how_often[0] = 1
+            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=4*how_often[0]))
 
         # Set new time
         db.collection("Reminders").document(event.id).update({"time": time_new})
