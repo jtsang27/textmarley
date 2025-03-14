@@ -603,23 +603,23 @@ def testing():
     number = "+12063343224"
     ID = "RANDOM010101ID"
 
-    doc_ref = db.collection("Testing").document(f"{number}")
+    doc_ref = db.collection("Testing").document("TESTING101")
     doc_ref.set({"ID": f"{ID}", "Message": "This is the ship that made the Kessel Run in fourteen parsecs?"})
 
-    users_ref = db.collection("Testing").document(f"{number}")
+    users_ref = db.collection("Testing").document("TESTING101")
     doc = users_ref.get()
 
-    if doc.exists:
-        dicti = doc.to_dict()
-        m = dicti["Message"]
+    # if doc.exists:
+    #     dicti = doc.to_dict()
+    #     m = dicti["Message"]
         
-        message = Tclient.messages.create(
-            body=m,
-            from_=TWILIO_PHONE_NUMBER,
-            to=number
-        )
-    else:
-        print("No such document!")
+    #     message = Tclient.messages.create(
+    #         body=m,
+    #         from_=TWILIO_PHONE_NUMBER,
+    #         to=number
+    #     )
+    # else:
+    #     print("No such document!")
     
 
     return "<p>This is the ship that made the Kessel Run in fourteen parsecs?</p>"
