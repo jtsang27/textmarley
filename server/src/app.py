@@ -216,19 +216,11 @@ def parse_set(user_number, user_message):
                                     "enum": ["hourly", "daily", "weekly", "monthly"]
                                 },
                                 "how_often": {
-                                    "oneOf": [
-                                        {
-                                            "type": "integer",
-                                            "description": "The number of time units between reminders (e.g., every X hours, days, weeks, or months)."
-                                        },
-                                        {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "integer"
-                                            },
-                                            "description": "For 'weekly', an array representing days of the week (0 for Sunday, 6 for Saturday)."
-                                        }
-                                    ]
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    },
+                                    "description": "For 'weekly', an array representing days of the week (0 for Sunday, 6 for Saturday)."
                                 }
                             },
                             "additionalProperties": False,
