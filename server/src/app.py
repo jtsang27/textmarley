@@ -137,18 +137,18 @@ def update_recurring_reminders():
         how_often = frequency.get("how_often")
 
         if time_unit == 'hourly':
-            if how_often[0] == None:
+            if len(how_often) == 0:
                 how_often[0] = 1
             time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(hours=how_often[0]))
         elif time_unit == "daily":
-            if how_often[0] == None:
+            if len(how_often) == 0:
                 how_often[0] = 1
             time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(days=how_often[0]))
         elif time_unit == "weekly":
 
             time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=1))
         elif time_unit == "monthly":
-            if how_often[0] == None:
+            if len(how_often) == 0:
                 how_often[0] = 1
             time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=4*how_often[0]))
 
