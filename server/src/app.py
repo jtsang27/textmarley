@@ -193,7 +193,7 @@ def parse_set(user_number, user_message):
             model="gpt-4o-mini",
             messages=[
                 {
-                    "role": "system",
+                    "role": "assistant",
                     "content": "You parse user requests for frequency of reminders and return a structured response."
                 },
                 {
@@ -201,42 +201,46 @@ def parse_set(user_number, user_message):
                     "content": user_message
                 }
             ],
-            functions=[
+            tools=[
                 {
-                    "name": "parse_frequency",
-                    "description": "Determine the frequency of a user's reminder request.",
-                    "parameters": {
-                        "type": "object",
-                        "properties": {
-                            "time_unit": {
-                                "type": "string",
-                                "description": "The unit of frequency, defining the time period for recurrence.",
-                                "enum": ["hourly", "daily", "weekly", "monthly"]
-                            },
-                            "how_often": {
-                                "oneOf": [
-                                    {
-                                        "type": "integer",
-                                        "description": "The number of time units between reminders (e.g., every X hours, days, weeks, or months)."
-                                    },
-                                    {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "integer"
+                    "type": "function",
+                    "function": {
+                        "name": "parse_frequency",
+                        "description": "Determine the frequency of a user's reminder request.",
+                        "parameters": {
+                            "type": "object",
+                            "properties": {
+                                "time_unit": {
+                                    "type": "string",
+                                    "description": "The unit of frequency, defining the time period for recurrence.",
+                                    "enum": ["hourly", "daily", "weekly", "monthly"]
+                                },
+                                "how_often": {
+                                    "oneOf": [
+                                        {
+                                            "type": "integer",
+                                            "description": "The number of time units between reminders (e.g., every X hours, days, weeks, or months)."
                                         },
-                                        "description": "For 'weekly', an array representing days of the week (0 for Sunday, 6 for Saturday)."
-                                    }
-                                ]
-                            }
+                                        {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "integer"
+                                            },
+                                            "description": "For 'weekly', an array representing days of the week (0 for Sunday, 6 for Saturday)."
+                                        }
+                                    ]
+                                }
+                            },
+                            "additionalProperties": False,
+                            "required": ["time_unit", "how_often"]
                         },
-                        "required": ["time_unit", "how_often"]
+                        "strict": False
                     }
                 }
             ],
-            function_call={"name": "parse_frequency"},
             temperature=1
         )
-        parsed_response_2 = frequency_response.choices[0].message.function_call.arguments
+        parsed_response_2 = frequency_response.choices[0].message.tool_calls[0].function.arguments
 
         frequency = json.loads(parsed_response_2)
 
