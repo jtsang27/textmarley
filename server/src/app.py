@@ -230,7 +230,7 @@ def parse_set(user_number, user_message):
                             "properties": {
                                 "time_unit": {
                                     "type": "string",
-                                    "description": "The unit of frequency, defining the time period for recurrence.",
+                                    "description": "The unit of frequency, defining the time period for recurrence. If days of the week are mentioned, then it is weekly.",
                                     "enum": ["hourly", "daily", "weekly", "monthly"]
                                 },
                                 "how_often": {
