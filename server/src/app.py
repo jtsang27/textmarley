@@ -133,24 +133,34 @@ def update_recurring_reminders():
         time = event_dict.get("time")
         frequency = event_dict.get("frequency")
         
+        # Get frequency specifics
         time_unit = frequency.get("time_unit")
         how_often = frequency.get("how_often")
+        days_of_week = frequency.get("days_of_week", None)
 
         if time_unit == 'hourly':
-            if len(how_often) == 0:
-                how_often.append(1)
-            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(hours=how_often[0]))
+            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(hours=how_often))
         elif time_unit == "daily":
-            if len(how_often) == 0:
-                how_often.append(1)
-            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(days=how_often[0]))
+            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(days=how_often))
         elif time_unit == "weekly":
-
-            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=1))
+            # If there are no days of the week, then it is every {how_often} weeks
+            if days_of_week is None: 
+                time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=how_often))
+            # If only one day of the week or all days of the week, then it is every one week
+            elif len(days_of_week) == 1 or len(days_of_week) == 7: 
+                time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=1))
+            else:
+                weekday = datetime.weekday(datetime.fromisoformat(now)) + 1 # Datetime has Monday as 0, so need to add 1 to get Monday=1
+                if weekday == 7: weekday=0 # Set Sunday to 0
+                # Calculate how many days to increment based on today's weekday and {days_of_week}
+                difference = days_of_week[0]-weekday+7
+                for w in days_of_week:
+                    if w > weekday:
+                        difference = w-weekday
+                        break
+                time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(days=difference))
         elif time_unit == "monthly":
-            if len(how_often) == 0:
-                how_often.append(1)
-            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=4*how_often[0]))
+            time_new = datetime.isoformat(datetime.fromisoformat(time) + timedelta(weeks=4*how_often))
 
         # Set new time
         db.collection("Reminders").document(event.id).update({"time": time_new})
@@ -224,6 +234,10 @@ def parse_set(user_number, user_message):
                                     "enum": ["hourly", "daily", "weekly", "monthly"]
                                 },
                                 "how_often": {
+                                    "type": "integer",
+                                    "description": "The number of times per time unit."
+                                },
+                                "days_of_week": {
                                     "type": "array",
                                     "items": {
                                         "type": "integer"
