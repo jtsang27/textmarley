@@ -117,7 +117,7 @@ def get_reminders(user_number):
             # Add timezone
             dt_obj = dt_obj.replace(tzinfo=pytz.timezone('US/Eastern'))
 
-        # Convert to UTC
+        # Convert to EST
         est_dt = dt_obj.astimezone(pytz.timezone('US/Eastern')).isoformat()
 
         schedule.append((task, est_dt))
@@ -401,9 +401,9 @@ Assistant = Oclient.beta.assistants.create(
 def create_conversation():
     user_phone = request.form.get("phone")
 
-    phone_ref = db.collection("Conversations").document(f"{user_phone}").get()
+    user_ref = db.collection("Users").document(f"{user_phone}").get()
 
-    if phone_ref.exists:
+    if user_ref.exists:
         #TODO: send a message to user
         None
         return jsonify({'This phone number already exists': f"{user_phone}"})
@@ -414,10 +414,10 @@ def create_conversation():
         conversation = Tclient.conversations.v1.conversations.create(
                 friendly_name=f"Conversation with {user_phone}"
             )
-        # conversations[user_phone] = conversation.sid 
-            # Add conversation to firestore collection where document name is phone number 
-        convo_ref = db.collection("Conversations").document(f"{user_phone}")
-        convo_ref.set({"ID": f"{conversation.sid}"})
+        
+            # Add conversation to firestore collection where document ID is phone number 
+        user_ref = db.collection("Users").document(f"{user_phone}")
+        user_ref.set({"twilio_ID": f"{conversation.sid}"})
 
             # Add participant to new conversation
         participant = Tclient.conversations.v1.conversations(
@@ -429,10 +429,8 @@ def create_conversation():
 
             # Create OpenAI thread
         thread = Oclient.beta.threads.create()
-        # threads[user_phone] = thread.id # Add thread to dictionary
-            # Add thread id to firestore collection where document name is phone number
-        thread_ref = db.collection("Threads").document(f"{user_phone}")
-        thread_ref.set({"ID": f"{thread.id}"})
+            # Add thread id user document
+        user_ref.set({"thread_ID": f"{thread.id}"}, merge = True)
 
             # Add message to thread
         message = Oclient.beta.threads.messages.create(
@@ -474,15 +472,11 @@ def receive_message():
     user_message = request.form.get("Body")  # Message body
     #print(f"Received message from {from_number}: {user_message}") TODO: Change this to logging
 
-    # Get thread id
-    thread_ref = db.collection("Threads").document(f"{from_number}").get()
-    if thread_ref.exists:
-        Thread_id = thread_ref.to_dict()["ID"]
-    
-    # Get conversation sid
-    convo_ref = db.collection("Conversations").document(f"{from_number}").get()
-    if convo_ref.exists:
-        Convo_id = convo_ref.to_dict()["ID"]
+    # Get twilio and thread id
+    user_ref = db.collection("Users").document(f"{from_number}").get()
+    if user_ref.exists:
+        Thread_id = user_ref.to_dict().get("thread_ID")
+        Twilio_id = user_ref.to_dict().get("twilio_ID")
     
     # Add message to OpenAI threads
     message = Oclient.beta.threads.messages.create(
@@ -584,7 +578,7 @@ def receive_message():
 
     # Send response back using twilio conversation
     message = Tclient.conversations.v1.conversations(
-        Convo_id
+        Twilio_id
     ).messages.create(
         body=message_final
     )
@@ -632,24 +626,20 @@ def reminder_thread():
         if jo in task or j in task:
             message_final += "\U0001F609 \U0001F609 \U0001F4A6 \U0001F4A6"
 
-        # Append to threads
-            # Get thread id
-        thread_ref = db.collection("Threads").document(f"{number}").get()
-        if thread_ref.exists:
-            Thread_id = thread_ref.to_dict()["ID"]
+        user_ref = db.collection("Users").document(f"{number}").get()
+        if user_ref.exists:
+            # Append to threads
+            user_dict = user_ref.to_dict()
+            Thread_id = user_dict.get("thread_ID")
             message = Oclient.beta.threads.messages.create(
                 thread_id=Thread_id,
                 role="assistant",
                 content=message_final
             )
-
-        # Send through twilio conversation
-            # Get conversation sid
-        convo_ref = db.collection("Conversations").document(f"{number}").get()
-        if convo_ref.exists:
-            Convo_id = convo_ref.to_dict()["ID"]
+            # Add to twilio conversation
+            twilio_id = user_dict.get("twilio_ID")
             message = Tclient.conversations.v1.conversations(
-                Convo_id
+                twilio_id
             ).messages.create(
                 body=message_final
             )
@@ -679,10 +669,10 @@ def delete_past_reminder():
 @app.route("/morning_to_dos", methods=["POST"])
 def morning():
     # Get all users that want to recieve message in the morning
-    user_ref = db.collection("Conversations").where(filter=FieldFilter("morning", "==", True)).stream()
+    user_ref = db.collection("Users").where(filter=FieldFilter("morning", "==", True)).stream()
     for user in user_ref:
         user_dict = user.to_dict()
-        user_id = user_dict.get("ID")
+        twilio_id = user_dict.get("twilio_ID")
         user_number = user.id
 
         get_reminders(user_number)
@@ -693,19 +683,19 @@ def morning():
 
 @app.route("/testing", methods=["GET"])
 def testing():
-    convo_ref = db.collection("Conversations").stream()
+    # convo_ref = db.collection("Conversations").stream()
     
-    for convo in convo_ref:
-        convo_dict = convo.to_dict()
-        convo_ID = convo_dict.get("twilio_ID")
-        thread_ID = convo_dict.get("thread_ID")
+    # for convo in convo_ref:
+    #     convo_dict = convo.to_dict()
+    #     convo_ID = convo_dict.get("twilio_ID")
+    #     thread_ID = convo_dict.get("thread_ID")
 
-        Users_ref = db.collection("Users").document(convo.id)
-        Users_ref.set({"twilio_ID": convo_ID, "thread_ID": thread_ID})
+    #     Users_ref = db.collection("Users").document(convo.id)
+    #     Users_ref.set({"twilio_ID": convo_ID, "thread_ID": thread_ID})
     
-    convo_ref = db.collection("Testing").stream()
-    for convo in convo_ref:
-        db.collection("Testing").document(convo.id).set({"Hello": "World"}, merge = True)
+    # convo_ref = db.collection("Testing").stream()
+    # for convo in convo_ref:
+    #     db.collection("Testing").document(convo.id).set({"Hello": "World"}, merge = True)
 
     return f"<p>This is the ship that made the Kessel Run in fourteen parsecs?: </p>"
 
