@@ -693,16 +693,19 @@ def morning():
 
 @app.route("/testing", methods=["GET"])
 def testing():
-    thread_ref = db.collection("Threads").stream()
-    threads = {}
-    for thread in thread_ref:
-        thread_dict = thread.to_dict()
-        thread_ID = thread_dict.get("ID")
-        threads[thread.id] = thread_ID
-    
     convo_ref = db.collection("Conversations").stream()
+    
     for convo in convo_ref:
-        db.collection("Conversations").document(convo.id).set({"thread_ID": threads[convo.id]}, merge = True)
+        convo_dict = convo.to_dict()
+        convo_ID = convo_dict.get("twilio_ID")
+        thread_ID = convo_dict.get("thread_ID")
+
+        Users_ref = db.collection("Users").document(convo.id)
+        Users_ref.set({"twilio_ID": convo_ID, "thread_ID": thread_ID})
+    
+    convo_ref = db.collection("Testing").stream()
+    for convo in convo_ref:
+        db.collection("Testing").document(convo.id).set({"Hello": "World"}, merge = True)
 
     return f"<p>This is the ship that made the Kessel Run in fourteen parsecs?: </p>"
 
