@@ -533,7 +533,7 @@ def receive_message():
     elif i != 4 and i != 3: # Set, delete, or edit cases
         # Parse information based on intent
         p = parse_array[i](from_number, user_message)
-         
+        
         # Create a response message to send back to the user
         message = Oclient.chat.completions.create(
             model="gpt-4o-mini",
@@ -543,8 +543,8 @@ def receive_message():
                     "content": [
                         {
                             "type": "text",
-                            "text": """You create friendly automatic responses to confirm users' reminder requests, 
-                            or ask for more information depending on the provided missing variables, if any."""
+                            "text": f"""You create friendly automatic responses to confirm users' reminder requests, 
+                            or ask for more information if task or time is missing in the following dictionary: {p}."""
                         }
                     ]
                 },
@@ -553,7 +553,7 @@ def receive_message():
                     "content": [
                         {
                             "type": "text",
-                            "text": f"{user_message}, {p}"
+                            "text": f"{user_message}"
                         }
                     ]
                 }
