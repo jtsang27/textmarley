@@ -691,6 +691,20 @@ def morning():
 
     return {"Status": "Morning message sent"}
 
+@app.route("/testing", methods=["GET"])
+def testing():
+    thread_ref = db.collection("Threads").stream()
+    threads = {}
+    for thread in thread_ref:
+        thread_dict = thread.to_dict()
+        thread_ID = thread_dict.get("ID")
+        threads[thread.id] = thread_ID
+    
+    convo_ref = db.collection("Conversations").stream()
+    for convo in convo_ref:
+        db.collection("Conversations").document(convo.id).set({"thread_ID": threads[convo.id]})
+
+    return f"<p>This is the ship that made the Kessel Run in fourteen parsecs?: </p>"
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
