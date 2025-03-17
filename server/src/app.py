@@ -592,12 +592,12 @@ def receive_message():
 @app.route("/reminder_thread", methods=["POST"])
 def reminder_thread():
     now = datetime.now(pytz.UTC).replace(second=0, microsecond=0).isoformat()
-    reminders = db.collection("Reminders").where(filter=FieldFilter("time", "==", now)).stream()
+    reminders = db.collection("Reminders").where(filter=FieldFilter("time", "==", now)).where(filter=FieldFilter("status", "==", "Pending")).stream()
     for event in reminders:
         # Convert to dictionary and get reminder task and user number
-        event = event.to_dict()
-        task = event.get("task")
-        number = event.get("user_number")
+        event_dict = event.to_dict()
+        task = event_dict.get("task")
+        number = event_dict.get("user_number")
 
         # Create message through OpenAI api
         message = Oclient.chat.completions.create(
@@ -627,7 +627,8 @@ def reminder_thread():
 
         # lol
         jo = "jerk off"
-        if jo in task:
+        j = "jerk"
+        if jo in task or j in task:
             message_final += "\U0001F609 \U0001F609 \U0001F4A6 \U0001F4A6"
 
         # Append to threads
@@ -641,7 +642,6 @@ def reminder_thread():
                 content=message_final
             )
 
-
         # Send through twilio conversation
             # Get conversation sid
         convo_ref = db.collection("Conversations").document(f"{number}").get()
@@ -652,7 +652,11 @@ def reminder_thread():
             ).messages.create(
                 body=message_final
             )
-
+        
+        # Set expired non-recurring reminder status to be completed 
+        if event.get("recurring") == False:
+            db.document("Reminders").collection(event.id).update({"status": "Completed"})
+    
     # Update recurring reminders
     update_recurring_reminders()
 
