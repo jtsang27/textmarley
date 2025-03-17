@@ -676,26 +676,21 @@ def delete_past_reminder():
 
     return jsonify({"Message": "Past reminders deleted"})
 
-@app.route("/testing", methods=["GET"])
-def testing():
-    number = "+12063343224"
-    ID = "RANDOM010101ID"
+@app.route("/morning_to_dos", methods=["POST"])
+def morning():
+    # Get all users that want to recieve message in the morning
+    user_ref = db.collection("Conversations").where(filter=FieldFilter("morning", "==", True)).stream()
+    for user in user_ref:
+        user_dict = user.to_dict()
+        user_id = user_dict.get("ID")
+        user_number = user.id
 
-    doc_ref = db.collection("Testing").document("TESTING101")
-    doc_ref.set({"ID": f"{ID}", "Message": "This is the ship that made the Kessel Run in fourteen parsecs?"})
+        get_reminders(user_number)
 
-    users_ref = db.collection("Testing").document("TESTING101")
-    doc = users_ref.get()
+        # Send reminders
 
-    if doc.exists:
-        dicti = doc.to_dict()
-        m = dicti["Message"]
-        
-    else:
-        m = "No such document!"
-    
+    return {"Status": "Morning message sent"}
 
-    return f"<p>This is the ship that made the Kessel Run in fourteen parsecs?: {m} </p>"
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
