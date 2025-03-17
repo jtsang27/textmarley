@@ -702,7 +702,7 @@ def testing():
     
     convo_ref = db.collection("Conversations").stream()
     for convo in convo_ref:
-        db.collection("Conversations").document(convo.id).set({"thread_ID": threads[convo.id]})
+        db.collection("Conversations").document(convo.id).set({"thread_ID": threads[convo.id]}, merge = True)
 
     return f"<p>This is the ship that made the Kessel Run in fourteen parsecs?: </p>"
 
