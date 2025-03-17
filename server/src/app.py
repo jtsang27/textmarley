@@ -95,10 +95,11 @@ def add_reminder(user_number, task, date, time, recurring=False, frequency=None)
         "status": "Pending"
     })
 
-def delete_reminder(user_number, task, date, time): # TODO: fix the id part of this
+def delete_reminder(user_number, task, date, time): 
     time_ = standardize_time(date, time)
-    to_delete = db.collection("Reminders").where(filter=FieldFilter("user_number", "==", user_number)).where(filter=FieldFilter("task", "==", task)).where(filter=FieldFilter("time", "==", time_))
-    db.collection("Reminders").document(to_delete.id).delete()
+    to_delete = db.collection("Reminders").where(filter=FieldFilter("user_number", "==", user_number)).where(filter=FieldFilter("task", "==", task)).where(filter=FieldFilter("time", "==", time_)).stream()
+    for e in to_delete:
+        db.collection("Reminders").document(e.id).delete()
 
 def get_reminders(user_number):
     now = datetime.now(pytz.UTC).replace(second=0, microsecond=0).isoformat()
