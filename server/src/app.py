@@ -399,7 +399,7 @@ Assistant = Oclient.beta.assistants.create(
 # Endpoint for creating conversation once phone number is received
 @app.route("/create_conversation", methods=["GET", "POST"])
 def create_conversation():
-    user_phone = request.form.get("phone")
+    user_phone = request.form.get("phone", "+12345678900")
 
     user_ref = db.collection("Users").document(f"{user_phone}").get()
 
